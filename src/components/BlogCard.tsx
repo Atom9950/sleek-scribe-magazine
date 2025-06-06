@@ -3,43 +3,41 @@ interface BlogCardProps {
   title: string;
   excerpt: string;
   category: string;
-  readTime: string;
+  date: string;
   image: string;
   featured?: boolean;
 }
 
-const BlogCard = ({ title, excerpt, category, readTime, image, featured = false }: BlogCardProps) => {
+const BlogCard = ({ title, excerpt, category, date, image, featured = false }: BlogCardProps) => {
   if (featured) {
     return (
-      <article className="group cursor-pointer">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <article className="group cursor-pointer col-span-2">
+        <div className="space-y-6">
           <div className="relative">
-            <div className="aspect-[4/3] bg-gray-100 rounded-sm overflow-hidden">
-              <img 
-                src={image} 
-                alt={title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
+            <img 
+              src={image} 
+              alt={title}
+              className="w-full h-[250px] lg:h-[300px] object-cover"
+            />
           </div>
           
           <div className="space-y-4">
-            <div className="flex items-center space-x-4 text-sm">
-              <span className="text-orange-500 font-medium uppercase tracking-wider">{category}</span>
-              <span className="text-muted-foreground">{readTime}</span>
+            <div className="flex items-center space-x-4 text-xs uppercase tracking-widest">
+              <span className="font-medium">{category}</span>
+              <span className="text-muted-foreground">{date}</span>
             </div>
             
-            <h2 className="text-2xl lg:text-3xl font-bold text-foreground group-hover:text-orange-500 transition-colors">
+            <h2 className="text-2xl lg:text-3xl font-serif font-bold group-hover:text-muted-foreground transition-colors leading-tight">
               {title}
             </h2>
             
-            <p className="text-muted-foreground text-lg leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
               {excerpt}
             </p>
             
-            <button className="text-foreground font-medium hover:text-orange-500 transition-colors">
+            <span className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer">
               Read More →
-            </button>
+            </span>
           </div>
         </div>
       </article>
@@ -50,32 +48,29 @@ const BlogCard = ({ title, excerpt, category, readTime, image, featured = false 
     <article className="group cursor-pointer">
       <div className="space-y-4">
         <div className="relative">
-          <div className="aspect-[4/3] bg-gray-100 rounded-sm overflow-hidden">
-            <img 
-              src={image} 
-              alt={title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          </div>
+          <img 
+            src={image} 
+            alt={title}
+            className="w-full h-[200px] object-cover"
+          />
         </div>
         
         <div className="space-y-3">
-          <div className="flex items-center space-x-4 text-sm">
-            <span className="text-orange-500 font-medium uppercase tracking-wider">{category}</span>
-            <span className="text-muted-foreground">{readTime}</span>
+          <div className="text-xs uppercase tracking-widest text-muted-foreground">
+            {category}
           </div>
           
-          <h3 className="text-xl font-bold text-foreground group-hover:text-orange-500 transition-colors line-clamp-2">
+          <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight line-clamp-2">
             {title}
           </h3>
           
-          <p className="text-muted-foreground leading-relaxed line-clamp-3">
+          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
             {excerpt}
           </p>
           
-          <button className="text-foreground font-medium hover:text-orange-500 transition-colors">
-            Read More →
-          </button>
+          <div className="text-xs text-muted-foreground">
+            {date}
+          </div>
         </div>
       </div>
     </article>

@@ -1,32 +1,37 @@
 
 const Newsletter = () => {
   return (
-    <section className="w-full bg-foreground text-background py-16">
+    <section className="bg-foreground text-background py-16 lg:py-20">
       <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <div className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl lg:text-4xl font-bold">
-              STAY INSPIRED
-            </h2>
-            <p className="text-lg opacity-90 max-w-2xl mx-auto">
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <div className="text-xs uppercase tracking-widest opacity-80">
+                NEWSLETTER
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-serif font-bold">
+                STAY IN THE LOOP
+              </h2>
+            </div>
+            <p className="text-lg opacity-90 max-w-2xl mx-auto font-light leading-relaxed">
               Get the latest design insights, creative techniques, and industry trends 
               delivered directly to your inbox every week.
             </p>
           </div>
 
           <div className="max-w-md mx-auto">
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 text-foreground bg-background rounded-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Your email address"
+                className="flex-1 px-4 py-3 text-foreground bg-background focus:outline-none text-sm"
               />
-              <button className="bg-orange-500 text-white px-8 py-3 font-medium hover:bg-orange-600 transition-colors rounded-sm">
-                Subscribe
+              <button className="bg-background text-foreground px-6 py-3 text-sm font-medium tracking-wide hover:bg-muted transition-colors">
+                SUBSCRIBE
               </button>
             </div>
-            <p className="text-sm opacity-70 mt-3">
-              No spam, unsubscribe at any time.
+            <p className="text-xs opacity-70 mt-4 tracking-wide">
+              Unsubscribe at any time. Privacy policy.
             </p>
           </div>
         </div>
