@@ -1,23 +1,21 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 255 255 255;
+    --background: 252 252 250;
     --foreground: 20 20 20;
 
-    --card: 255 255 255;
+    --card: 252 252 250;
     --card-foreground: 20 20 20;
 
-    --popover: 255 255 255;
+    --popover: 252 252 250;
     --popover-foreground: 20 20 20;
 
     --primary: 20 20 20;
-    --primary-foreground: 255 255 255;
+    --primary-foreground: 252 252 250;
 
     --secondary: 245 245 244;
     --secondary-foreground: 20 20 20;
@@ -29,7 +27,7 @@
     --accent-foreground: 20 20 20;
 
     --destructive: 220 38 38;
-    --destructive-foreground: 255 255 255;
+    --destructive-foreground: 252 252 250;
 
     --border: 229 229 227;
     --input: 229 229 227;
@@ -37,14 +35,52 @@
 
     --radius: 0rem;
 
-    --sidebar-background: 255 255 255;
+    --sidebar-background: 252 252 250;
     --sidebar-foreground: 115 115 115;
     --sidebar-primary: 20 20 20;
-    --sidebar-primary-foreground: 255 255 255;
+    --sidebar-primary-foreground: 252 252 250;
     --sidebar-accent: 245 245 244;
     --sidebar-accent-foreground: 20 20 20;
     --sidebar-border: 229 229 227;
     --sidebar-ring: 20 20 20;
+  }
+
+  .dark {
+    --background: 12 12 12;
+    --foreground: 252 252 250;
+
+    --card: 12 12 12;
+    --card-foreground: 252 252 250;
+
+    --popover: 12 12 12;
+    --popover-foreground: 252 252 250;
+
+    --primary: 252 252 250;
+    --primary-foreground: 12 12 12;
+
+    --secondary: 39 39 42;
+    --secondary-foreground: 252 252 250;
+
+    --muted: 39 39 42;
+    --muted-foreground: 161 161 170;
+
+    --accent: 39 39 42;
+    --accent-foreground: 252 252 250;
+
+    --destructive: 239 68 68;
+    --destructive-foreground: 252 252 250;
+
+    --border: 39 39 42;
+    --input: 39 39 42;
+    --ring: 212 212 216;
+    --sidebar-background: 12 12 12;
+    --sidebar-foreground: 161 161 170;
+    --sidebar-primary: 252 252 250;
+    --sidebar-primary-foreground: 12 12 12;
+    --sidebar-accent: 39 39 42;
+    --sidebar-accent-foreground: 252 252 250;
+    --sidebar-border: 39 39 42;
+    --sidebar-ring: 212 212 216;
   }
 }
 
@@ -54,7 +90,7 @@
   }
 
   body {
-    @apply bg-white text-foreground font-sans;
+    @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
     line-height: 1.6;
   }
@@ -89,50 +125,5 @@
   .magazine-subtitle {
     font-size: clamp(1.125rem, 2.5vw, 1.5rem);
     line-height: 1.4;
-  }
-
-  .fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-  }
-
-  .slide-down {
-    animation: slideDown 0.3s ease-out forwards;
-  }
-
-  .slide-up {
-    animation: slideUp 0.3s ease-out forwards;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideDown {
-  from {
-    height: 0;
-    opacity: 0;
-  }
-  to {
-    height: auto;
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    height: auto;
-    opacity: 1;
-  }
-  to {
-    height: 0;
-    opacity: 0;
   }
 }

@@ -1,9 +1,9 @@
 
 const Newsletter = () => {
   return (
-    <section className="bg-black text-white py-16 lg:py-20">
+    <section className="bg-foreground text-background py-16 lg:py-20">
       <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-        <div className="space-y-8 fade-in-up">
+        <div className="space-y-8">
           <div className="space-y-6">
             <div className="space-y-2">
               <div className="text-xs uppercase tracking-widest opacity-80">
@@ -24,9 +24,9 @@ const Newsletter = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 px-4 py-3 text-black bg-white focus:outline-none text-sm"
+                className="flex-1 px-4 py-3 text-foreground bg-background focus:outline-none text-sm"
               />
-              <button className="bg-white text-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-gray-100 transition-colors">
+              <button className="bg-background text-foreground px-6 py-3 text-sm font-medium tracking-wide hover:bg-muted transition-colors">
                 SUBSCRIBE
               </button>
             </div>
