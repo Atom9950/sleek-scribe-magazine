@@ -7,7 +7,7 @@ const HeroSection = () => {
         <div className="lg:col-span-8">
           <article className="group cursor-pointer">
           
-            <div className="space-y-4">
+            <div className="space-y-0">
               <div className="flex items-center space-x-4 text-xs uppercase tracking-widest">
                 <span className="font-medium">DESIGN</span>
                 <span className="text-muted-foreground">MARCH 15, 2024</span>
