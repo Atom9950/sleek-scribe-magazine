@@ -65,7 +65,7 @@ const Header = () => {
                       <span className="text-xs text-gray-500">(01)</span>
                       <a 
                         href="#" 
-                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
                         onClick={toggleMenu}
                       >
                         HOME
@@ -76,7 +76,7 @@ const Header = () => {
                       <span className="text-xs text-gray-500">(02)</span>
                       <a 
                         href="#" 
-                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
                         onClick={toggleMenu}
                       >
                         CONTENT
@@ -87,7 +87,7 @@ const Header = () => {
                       <span className="text-xs text-gray-500">(03)</span>
                       <a 
                         href="#" 
-                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
                         onClick={toggleMenu}
                       >
                         ABOUT
@@ -98,7 +98,7 @@ const Header = () => {
                       <span className="text-xs text-gray-500">(04)</span>
                       <a 
                         href="#" 
-                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
                         onClick={toggleMenu}
                       >
                         POSTS
@@ -109,7 +109,7 @@ const Header = () => {
                       <span className="text-xs text-gray-500">(05)</span>
                       <a 
                         href="#" 
-                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
                         onClick={toggleMenu}
                       >
                         NEWSLETTER
@@ -135,9 +135,9 @@ const Header = () => {
                     </a>
                     
                     <div className="pt-8 space-y-2">
-                      <p className="text-sm md:text-base text-gray-400">C-29 & 75, Sector 8, Noida</p>
-                      <p className="text-sm md:text-base text-gray-400">+91 88606 08188</p>
-                      <p className="text-sm md:text-base text-gray-400">admissions@medesignvillage.org</p>
+                      <p className="text-sm md:text-base text-gray-400">sd-atom.vercel.app</p>
+                      <p className="text-sm md:text-base text-gray-400">+91 99000 55000</p>
+                      <p className="text-sm md:text-base text-gray-400">sdroy001@gmail.com</p>
                     </div>
                     
                     <div className="pt-8 flex space-x-6">
@@ -153,7 +153,7 @@ const Header = () => {
                     </div>
                     
                     <p className="pt-8 text-xs md:text-sm text-gray-500">
-                      © 2024 THE DESIGN VILLAGE FOUNDATION
+                      © 2024 PAPER MAGAZINE
                     </p>
                   </nav>
                 </div>

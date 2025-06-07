@@ -14,8 +14,8 @@ const HeroSection = () => {
               </div>
               
               <h1 className="magazine-title font-serif font-bold group-hover:text-muted-foreground transition-colors whitespace-pre-line">
-  THE FUTURE{'\n'}OF{'\n'}MINIMALIST{'\n'}DESIGN
-              </h1>
+                   THE FUTURE{'\n'}OF{'\n'}MINIMALIST{'\n'}DESIGN
+                </h1>
               
               <p className="magazine-subtitle text-muted-foreground max-w-2xl">
                 Exploring how minimalism continues to shape user experience and interface design in 2024. From typography choices to color palettes, discover the principles driving modern design.
