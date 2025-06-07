@@ -79,7 +79,7 @@ const Header = () => {
                         className="block text-4xl md:text-6xl font-bold text-white mt-1"
                         onClick={toggleMenu}
                       >
-                        PROGRAMMES
+                        CONTENT
                       </a>
                     </div>
                     
@@ -101,7 +101,7 @@ const Header = () => {
                         className="block text-4xl md:text-6xl font-bold text-white mt-1"
                         onClick={toggleMenu}
                       >
-                        ADMISSIONS
+                        POSTS
                       </a>
                     </div>
                     
@@ -112,7 +112,7 @@ const Header = () => {
                         className="block text-4xl md:text-6xl font-bold text-white mt-1"
                         onClick={toggleMenu}
                       >
-                        STUDENT LOGIN
+                        NEWSLETTER
                       </a>
                     </div>
                   </nav>
