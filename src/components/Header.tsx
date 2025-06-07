@@ -121,38 +121,38 @@ const Header = () => {
                 {/* Right Column - Secondary Links */}
                 <div className="w-full md:w-1/2 md:pl-8 md:border-l md:border-gray-700">
                   <nav className="space-y-6">
-                    <a href="#" className="block text-lg md:text-xl font-medium text-white">
+                    <a href="#" className="magazine-subtitle block text-white max-w-2xl">
                       Contribute
                     </a>
-                    <a href="#" className="block text-lg md:text-xl font-medium text-white">
+                    <a href="#" className="magazine-subtitle block text-white max-w-2xl">
                       Incubate
                     </a>
-                    <a href="#" className="block text-lg md:text-xl font-medium text-white">
+                    <a href="#" className="magazine-subtitle block text-white max-w-2xl">
                       Recruit
                     </a>
-                    <a href="#" className="block text-lg md:text-xl font-medium text-white">
+                    <a href="#" className="magazine-subtitle block text-white max-w-2xl">
                       Reach Us
                     </a>
                     
                     <div className="pt-8 space-y-2">
-                      <p className="text-sm md:text-base text-gray-400">sd-atom.vercel.app</p>
-                      <p className="text-sm md:text-base text-gray-400">+91 99000 55000</p>
-                      <p className="text-sm md:text-base text-gray-400">sdroy001@gmail.com</p>
+                      <p className="magazine-subtle text-sm md:text-base text-gray-400">sd-atom.vercel.app</p>
+                      <p className="magazine-subtle text-sm md:text-base text-gray-400">+91 99000 55000</p>
+                      <p className="magazine-subtle text-sm md:text-base text-gray-400">sdroy001@gmail.com</p>
                     </div>
                     
                     <div className="pt-8 flex space-x-6">
-                      <a href="#" className="text-sm md:text-base font-medium text-white">
+                      <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
                         Instagram
                       </a>
-                      <a href="#" className="text-sm md:text-base font-medium text-white">
+                      <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
                         LinkedIn
                       </a>
-                      <a href="#" className="text-sm md:text-base font-medium text-white">
+                      <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
                         Youtube
                       </a>
                     </div>
                     
-                    <p className="pt-8 text-xs md:text-sm text-gray-500">
+                    <p className="magazine-subtle pt-8 text-xs md:text-sm text-gray-500">
                       © 2024 PAPER MAGAZINE
                     </p>
                   </nav>
