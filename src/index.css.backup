@@ -1,0 +1,444 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 245, 245, 245; /* Smoke white color */
+    --foreground: 20, 20, 20;
+
+    --card: 255, 255, 255;
+    --card-foreground: 20, 20, 20;
+
+    --popover: 255, 255, 255;
+    --popover-foreground: 20, 20, 20;
+
+    --primary: 20, 20, 20;
+    --primary-foreground: 255, 255, 255;
+
+    --secondary: 245, 245, 245;
+    --secondary-foreground: 20, 20, 20;
+
+    --muted: 245, 245, 245;
+    --muted-foreground: 115, 115, 115;
+
+    --accent: 245, 245, 245;
+    --accent-foreground: 20, 20, 20;
+
+    --destructive: 239, 68, 68;
+    --destructive-foreground: 255, 255, 255;
+
+    --border: 229, 229, 229;
+    --input: 229, 229, 229;
+    --ring: 20, 20, 20;
+
+    --radius: 0rem;
+
+    --sidebar-background: 255, 255, 255;
+    --sidebar-foreground: 115, 115, 115;
+    --sidebar-primary: 20, 20, 20;
+    --sidebar-primary-foreground: 255, 255, 255;
+    --sidebar-accent: 245, 245, 245;
+    --sidebar-accent-foreground: 20, 20, 20;
+    --sidebar-border: 229, 229, 229;
+    --sidebar-ring: 20, 20, 20;
+  }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 245, 245, 245; /* Whitesmoke */
+    --foreground: 20, 20, 20;
+
+    --card: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --card-foreground: 20, 20, 20;
+
+    --popover: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --popover-foreground: 20, 20, 20;
+
+    --primary: 20, 20, 20;
+    --primary-foreground: 255, 255, 255; /* Changed from 252, 252, 250 */
+
+    --sidebar-background: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --sidebar-primary-foreground: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --ebar-ring: 20, 20, 20;
+  }
+
+  .dark {
+    --background: 12, 12, 12;
+    --foreground: 252, 252, 250;
+
+    --card: 12, 12, 12;
+    --card-foreground: 252, 252, 250;
+
+    --popover: 12, 12, 12;
+    --popover-foreground: 252, 252, 250;
+
+    --primary: 252, 252, 250;
+    --primary-foreground: 12, 12, 12;
+
+    --secondary: 39, 39, 42;
+    --secondary-foreground: 252, 252, 250;
+
+    --muted: 39, 39, 42;
+    --muted-foreground: 161, 161, 170;
+
+    --accent: 39, 39, 42;
+    --accent-foreground: 252, 252, 250;
+
+    --destructive: 239, 68, 68;
+    --destructive-foreground: 252, 252, 250;
+
+    --border: 39, 39, 42;
+    --input: 39, 39, 42;
+    --ring: 212, 212, 216;
+    --sidebar-background: 12, 12, 12;
+    --sidebar-foreground: 161, 161, 170;
+    --sidebar-primary: 252, 252, 250;
+    --sidebar-primary-foreground: 12, 12, 12;
+    --sidebar-accent: 39, 39, 42;
+    --sidebar-accent-foreground: 252, 252, 250;
+    --sidebar-border: 39, 39, 42;
+    --sidebar-ring: 212, 212, 216;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-medium tracking-tight;
+    line-height: 1.2;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .magazine-title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+
+  .magazine-subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    line-height: 1.4;
+  }
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240, 240, 240; /* Light gray for newspaper-like color */
+    --foreground: 20, 20, 20;
+
+    --card: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --card-foreground: 20, 20, 20;
+
+    --popover: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --popover-foreground: 20, 20, 20;
+
+    --primary: 20, 20, 20;
+    --primary-foreground: 255, 255, 255; /* Changed from 252, 252, 250 */
+
+    --sidebar-background: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --sidebar-primary-foreground: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --ebar-ring: 20, 20, 20;
+  }
+
+  .dark {
+    --background: 12, 12, 12;
+    --foreground: 252, 252, 250;
+
+    --card: 12, 12, 12;
+    --card-foreground: 252, 252, 250;
+
+    --popover: 12, 12, 12;
+    --popover-foreground: 252, 252, 250;
+
+    --primary: 252, 252, 250;
+    --primary-foreground: 12, 12, 12;
+
+    --secondary: 39, 39, 42;
+    --secondary-foreground: 252, 252, 250;
+
+    --muted: 39, 39, 42;
+    --muted-foreground: 161, 161, 170;
+
+    --accent: 39, 39, 42;
+    --accent-foreground: 252, 252, 250;
+
+    --destructive: 239, 68, 68;
+    --destructive-foreground: 252, 252, 250;
+
+    --border: 39, 39, 42;
+    --input: 39, 39, 42;
+    --ring: 212, 212, 216;
+    --sidebar-background: 12, 12, 12;
+    --sidebar-foreground: 161, 161, 170;
+    --sidebar-primary: 252, 252, 250;
+    --sidebar-primary-foreground: 12, 12, 12;
+    --sidebar-accent: 39, 39, 42;
+    --sidebar-accent-foreground: 252, 252, 250;
+    --sidebar-border: 39, 39, 42;
+    --sidebar-ring: 212, 212, 216;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-medium tracking-tight;
+    line-height: 1.2;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .magazine-title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+
+  .magazine-subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    line-height: 1.4;
+  }
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240, 240, 240; /* Light gray for newspaper-like color */
+    --foreground: 20, 20, 20;
+
+    --card: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --card-foreground: 20, 20, 20;
+
+    --popover: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --popover-foreground: 20, 20, 20;
+
+    --primary: 20, 20, 20;
+    --primary-foreground: 255, 255, 255; /* Changed from 252, 252, 250 */
+
+    --sidebar-background: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --sidebar-primary-foreground: 255, 255, 255; /* Changed from 252, 252, 250 */
+    --ebar-ring: 20, 20, 20;
+  }
+
+  .dark {
+    --background: 12, 12, 12;
+    --foreground: 252, 252, 250;
+
+    --card: 12, 12, 12;
+    --card-foreground: 252, 252, 250;
+
+    --popover: 12, 12, 12;
+    --popover-foreground: 252, 252, 250;
+
+    --primary: 252, 252, 250;
+    --primary-foreground: 12, 12, 12;
+
+    --secondary: 39, 39, 42;
+    --secondary-foreground: 252, 252, 250;
+
+    --muted: 39, 39, 42;
+    --muted-foreground: 161, 161, 170;
+
+    --accent: 39, 39, 42;
+    --accent-foreground: 252, 252, 250;
+
+    --destructive: 239, 68, 68;
+    --destructive-foreground: 252, 252, 250;
+
+    --border: 39, 39, 42;
+    --input: 39, 39, 42;
+    --ring: 212, 212, 216;
+    --sidebar-background: 12, 12, 12;
+    --sidebar-foreground: 161, 161, 170;
+    --sidebar-primary: 252, 252, 250;
+    --sidebar-primary-foreground: 12, 12, 12;
+    --sidebar-accent: 39, 39, 42;
+    --sidebar-accent-foreground: 252, 252, 250;
+    --sidebar-border: 39, 39, 42;
+    --sidebar-ring: 212, 212, 216;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-medium tracking-tight;
+    line-height: 1.2;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .magazine-title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+
+  .magazine-subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    line-height: 1.4;
+  }
+}
+
+  .dark {
+    --background: 12 12 12;
+    --foreground: 252 252 250;
+
+    --card: 12 12 12;
+    --card-foreground: 252 252 250;
+
+    --popover: 12 12 12;
+    --popover-foreground: 252 252 250;
+
+    --primary: 252 252 250;
+    --primary-foreground: 12 12 12;
+
+    --secondary: 39 39 42;
+    --secondary-foreground: 252 252 250;
+
+    --muted: 39 39 42;
+    --muted-foreground: 161 161 170;
+
+    --accent: 39 39 42;
+    --accent-foreground: 252 252 250;
+
+    --destructive: 239 68 68;
+    --destructive-foreground: 252 252 250;
+
+    --border: 39 39 42;
+    --input: 39 39 42;
+    --ring: 212 212 216;
+    --sidebar-background: 12 12 12;
+    --sidebar-foreground: 161 161 170;
+    --sidebar-primary: 252 252 250;
+    --sidebar-primary-foreground: 12 12 12;
+    --sidebar-accent: 39 39 42;
+    --sidebar-accent-foreground: 252 252 250;
+    --sidebar-border: 39 39 42;
+    --sidebar-ring: 212 212 216;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-medium tracking-tight;
+    line-height: 1.2;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .magazine-title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+
+  .magazine-subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    line-height: 1.4;
+  }
+}

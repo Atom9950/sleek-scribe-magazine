@@ -6,14 +6,7 @@ const HeroSection = () => {
         {/* Main Featured Article */}
         <div className="lg:col-span-8">
           <article className="group cursor-pointer">
-            <div className="relative mb-6">
-              <img 
-                src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=500&fit=crop" 
-                alt="Featured article"
-                className="w-full h-[300px] lg:h-[400px] object-cover"
-              />
-            </div>
-            
+          
             <div className="space-y-4">
               <div className="flex items-center space-x-4 text-xs uppercase tracking-widest">
                 <span className="font-medium">DESIGN</span>
@@ -33,6 +26,13 @@ const HeroSection = () => {
                   Read More →
                 </span>
               </div>
+                <div className="relative mb-6">
+              <img 
+                src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=500&fit=crop" 
+                alt="Featured article"
+                className="w-full h-[300px] lg:h-[400px] object-cover"
+              />
+            </div>
             </div>
           </article>
         </div>

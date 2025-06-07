@@ -1,85 +1,169 @@
-
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    document.body.style.overflow = !isMenuOpen ? 'hidden' : 'unset';
+  };
+
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <header className="fixed top-0 left-0 right-0 z-[60] newspaper-bg border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <h1 className="text-2xl font-serif font-bold tracking-tight">PAPER</h1>
+              <h1 className="text-2xl font-bold">PAPER</h1>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-sm font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                HOME
-              </a>
-              <a href="#" className="text-sm font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                ARTICLES
-              </a>
-              <a href="#" className="text-sm font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                CULTURE
-              </a>
-              <a href="#" className="text-sm font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                OPINION
-              </a>
-              <a href="#" className="text-sm font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                ABOUT
-              </a>
-            </nav>
-
-            {/* Subscribe Button */}
-            <div className="hidden md:flex">
-              <button className="bg-foreground text-background px-6 py-2 text-sm font-medium tracking-wide hover:bg-muted-foreground transition-colors">
-                SUBSCRIBE
-              </button>
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
+            {/* Menu Button (Hamburger/Close) */}
+            <div className="flex">
               <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-foreground hover:text-muted-foreground"
+                onClick={toggleMenu}
+                className={`focus:outline-none p-4 transition-colors duration-300 relative ${
+                  isMenuOpen ? 'text-white' : 'text-black'
+                }`}
+                style={{ zIndex: 90 }}
+                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                <X 
+                  size={56} 
+                  strokeWidth={1.5} 
+                  className={`absolute transition-all duration-300 hover:rotate-90 ${
+                    isMenuOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'
+                  }`} 
+                />
+                <Menu 
+                  size={56} 
+                  strokeWidth={1.5} 
+                  className={`transition-all duration-300 ${
+                    isMenuOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'
+                  }`} 
+                />
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Navigation - Expanding from top */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-background border-t border-border animate-accordion-down">
-            <div className="max-w-6xl mx-auto px-6 py-6 space-y-6">
-              <a href="#" className="block text-lg font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                HOME
-              </a>
-              <a href="#" className="block text-lg font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                ARTICLES
-              </a>
-              <a href="#" className="block text-lg font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                CULTURE
-              </a>
-              <a href="#" className="block text-lg font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                OPINION
-              </a>
-              <a href="#" className="block text-lg font-medium tracking-wide hover:text-muted-foreground transition-colors">
-                ABOUT
-              </a>
-              <button className="w-full bg-foreground text-background px-6 py-3 text-sm font-medium tracking-wide hover:bg-muted-foreground transition-colors mt-6">
-                SUBSCRIBE
-              </button>
+        {/* Fullscreen Menu */}
+        <div 
+          className={`fixed inset-0 z-[70] newspaper-menu transition-transform duration-500 ease-in-out ${
+            isMenuOpen ? 'translate-y-0' : '-translate-y-full'
+          }`}
+          style={{ top: '0', height: '100vh' }}
+        >
+          <div className="h-full overflow-y-auto">
+            <div className="container mx-auto px-6 py-16">
+              <div className="flex flex-col md:flex-row h-full">
+                {/* Left Column - Main Navigation */}
+                <div className="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                  <nav className="space-y-6">
+                    <div>
+                      <span className="text-xs text-gray-500">(01)</span>
+                      <a 
+                        href="#" 
+                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        onClick={toggleMenu}
+                      >
+                        HOME
+                      </a>
+                    </div>
+                    
+                    <div>
+                      <span className="text-xs text-gray-500">(02)</span>
+                      <a 
+                        href="#" 
+                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        onClick={toggleMenu}
+                      >
+                        PROGRAMMES
+                      </a>
+                    </div>
+                    
+                    <div>
+                      <span className="text-xs text-gray-500">(03)</span>
+                      <a 
+                        href="#" 
+                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        onClick={toggleMenu}
+                      >
+                        ABOUT
+                      </a>
+                    </div>
+                    
+                    <div>
+                      <span className="text-xs text-gray-500">(04)</span>
+                      <a 
+                        href="#" 
+                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        onClick={toggleMenu}
+                      >
+                        ADMISSIONS
+                      </a>
+                    </div>
+                    
+                    <div>
+                      <span className="text-xs text-gray-500">(05)</span>
+                      <a 
+                        href="#" 
+                        className="block text-4xl md:text-6xl font-bold text-white mt-1"
+                        onClick={toggleMenu}
+                      >
+                        STUDENT LOGIN
+                      </a>
+                    </div>
+                  </nav>
+                </div>
+
+                {/* Right Column - Secondary Links */}
+                <div className="w-full md:w-1/2 md:pl-8 md:border-l md:border-gray-700">
+                  <nav className="space-y-6">
+                    <a href="#" className="block text-lg md:text-xl font-medium text-white">
+                      Contribute
+                    </a>
+                    <a href="#" className="block text-lg md:text-xl font-medium text-white">
+                      Incubate
+                    </a>
+                    <a href="#" className="block text-lg md:text-xl font-medium text-white">
+                      Recruit
+                    </a>
+                    <a href="#" className="block text-lg md:text-xl font-medium text-white">
+                      Reach Us
+                    </a>
+                    
+                    <div className="pt-8 space-y-2">
+                      <p className="text-sm md:text-base text-gray-400">C-29 & 75, Sector 8, Noida</p>
+                      <p className="text-sm md:text-base text-gray-400">+91 88606 08188</p>
+                      <p className="text-sm md:text-base text-gray-400">admissions@medesignvillage.org</p>
+                    </div>
+                    
+                    <div className="pt-8 flex space-x-6">
+                      <a href="#" className="text-sm md:text-base font-medium text-white">
+                        Instagram
+                      </a>
+                      <a href="#" className="text-sm md:text-base font-medium text-white">
+                        LinkedIn
+                      </a>
+                      <a href="#" className="text-sm md:text-base font-medium text-white">
+                        Youtube
+                      </a>
+                    </div>
+                    
+                    <p className="pt-8 text-xs md:text-sm text-gray-500">
+                      © 2024 THE DESIGN VILLAGE FOUNDATION
+                    </p>
+                  </nav>
+                </div>
+              </div>
             </div>
           </div>
-        )}
+        </div>
       </header>
-      <div className="h-16"></div> {/* Spacer for fixed header */}
+      {/* Spacer for fixed header */}
+      <div className="h-16"></div>
     </>
   );
 };
