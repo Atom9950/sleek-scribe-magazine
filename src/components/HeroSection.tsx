@@ -13,8 +13,8 @@ const HeroSection = () => {
                 <span className="text-muted-foreground">MARCH 15, 2024</span>
               </div>
               
-              <h1 className="magazine-title font-serif font-bold group-hover:text-muted-foreground transition-colors">
-                THE FUTURE OF MINIMALIST DESIGN
+              <h1 className="magazine-title font-serif font-bold group-hover:text-muted-foreground transition-colors whitespace-pre-line">
+  THE FUTURE{'\n'}OF{'\n'}MINIMALIST{'\n'}DESIGN
               </h1>
               
               <p className="magazine-subtitle text-muted-foreground max-w-2xl">
