@@ -2,6 +2,7 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
 import { PanelLeft } from "lucide-react"
+import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -153,6 +154,44 @@ const SidebarProvider = React.forwardRef<
   }
 )
 SidebarProvider.displayName = "SidebarProvider"
+
+const sidebarVariants = {
+  expanded: {
+    width: SIDEBAR_WIDTH,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+    },
+  },
+  collapsed: {
+    width: SIDEBAR_WIDTH_ICON,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+    },
+  },
+}
+
+const contentVariants = {
+  expanded: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut",
+    },
+  },
+  collapsed: {
+    opacity: 0,
+    x: -10,
+    transition: {
+      duration: 0.2,
+      ease: "easeIn",
+    },
+  },
+}
 
 const Sidebar = React.forwardRef<
   HTMLDivElement,
@@ -482,6 +521,28 @@ const SidebarGroupContent = React.forwardRef<
   />
 ))
 SidebarGroupContent.displayName = "SidebarGroupContent"
+
+interface SidebarNavProps extends HTMLMotionProps<"div"> {
+  className?: string
+}
+
+const SidebarNav = React.forwardRef<HTMLDivElement, SidebarNavProps>(
+  ({ className, ...props }, ref) => {
+    const { state } = useSidebar()
+
+    return (
+      <motion.div
+        ref={ref}
+        className={cn("flex flex-col gap-4", className)}
+        variants={contentVariants}
+        initial={false}
+        animate={state}
+        {...props}
+      />
+    )
+  }
+)
+SidebarNav.displayName = "SidebarNav"
 
 const SidebarMenu = React.forwardRef<
   HTMLUListElement,

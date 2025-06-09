@@ -1,8 +1,33 @@
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
+
+const menuItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  })
+};
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      // Animate menu background
+      gsap.fromTo(".newspaper-menu", 
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3 }
+      );
+    }
+  }, [isMenuOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -11,16 +36,31 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-[60] newspaper-bg border-b border-gray-200">
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="fixed top-0 left-0 right-0 z-[60] newspaper-bg border-b border-gray-200"
+      >
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex items-center"
+            >
               <h1 className="text-2xl font-bold">PAPER</h1>
-            </div>
+            </motion.div>
 
-            {/* Menu Button (Hamburger/Close) */}
-            <div className="flex">
+            {/* Menu Button */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex"
+            >
               <button
                 onClick={toggleMenu}
                 className={`focus:outline-none p-4 transition-colors duration-300 relative ${
@@ -44,124 +84,114 @@ const Header = () => {
                   }`} 
                 />
               </button>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* Fullscreen Menu */}
-        <div 
-          className={`fixed inset-0 z-[70] newspaper-menu transition-transform duration-500 ease-in-out ${
-            isMenuOpen ? 'translate-y-0' : '-translate-y-full'
-          }`}
-          style={{ top: '0', height: '100vh' }}
-        >
-          <div className="h-full overflow-y-auto">
-            <div className="container mx-auto px-6 py-16">
-              <div className="flex flex-col md:flex-row h-full">
-                {/* Left Column - Main Navigation */}
-                <div className="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                  <nav className="space-y-6">
-                    <div>
-                      <span className="text-xs text-gray-500">(01)</span>
-                      <a 
-                        href="#" 
-                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
-                        onClick={toggleMenu}
-                      >
-                        HOME
-                      </a>
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ y: "-100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-100%" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-0 z-[70] newspaper-menu"
+              style={{ top: '0', height: '100vh' }}
+            >
+              <div className="h-full overflow-y-auto">
+                <div className="container mx-auto px-6 py-16">
+                  <div className="flex flex-col md:flex-row h-full">
+                    {/* Left Column - Main Navigation */}
+                    <div className="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                      <nav className="space-y-6">
+                        {["HOME", "CONTENT", "ABOUT", "POSTS", "NEWSLETTER"].map((item, i) => (
+                          <motion.div
+                            key={item}
+                            custom={i}
+                            variants={menuItemVariants}
+                            initial="hidden"
+                            animate="visible"
+                          >
+                            <span className="text-xs text-gray-500">({String(i + 1).padStart(2, '0')})</span>
+                            <a 
+                              href="#" 
+                              className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
+                              onClick={toggleMenu}
+                            >
+                              {item}
+                            </a>
+                          </motion.div>
+                        ))}
+                      </nav>
                     </div>
-                    
-                    <div>
-                      <span className="text-xs text-gray-500">(02)</span>
-                      <a 
-                        href="#" 
-                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
-                        onClick={toggleMenu}
-                      >
-                        CONTENT
-                      </a>
-                    </div>
-                    
-                    <div>
-                      <span className="text-xs text-gray-500">(03)</span>
-                      <a 
-                        href="#" 
-                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
-                        onClick={toggleMenu}
-                      >
-                        ABOUT
-                      </a>
-                    </div>
-                    
-                    <div>
-                      <span className="text-xs text-gray-500">(04)</span>
-                      <a 
-                        href="#" 
-                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
-                        onClick={toggleMenu}
-                      >
-                        POSTS
-                      </a>
-                    </div>
-                    
-                    <div>
-                      <span className="text-xs text-gray-500">(05)</span>
-                      <a 
-                        href="#" 
-                        className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
-                        onClick={toggleMenu}
-                      >
-                        NEWSLETTER
-                      </a>
-                    </div>
-                  </nav>
-                </div>
 
-                {/* Right Column - Secondary Links */}
-                <div className="w-full md:w-1/2 md:pl-8 md:border-l md:border-gray-700">
-                  <nav className="space-y-6">
-                    <a href="#" className="magazine-subtitle block text-white max-w-2xl">
-                      Contribute
-                    </a>
-                    <a href="#" className="magazine-subtitle block text-white max-w-2xl">
-                      Incubate
-                    </a>
-                    <a href="#" className="magazine-subtitle block text-white max-w-2xl">
-                      Recruit
-                    </a>
-                    <a href="#" className="magazine-subtitle block text-white max-w-2xl">
-                      Reach Us
-                    </a>
-                    
-                    <div className="pt-8 space-y-2">
-                      <p className="magazine-subtle text-sm md:text-base text-gray-400">sd-atom.vercel.app</p>
-                      <p className="magazine-subtle text-sm md:text-base text-gray-400">+91 99000 55000</p>
-                      <p className="magazine-subtle text-sm md:text-base text-gray-400">sdroy001@gmail.com</p>
-                    </div>
-                    
-                    <div className="pt-8 flex space-x-6">
-                      <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
-                        Instagram
-                      </a>
-                      <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
-                        LinkedIn
-                      </a>
-                      <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
-                        Youtube
-                      </a>
-                    </div>
-                    
-                    <p className="magazine-subtle pt-8 text-xs md:text-sm text-gray-500">
-                      © 2024 PAPER MAGAZINE
-                    </p>
-                  </nav>
+                    {/* Right Column - Secondary Links */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                      className="w-full md:w-1/2 md:pl-8 md:border-l md:border-gray-700"
+                    >
+                      <nav className="space-y-6">
+                        {["Contribute", "Incubate", "Recruit", "Reach Us"].map((item, i) => (
+                          <motion.a
+                            key={item}
+                            href="#"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.4 + (i * 0.1), duration: 0.5 }}
+                            className="block text-lg md:text-xl font-medium text-white"
+                          >
+                            {item}
+                          </motion.a>
+                        ))}
+                        
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.8, duration: 0.5 }}
+                          className="pt-8 space-y-2"
+                        >
+                          <p className="magazine-subtle text-sm md:text-base text-gray-400">sd-atom.vercel.app</p>
+                          <p className="magazine-subtle text-sm md:text-base text-gray-400">+91 99000 55000</p>
+                          <p className="magazine-subtle text-sm md:text-base text-gray-400">sdroy001@gmail.com</p>
+                        </motion.div>
+                        
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.9, duration: 0.5 }}
+                          className="pt-8 flex space-x-6"
+                        >
+                          <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
+                            Instagram
+                          </a>
+                          <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
+                            LinkedIn
+                          </a>
+                          <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
+                            Youtube
+                          </a>
+                        </motion.div>
+                        
+                        <motion.p
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1, duration: 0.5 }}
+                          className="pt-8 text-xs md:text-sm text-gray-500"
+                        >
+                          © 2024 PAPER MAGAZINE
+                        </motion.p>
+                      </nav>
+                    </motion.div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </header>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
       {/* Spacer for fixed header */}
       <div className="h-16"></div>
     </>

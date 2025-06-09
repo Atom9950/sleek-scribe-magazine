@@ -1,39 +1,126 @@
+import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Newsletter = () => {
+  const sectionRef = useRef(null);
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate section background on scroll
+      gsap.from(sectionRef.current, {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "top center",
+          scrub: 1
+        },
+        backgroundColor: "transparent",
+        duration: 1
+      });
+
+      // Animate form elements on scroll
+      gsap.from(formRef.current, {
+        scrollTrigger: {
+          trigger: formRef.current,
+          start: "top bottom-=100",
+          toggleActions: "play none none reverse"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="bg-foreground text-background py-16 lg:py-20">
+    <section 
+      ref={sectionRef} 
+      className="bg-foreground text-background py-16 lg:py-20"
+    >
       <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <div className="space-y-8">
-          <div className="space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
             <div className="space-y-2">
-              <div className="text-xs uppercase tracking-widest opacity-80">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-xs uppercase tracking-widest opacity-80"
+              >
                 NEWSLETTER
-              </div>
-              <h2 className="text-3xl lg:text-4xl font-serif font-bold">
+              </motion.div>
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="text-3xl lg:text-4xl font-serif font-bold"
+              >
                 STAY IN THE LOOP
-              </h2>
+              </motion.h2>
             </div>
-            <p className="text-lg opacity-90 max-w-2xl mx-auto font-light leading-relaxed">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-lg opacity-90 max-w-2xl mx-auto font-light leading-relaxed"
+            >
               Get the latest design insights, creative techniques, and industry trends 
               delivered directly to your inbox every week.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="max-w-md mx-auto">
+          <motion.div 
+            ref={formRef}
+            className="max-w-md mx-auto"
+          >
             <div className="flex flex-col sm:flex-row gap-3">
-              <input
+              <motion.input
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 px-4 py-3 text-foreground bg-background border text-sm"
+                className="flex-1 px-4 py-3 text-black bg-white border text-sm"
               />
-              <button className="text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300">
+              <motion.button 
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300"
+              >
                 SUBSCRIBE
-              </button>
+              </motion.button>
             </div>
-            <p className="text-xs opacity-70 mt-4 tracking-wide">
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 0.7 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="text-xs mt-4 tracking-wide"
+            >
               Unsubscribe at any time. Privacy policy.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
         </div>
       </div>
     </section>
