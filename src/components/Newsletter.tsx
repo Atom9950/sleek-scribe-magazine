@@ -97,7 +97,7 @@ const Newsletter = () => {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 px-4 py-3 text-black bg-white border text-sm"
+                className="flex-1 px-4 py-3 bg-transparent text-background border border-background text-sm placeholder-opacity-80"
               />
               <motion.button 
                 initial={{ opacity: 0, x: 20 }}
@@ -106,7 +106,7 @@ const Newsletter = () => {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300"
+                className="text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300"
               >
                 SUBSCRIBE
               </motion.button>
