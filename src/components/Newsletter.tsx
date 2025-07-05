@@ -61,7 +61,7 @@ const Newsletter = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-xs uppercase tracking-widest opacity-80"
               >
-                NEWSLETTER
+                নিউজলেটার
               </motion.div>
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
@@ -70,7 +70,7 @@ const Newsletter = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="text-3xl lg:text-4xl font-serif font-bold"
               >
-                STAY IN THE LOOP
+                সংযোগে থাকুন
               </motion.h2>
             </div>
             <motion.p 
@@ -80,8 +80,7 @@ const Newsletter = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-lg opacity-90 max-w-2xl mx-auto font-light leading-relaxed"
             >
-              Get the latest design insights, creative techniques, and industry trends 
-              delivered directly to your inbox every week.
+              প্রতি সপ্তাহে আপনার ইনবক্সে পান নতুন কবিতা, ভাবনাচিত্র, আর যুগান্তকারী গল্প — কল্পনার রঙে আঁকা বাস্তবতার ছোঁয়া।
             </motion.p>
           </motion.div>
 
@@ -96,7 +95,7 @@ const Newsletter = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 }}
                 type="email"
-                placeholder="Your email address"
+                placeholder="আপনার ইমেইল ঠিকানা"
                 className="flex-1 px-4 py-3 bg-transparent text-background border border-background text-sm placeholder-opacity-80"
               />
               <motion.button 
@@ -108,7 +107,7 @@ const Newsletter = () => {
                 whileTap={{ scale: 0.95 }}
                 className="text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300"
               >
-                SUBSCRIBE
+                সাবস্ক্রাইব করুন
               </motion.button>
             </div>
             <motion.p 
@@ -118,7 +117,7 @@ const Newsletter = () => {
               transition={{ duration: 0.5, delay: 0.7 }}
               className="text-xs mt-4 tracking-wide"
             >
-              Unsubscribe at any time. Privacy policy.
+              যেকোনো সময় সদস্যতা বাতিল করুন। গোপনীয়তা নীতিমালা।
             </motion.p>
           </motion.div>
         </div>

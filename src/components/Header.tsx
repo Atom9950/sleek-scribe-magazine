@@ -113,7 +113,7 @@ const Header = () => {
                     {/* Left Column - Main Navigation */}
                     <div className="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
                       <nav className="space-y-6">
-                        {["HOME", "CONTENT", "ABOUT", "POSTS", "NEWSLETTER"].map((item, i) => (
+                        {["হোম", "বিষয়বস্তু", "সম্পর্কে", "পোস্ট", "নিউজলেটার"].map((item, i) => (
                           <motion.div
                             key={item}
                             custom={i}
@@ -142,7 +142,7 @@ const Header = () => {
                       className="w-full md:w-1/2 md:pl-8 md:border-l md:border-gray-700"
                     >
                       <nav className="space-y-6">
-                        {["Contribute", "Incubate", "Recruit", "Reach Us"].map((item, i) => (
+                        {["অবদান করুণ", "শেয়ার করুণ", "দান করুণ", "আমাদের কাছে পৌঁছান"].map((item, i) => (
                           <motion.a
                             key={item}
                             href="#"
@@ -173,13 +173,13 @@ const Header = () => {
                           className="pt-8 flex space-x-6"
                         >
                           <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
+                            Twitter
+                          </a>
+                          <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
                             Instagram
                           </a>
                           <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
-                            LinkedIn
-                          </a>
-                          <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
-                            Youtube
+                            Facebook
                           </a>
                         </motion.div>
                         
@@ -189,7 +189,7 @@ const Header = () => {
                           transition={{ delay: 1, duration: 0.5 }}
                           className="pt-8 text-xs md:text-sm text-gray-500"
                         >
-                          © 2024 PAPER MAGAZINE
+                          © 2025 পাতা
                         </motion.p>
                       </nav>
                     </motion.div>

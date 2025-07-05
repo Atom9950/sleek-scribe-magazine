@@ -142,7 +142,7 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false }: B
               variants={readMoreVariants}
               className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer inline-flex items-center gap-2"
             >
-              Read More
+              আরও পড়ুন
               <motion.span
                 initial={{ opacity: 0, x: -5 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -233,7 +233,7 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false }: B
             variants={readMoreVariants}
             className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer inline-flex items-center gap-2 mt-3"
           >
-            Read More
+            আরও পড়ুন
             <motion.span
               initial={{ opacity: 0, x: -5 }}
               animate={{ opacity: 1, x: 0 }}

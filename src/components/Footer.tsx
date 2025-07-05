@@ -58,7 +58,7 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-2xl font-serif font-bold tracking-tight"
             >
-              PAPER
+              পাতা
             </motion.h3>
             <motion.p 
               initial={{ opacity: 0 }}
@@ -67,7 +67,7 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-sm text-muted-foreground leading-relaxed"
             >
-              A modern magazine for creative professionals and design enthusiasts exploring the intersection of art, technology, and culture.
+              বিপ্লবী কবিতা ও গল্পের এক অনন্য ঠিকানা, যেখানে ভাবনা জাগে, জাগে অনুভব, গড়ে প্রতিবাদ, ও শুরু হয় পরিবর্তন।
             </motion.p>
           </motion.div>
 
@@ -79,9 +79,9 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="space-y-4"
           >
-            <h4 className="text-sm font-medium tracking-widest uppercase">Navigate</h4>
+            <h4 className="text-sm font-medium tracking-widest uppercase">নেভিগেট করুন</h4>
             <div className="space-y-3">
-              {["Home", "Articles", "Culture", "Opinion"].map((item, i) => (
+              {["হোম", "বিষয়বস্তু", "সম্পর্কে", "পোস্ট", "নিউজলেটার"].map((item, i) => (
                 <motion.a
                   key={item}
                   custom={i}
@@ -106,9 +106,9 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="space-y-4"
           >
-            <h4 className="text-sm font-medium tracking-widest uppercase">Topics</h4>
+            <h4 className="text-sm font-medium tracking-widest uppercase">বিষয়</h4>
             <div className="space-y-3">
-              {["Design", "Technology", "Innovation", "Sustainability"].map((item, i) => (
+              {["প্রহসন", "Technology", "Innovation", "Sustainability"].map((item, i) => (
                 <motion.a
                   key={item}
                   custom={i}
@@ -133,9 +133,9 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="space-y-4"
           >
-            <h4 className="text-sm font-medium tracking-widest uppercase">Connect</h4>
+            <h4 className="text-sm font-medium tracking-widest uppercase">সংযোগ করুন</h4>
             <div className="space-y-3">
-              {["Twitter", "Instagram", "LinkedIn", "Contact"].map((item, i) => (
+              {["Twitter", "Instagram", "Facebook"].map((item, i) => (
                 <motion.a
                   key={item}
                   custom={i}
@@ -163,7 +163,7 @@ const Footer = () => {
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-xs text-muted-foreground tracking-wide">
-              © 2024 PAPER MAGAZINE. ALL RIGHTS RESERVED.
+              © 2025 পাতা. ALL RIGHTS RESERVED.
             </p>
             <div className="flex space-x-6">
               <motion.a 

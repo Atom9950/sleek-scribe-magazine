@@ -30,9 +30,9 @@ const HeroSection = () => {
 
       // Animate trending articles on scroll
       gsap.utils.toArray(".trending-article").forEach((article, i) => {
-        gsap.from(article, {
+        gsap.from(article as Element, {
           scrollTrigger: {
-            trigger: article,
+            trigger: article as Element,
             start: "top bottom-=100",
             toggleActions: "play none none reverse"
           },
@@ -99,18 +99,20 @@ const HeroSection = () => {
                 transition={{ duration: 0.5 }}
                 className="flex items-center space-x-4 text-xs uppercase tracking-widest"
               >
-                <span className="font-medium">DESIGN</span>
-                <span className="text-muted-foreground">MARCH 15, 2024</span>
+                <span className="text-lg">প্রীতি</span>
+                <span className="text-muted-foreground text-lg">AUGUST 16, 2024</span>
               </motion.div>
               
               <motion.h1 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="magazine-title font-serif font-bold group-hover:text-muted-foreground transition-colors whitespace-pre-line"
+                className="magazine-title font-serif font-bold group-hover:text-muted-foreground transition-colors whitespace-pre-line gap"
+                style={{ lineHeight: '1.3' }} // Adjust this value as needed
               >
-                THE FUTURE{'\n'}OF{'\n'}MINIMALIST{'\n'}DESIGN
+                আমরা নাকি{'\n'}আধুনিক{'\n'}মানুষ ?{'\n'}
               </motion.h1>
+
               
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -118,7 +120,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="magazine-subtitle text-muted-foreground py-5 max-w-2xl"
               >
-                Exploring how minimalism continues to shape user experience and interface design in 2024. From typography choices to color palettes, discover the principles driving modern design.
+               ধর্ম-জাতির মোহে আমরা আধুনিক হলেও মানবতা হারিয়েছি। দেশপ্রেমের মুখোশ পরে চলছে পিশাচের রাজ। নিরাপত্তাহীন সমাজে ভালো মানুষরা হারিয়ে যাচ্ছে, অসুরেরা দাপট দেখাচ্ছে।
               </motion.p>
               
               <motion.div 
@@ -131,7 +133,7 @@ const HeroSection = () => {
                   whileHover={{ x: 10 }}
                   className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer inline-block"
                 >
-                  Read More →
+                  আরও পড়ুন →
                 </motion.span>
               </motion.div>
 
@@ -148,7 +150,7 @@ const HeroSection = () => {
                   className="w-full h-[300px] lg:h-[400px] transform-gpu"
                 >
                   <img 
-                    src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=500&fit=crop" 
+                    src="hero.jpg" 
                     alt="Featured article"
                     className="w-full h-full object-cover transition-all will-change-transform"
                     style={{
@@ -175,14 +177,14 @@ const HeroSection = () => {
           className="lg:col-span-4 space-y-8"
         >
           <div className="border-l border-border pl-6">
-            <motion.h2 
+            <motion.h1 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-sm font-medium tracking-widest uppercase mb-6"
+              className="text-lg font-medium tracking-widest uppercase mb-6"
             >
-              TRENDING
-            </motion.h2>
+              ট্রেন্ডিং
+            </motion.h1>
             
             <div className="space-y-6">
               {/* Trending articles with className for GSAP animations */}
@@ -192,14 +194,15 @@ const HeroSection = () => {
                 transition={{ duration: 0.2 }}
               >
                 <div className="space-y-3">
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                    CULTURE
+                  <div className="text-sm uppercase tracking-widest text-muted-foreground">
+                    প্রহসন
+
                   </div>
                   <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight">
-                    Typography Hierarchy in Modern Web Design
+                    আমরা নাকি আধুনিক মানুষ?
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Understanding the role of typography in creating visual hierarchy and improving user experience.
+                   ধর্ম-জাতির মোহে মানবতা হারিয়ে যাচ্ছে, ভালো মানুষরা হারিয়ে অসুরেরা সমাজে দাপট দেখাচ্ছে।
                   </p>
                 </div>
               </motion.article>

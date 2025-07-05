@@ -81,7 +81,7 @@ const BlogGrid = () => {
           transition={{ duration: 0.5 }}
           className="border-b border-border pb-6"
         >
-          <h2 className="text-sm font-medium tracking-widest uppercase">LATEST ARTICLES</h2>
+          <h2 className="text-sm font-medium tracking-widest uppercase">সর্বশেষ নিবন্ধ</h2>
         </motion.div>
 
         {/* Featured + Grid Layout */}
