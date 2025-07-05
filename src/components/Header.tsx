@@ -51,7 +51,15 @@ const Header = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex items-center"
             >
-              <h1 className="text-2xl font-bold">PAPER</h1>
+              <div className="flex items-center gap-4">
+                  <h1 className="text-2xl font-bold">পাতা</h1>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="34" height="34" fill="none" stroke="black" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 12v40c0 2 2 4 4 4h20c2 0 4 2 4 4V20c0-2-2-4-4-4H8c-2 0-4-2-4-4z" />
+                    <path d="M60 12v40c0 2-2 4-4 4H36c-2 0-4 2-4 4V20c0-2 2-4 4-4h20c2 0 4-2 4-4z" />
+                    <path d="M32 20v32" />
+                  </svg>
+              </div>
+
             </motion.div>
 
             {/* Menu Button */}
