@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -129,12 +130,14 @@ const HeroSection = () => {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="pt-4"
               >
+                <Link to="/article/amra-naki-adhunik-manush">
                 <motion.span 
                   whileHover={{ x: 10 }}
                   className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer inline-block"
                 >
                   আরও পড়ুন →
                 </motion.span>
+              </Link>
               </motion.div>
 
               <motion.div 
@@ -143,29 +146,31 @@ const HeroSection = () => {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="relative overflow-hidden"
               >
-                <motion.div
-                  initial="initial"
-                  whileHover="hover"
-                  animate="initial"
-                  className="w-full h-[300px] lg:h-[400px] transform-gpu"
-                >
-                  <img 
-                    src="hero.jpg" 
-                    alt="Featured article"
-                    className="w-full h-full object-cover transition-all will-change-transform"
-                    style={{
-                      transition: "transform 0.4s ease-out, filter 0.4s ease-out"
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "scale(1.05)";
-                      e.currentTarget.style.filter = "brightness(1.1)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "scale(1)";
-                      e.currentTarget.style.filter = "brightness(1)";
-                    }}
-                  />
-                </motion.div>
+                <Link to="/article/amra-naki-adhunik-manush">
+                  <motion.div
+                    initial="initial"
+                    whileHover="hover"
+                    animate="initial"
+                    className="w-full h-[300px] lg:h-[400px] transform-gpu"
+                  >
+                    <img 
+                      src="hero.jpg" 
+                      alt="Featured article"
+                      className="w-full h-full object-cover transition-all will-change-transform"
+                      style={{
+                        transition: "transform 0.4s ease-out, filter 0.4s ease-out"
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "scale(1.05)";
+                        e.currentTarget.style.filter = "brightness(1.1)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "scale(1)";
+                        e.currentTarget.style.filter = "brightness(1)";
+                      }}
+                    />
+                  </motion.div>
+                </Link>
               </motion.div>
             </div>
           </article>
