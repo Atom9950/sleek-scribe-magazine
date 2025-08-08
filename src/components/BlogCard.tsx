@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface BlogCardProps {
   title: string;
@@ -8,9 +9,10 @@ interface BlogCardProps {
   date: string;
   image: string;
   featured?: boolean;
+  slug?: string;
 }
 
-const BlogCard = ({ title, excerpt, category, date, image, featured = false }: BlogCardProps) => {
+const BlogCard = ({ title, excerpt, category, date, image, featured = false, slug }: BlogCardProps) => {
   const imageWrapperVariants = {
     initial: { 
       y: 0,
@@ -78,28 +80,30 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false }: B
     return (
       <article className="group cursor-pointer col-span-2">
         <div className="space-y-6">
-          <motion.div 
-            initial="initial"
-            whileHover="hover"
-            animate="initial"
-            variants={imageWrapperVariants}
-            className="relative overflow-hidden"
-          >
-            <motion.div
-              variants={overlayVariants}
-              className="absolute inset-0 z-10"
-            />
-            <motion.div
-              variants={imageVariants}
-              className="w-full h-[250px] lg:h-[300px] transform-gpu"
+          <Link to={slug ? `/${slug}` : '#'}>
+            <motion.div 
+              initial="initial"
+              whileHover="hover"
+              animate="initial"
+              variants={imageWrapperVariants}
+              className="relative overflow-hidden"
             >
-              <img 
-                src={image} 
-                alt={title}
-                className="w-full h-full object-cover"
+              <motion.div
+                variants={overlayVariants}
+                className="absolute inset-0 z-10"
               />
+              <motion.div
+                variants={imageVariants}
+                className="w-full h-[250px] lg:h-[300px] transform-gpu"
+              >
+                <img 
+                  src={image} 
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </Link>
           
           <div className="space-y-4">
             <motion.div 
@@ -133,24 +137,26 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false }: B
               {excerpt}
             </motion.p>
             
-            <motion.span 
-              initial="initial"
-              whileInView="animate"
-              whileHover="hover"
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              variants={readMoreVariants}
-              className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer inline-flex items-center gap-2"
-            >
-              আরও পড়ুন
-              <motion.span
-                initial={{ opacity: 0, x: -5 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7 }}
+            <Link to={slug ? `/${slug}` : '#'}>
+              <motion.span 
+                initial="initial"
+                whileInView="animate"
+                whileHover="hover"
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                variants={readMoreVariants}
+                className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer inline-flex items-center gap-2"
               >
-                <ArrowRight className="h-4 w-4" />
+                আরও পড়ুন
+                <motion.span
+                  initial={{ opacity: 0, x: -5 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.7 }}
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </motion.span>
               </motion.span>
-            </motion.span>
+            </Link>
           </div>
         </div>
       </article>
@@ -160,28 +166,30 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false }: B
   return (
     <article className="group cursor-pointer">
       <div className="space-y-4">
-        <motion.div 
-          initial="initial"
-          whileHover="hover"
-          animate="initial"
-          variants={imageWrapperVariants}
-          className="relative overflow-hidden"
-        >
-          <motion.div
-            variants={overlayVariants}
-            className="absolute inset-0 z-10"
-          />
-          <motion.div
-            variants={imageVariants}
-            className="w-full h-[200px] transform-gpu"
+        <Link to={slug ? `/${slug}` : '#'}>
+          <motion.div 
+            initial="initial"
+            whileHover="hover"
+            animate="initial"
+            variants={imageWrapperVariants}
+            className="relative overflow-hidden"
           >
-            <img 
-              src={image} 
-              alt={title}
-              className="w-full h-full object-cover"
+            <motion.div
+              variants={overlayVariants}
+              className="absolute inset-0 z-10"
             />
+            <motion.div
+              variants={imageVariants}
+              className="w-full h-[200px] transform-gpu"
+            >
+              <img 
+                src={image} 
+                alt={title}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </Link>
         
         <div className="space-y-3">
           <motion.div 
@@ -224,24 +232,26 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false }: B
             {date}
           </motion.div>
 
-          <motion.span 
-            initial="initial"
-            whileInView="animate"
-            whileHover="hover"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            variants={readMoreVariants}
-            className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer inline-flex items-center gap-2 mt-3"
-          >
-            আরও পড়ুন
-            <motion.span
-              initial={{ opacity: 0, x: -5 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.7 }}
+          <Link to={slug ? `/${slug}` : '#'}>
+            <motion.span 
+              initial="initial"
+              whileInView="animate"
+              whileHover="hover"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              variants={readMoreVariants}
+              className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer inline-flex items-center gap-2 mt-3"
             >
-              <ArrowRight className="h-4 w-4" />
+              আরও পড়ুন
+              <motion.span
+                initial={{ opacity: 0, x: -5 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 }}
+              >
+                <ArrowRight className="h-4 w-4" />
+              </motion.span>
             </motion.span>
-          </motion.span>
+          </Link>
         </div>
       </div>
     </article>

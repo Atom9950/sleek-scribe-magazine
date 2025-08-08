@@ -1,23 +1,32 @@
-import { useParams, Navigate } from 'react-router-dom';
 import { useState } from 'react';
-import Header from './Header';
-import { getArticleBySlug } from '../data/articles';
+import Header from '../components/Header';
 
-const ArticlePage = () => {
-  const { slug } = useParams(); // Get the slug from URL
+const SustainableDesignPage = () => {
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [showImageModal, setShowImageModal] = useState(false);
 
-  // Get article data based on slug
-  const articleData = slug ? getArticleBySlug(slug) : null;
-
-  // If article not found, redirect to 404
-  if (!articleData) {
-    return <Navigate to="/404" replace />;
-  }
+  const articleData = {
+    title: "Sustainable Design Philosophy",
+    date: "MARCH 03, 2024",
+    author: "Sustainability Team",
+    category: "CULTURE",
+    excerpt: "Exploring eco-conscious design principles and their impact on both environmental sustainability and creative innovation.",
+    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop",
+    fullContent: `
+      <p>Sustainable design is more than a trend—it's a fundamental shift in how we approach creativity and problem-solving. It challenges designers to consider the long-term impact of their decisions.</p>
+      <p>The principles of sustainable design extend beyond material choices to include digital sustainability, energy-efficient processes, and designs that promote longevity over disposability.</p>
+      <p>Eco-conscious design often leads to more innovative solutions. Constraints breed creativity, and the challenge of working within environmental limits often results in breakthrough ideas.</p>
+      <p>The future of design must balance aesthetic appeal with environmental responsibility. This balance is not a limitation but an opportunity to create more meaningful and impactful work.</p>
+      <p>Circular design principles are revolutionizing how we think about product lifecycles. Instead of linear "take-make-dispose" models, designers are creating systems where waste becomes input for new products.</p>
+      <p>Biomimicry is inspiring sustainable design solutions by learning from nature's 3.8 billion years of research and development. From self-cleaning surfaces inspired by lotus leaves to energy-efficient buildings modeled after termite mounds.</p>
+      <p>The concept of "design for disassembly" is gaining traction, where products are created with their end-of-life in mind, making recycling and material recovery more efficient.</p>
+      <p>Digital sustainability is becoming increasingly important as our digital footprint grows. Optimizing websites, reducing data transfer, and choosing green hosting providers are all part of sustainable design practice.</p>
+      <p>Consumer awareness of environmental issues is driving demand for sustainable design. Brands that embrace these principles are not only doing good but also gaining competitive advantages in the marketplace.</p>
+    `
+  };
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
@@ -83,34 +92,34 @@ const ArticlePage = () => {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span>লাইক</span>
+              <span>Like</span>
             </button>
 
             <button onClick={() => setSaved(!saved)} className={`flex items-center space-x-2 ${saved ? 'text-blue-500' : 'text-gray-500'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={saved ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
               </svg>
-              <span>সেভ</span>
+              <span>Save</span>
             </button>
           </div>
 
           {/* Comments Section */}
           <div className="pt-12">
-            <h3 className="text-xl font-semibold mb-6">মন্তব্য ({comments.length})</h3>
+            <h3 className="text-xl font-semibold mb-6">Comments ({comments.length})</h3>
             
             <form onSubmit={handleSubmitComment} className="mb-8">
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="আপনার মন্তব্য লিখুন..."
+                placeholder="Write your comment..."
                 rows={4}
               />
               <button
                 type="submit"
                 className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                পোস্ট করুন
+                Post Comment
               </button>
             </form>
 
@@ -128,4 +137,4 @@ const ArticlePage = () => {
   );
 };
 
-export default ArticlePage;
+export default SustainableDesignPage;

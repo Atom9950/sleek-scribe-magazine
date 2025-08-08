@@ -193,7 +193,8 @@ const HeroSection = () => {
             
             <div className="space-y-6">
               {/* Trending articles with className for GSAP animations */}
-              <motion.article 
+              <Link to="/article/amra-naki-adhunik-manush">
+                <motion.article 
                 className="group cursor-pointer trending-article"
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
@@ -211,16 +212,18 @@ const HeroSection = () => {
                   </p>
                 </div>
               </motion.article>
+              </Link>
 
-              <motion.article 
-                className="group cursor-pointer trending-article"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="space-y-3">
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                    OPINION
-                  </div>
+              <Link to="/article/color-psychology-brand-identity">
+                <motion.article 
+                  className="group cursor-pointer trending-article"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="space-y-3">
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground">
+                      OPINION
+                    </div>
                   <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight">
                     Color Psychology in Brand Identity
                   </h3>
@@ -229,24 +232,27 @@ const HeroSection = () => {
                   </p>
                 </div>
               </motion.article>
+              </Link>
 
-              <motion.article 
-                className="group cursor-pointer trending-article"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="space-y-3">
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                    TECH
+              <Link to="/article/sustainable-design-practices">
+                <motion.article 
+                  className="group cursor-pointer trending-article"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="space-y-3">
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground">
+                      TECH
+                    </div>
+                    <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight">
+                      Sustainable Design Practices
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Exploring eco-friendly approaches that are reshaping the creative industry.
+                    </p>
                   </div>
-                  <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight">
-                    Sustainable Design Practices
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Exploring eco-friendly approaches that are reshaping the creative industry.
-                  </p>
-                </div>
-              </motion.article>
+                </motion.article>
+              </Link>
             </div>
           </div>
         </motion.div>

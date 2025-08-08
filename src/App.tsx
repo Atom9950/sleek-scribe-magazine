@@ -6,6 +6,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ArticlePage from "./components/ArticlePage";
+import ArtOfCreativeCollaborationPage from "./pages/ArtOfCreativeCollaborationPage";
+import UserExperienceMobilePage from "./pages/UserExperienceMobilePage";
+import EmergingTechnologiesPage from "./pages/EmergingTechnologiesPage";
+import VisualStorytellingPage from "./pages/VisualStorytellingPage";
+import SustainableDesignPage from "./pages/SustainableDesignPage";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +24,14 @@ const App = () => (
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="/article/:slug" element={<ArticlePage />} />
+          
+          {/* Individual Article Pages */}
+          <Route path="/creative-collaboration" element={<ArtOfCreativeCollaborationPage />} />
+          <Route path="/mobile-ux" element={<UserExperienceMobilePage />} />
+          <Route path="/emerging-tech" element={<EmergingTechnologiesPage />} />
+          <Route path="/visual-storytelling" element={<VisualStorytellingPage />} />
+          <Route path="/sustainable-design" element={<SustainableDesignPage />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

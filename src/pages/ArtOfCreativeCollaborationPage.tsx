@@ -1,23 +1,29 @@
-import { useParams, Navigate } from 'react-router-dom';
 import { useState } from 'react';
-import Header from './Header';
-import { getArticleBySlug } from '../data/articles';
+import Header from '../components/Header';
 
-const ArticlePage = () => {
-  const { slug } = useParams(); // Get the slug from URL
+const ArtOfCreativeCollaborationPage = () => {
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [showImageModal, setShowImageModal] = useState(false);
 
-  // Get article data based on slug
-  const articleData = slug ? getArticleBySlug(slug) : null;
-
-  // If article not found, redirect to 404
-  if (!articleData) {
-    return <Navigate to="/404" replace />;
-  }
+  const articleData = {
+    title: "The Art of Creative Collaboration",
+    date: "MARCH 12, 2024",
+    author: "Creative Team",
+    category: "CULTURE",
+    excerpt: "Building effective creative teams and fostering collaboration in remote and hybrid work environments. Discover the tools and techniques that drive innovation.",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
+    fullContent: `
+      <p>In today's rapidly evolving creative landscape, collaboration has become the cornerstone of innovation. The art of bringing diverse minds together to create something extraordinary requires both skill and strategy.</p>
+      <p>Remote and hybrid work environments have transformed how creative teams operate. The challenge lies not just in maintaining productivity, but in fostering the spontaneous interactions that often lead to breakthrough ideas.</p>
+      <p>Successful creative collaboration starts with establishing clear communication channels and shared goals. When team members understand their roles and the project vision, they can contribute more effectively to the collective effort.</p>
+      <p>The tools we use matter, but the culture we build matters more. Creating an environment where ideas can flow freely, where constructive criticism is welcomed, and where every voice is heard is essential for true collaboration.</p>
+      <p>Digital collaboration platforms have revolutionized how we work together, but they cannot replace the human element of creativity. The best collaborative efforts combine technological efficiency with human empathy and understanding.</p>
+      <p>Building trust within creative teams is fundamental. When team members feel safe to share their ideas, take risks, and even fail, the collective creative output increases exponentially.</p>
+    `
+  };
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
@@ -83,34 +89,34 @@ const ArticlePage = () => {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span>লাইক</span>
+              <span>Like</span>
             </button>
 
             <button onClick={() => setSaved(!saved)} className={`flex items-center space-x-2 ${saved ? 'text-blue-500' : 'text-gray-500'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={saved ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
               </svg>
-              <span>সেভ</span>
+              <span>Save</span>
             </button>
           </div>
 
           {/* Comments Section */}
           <div className="pt-12">
-            <h3 className="text-xl font-semibold mb-6">মন্তব্য ({comments.length})</h3>
+            <h3 className="text-xl font-semibold mb-6">Comments ({comments.length})</h3>
             
             <form onSubmit={handleSubmitComment} className="mb-8">
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="আপনার মন্তব্য লিখুন..."
+                placeholder="Write your comment..."
                 rows={4}
               />
               <button
                 type="submit"
                 className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                পোস্ট করুন
+                Post Comment
               </button>
             </form>
 
@@ -128,4 +134,4 @@ const ArticlePage = () => {
   );
 };
 
-export default ArticlePage;
+export default ArtOfCreativeCollaborationPage;

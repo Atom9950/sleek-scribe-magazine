@@ -1,23 +1,31 @@
-import { useParams, Navigate } from 'react-router-dom';
 import { useState } from 'react';
-import Header from './Header';
-import { getArticleBySlug } from '../data/articles';
+import Header from '../components/Header';
 
-const ArticlePage = () => {
-  const { slug } = useParams(); // Get the slug from URL
+const VisualStorytellingPage = () => {
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [showImageModal, setShowImageModal] = useState(false);
 
-  // Get article data based on slug
-  const articleData = slug ? getArticleBySlug(slug) : null;
-
-  // If article not found, redirect to 404
-  if (!articleData) {
-    return <Navigate to="/404" replace />;
-  }
+  const articleData = {
+    title: "The Psychology of Visual Storytelling",
+    date: "MARCH 05, 2024",
+    author: "Content Team",
+    category: "OPINION",
+    excerpt: "How visual narratives influence human behavior and decision-making in the digital age of content consumption.",
+    image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=300&fit=crop",
+    fullContent: `
+      <p>Visual storytelling taps into fundamental aspects of human psychology. Our brains are wired to process visual information faster than text, making images a powerful tool for communication.</p>
+      <p>The emotional impact of visual narratives can drive decision-making in ways that pure logic cannot. Colors, composition, and visual metaphors all play crucial roles in how messages are received and interpreted.</p>
+      <p>In the digital age, attention spans are shorter, making the ability to convey complex ideas through visual means more valuable than ever. A single image can communicate what might take paragraphs to explain.</p>
+      <p>Understanding the psychology behind visual perception allows creators to craft more effective and engaging content that resonates with their audience on a deeper level.</p>
+      <p>The rise of social media has transformed visual storytelling from a nice-to-have skill to an essential competency. Platforms like Instagram, TikTok, and Pinterest have made visual content the primary language of digital communication.</p>
+      <p>Neuroscience research shows that visual information is processed 60,000 times faster than text by the human brain, explaining why visual storytelling is so effective at capturing and maintaining attention.</p>
+      <p>Cultural context plays a significant role in visual interpretation. What resonates in one culture may have completely different meanings in another, making cultural sensitivity crucial for global visual communication.</p>
+      <p>The future of visual storytelling lies in interactive and immersive experiences that engage multiple senses and create memorable, emotional connections with audiences.</p>
+    `
+  };
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
@@ -83,34 +91,34 @@ const ArticlePage = () => {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span>লাইক</span>
+              <span>Like</span>
             </button>
 
             <button onClick={() => setSaved(!saved)} className={`flex items-center space-x-2 ${saved ? 'text-blue-500' : 'text-gray-500'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={saved ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
               </svg>
-              <span>সেভ</span>
+              <span>Save</span>
             </button>
           </div>
 
           {/* Comments Section */}
           <div className="pt-12">
-            <h3 className="text-xl font-semibold mb-6">মন্তব্য ({comments.length})</h3>
+            <h3 className="text-xl font-semibold mb-6">Comments ({comments.length})</h3>
             
             <form onSubmit={handleSubmitComment} className="mb-8">
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="আপনার মন্তব্য লিখুন..."
+                placeholder="Write your comment..."
                 rows={4}
               />
               <button
                 type="submit"
                 className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                পোস্ট করুন
+                Post Comment
               </button>
             </form>
 
@@ -128,4 +136,4 @@ const ArticlePage = () => {
   );
 };
 
-export default ArticlePage;
+export default VisualStorytellingPage;
