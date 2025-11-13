@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 gsap.registerPlugin(ScrollTrigger);
 
 const Newsletter = () => {
@@ -40,6 +41,8 @@ const Newsletter = () => {
   }, []);
 
   return (
+    <div className="min-h-screen bg-[#f0f0f0]">
+      <Header />
     <section 
       ref={sectionRef} 
       className="bg-foreground text-background py-16 lg:py-20"
@@ -123,6 +126,8 @@ const Newsletter = () => {
         </div>
       </div>
     </section>
+    <Footer />
+    </div>
   );
 };
 
