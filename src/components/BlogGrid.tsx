@@ -36,7 +36,7 @@ const BlogGrid = () => {
     excerpt: "Building effective creative teams and fostering collaboration in remote and hybrid work environments. Discover the tools and techniques that drive innovation.",
     category: "CULTURE",
     date: "MARCH 12, 2024",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
+    image: "/second.jpg",
     slug: "creative-collaboration"
   };
 

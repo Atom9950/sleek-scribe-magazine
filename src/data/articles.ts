@@ -44,7 +44,7 @@ export const articles: Article[] = [
       <p>Successful creative collaboration starts with establishing clear communication channels and shared goals. When team members understand their roles and the project vision, they can contribute more effectively to the collective effort.</p>
       <p>The tools we use matter, but the culture we build matters more. Creating an environment where ideas can flow freely, where constructive criticism is welcomed, and where every voice is heard is essential for true collaboration.</p>
     `,
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop"
+    image: "/second.jpg"
   },
   {
     id: "3",

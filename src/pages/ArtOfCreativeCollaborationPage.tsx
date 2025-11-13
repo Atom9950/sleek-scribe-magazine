@@ -14,7 +14,7 @@ const ArtOfCreativeCollaborationPage = () => {
     author: "Creative Team",
     category: "CULTURE",
     excerpt: "Building effective creative teams and fostering collaboration in remote and hybrid work environments. Discover the tools and techniques that drive innovation.",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
+    image: "/second.jpg",
     fullContent: `
       <p>In today's rapidly evolving creative landscape, collaboration has become the cornerstone of innovation. The art of bringing diverse minds together to create something extraordinary requires both skill and strategy.</p>
       <p>Remote and hybrid work environments have transformed how creative teams operate. The challenge lies not just in maintaining productivity, but in fostering the spontaneous interactions that often lead to breakthrough ideas.</p>
