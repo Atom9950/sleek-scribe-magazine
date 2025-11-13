@@ -31,18 +31,19 @@ export const articles: Article[] = [
   },
   {
     id: "2",
-    slug: "art-of-creative-collaboration",
-    title: "The Art of Creative Collaboration",
+    slug: "বৃষ্টি",
+    title: "বৃষ্টি",
     date: "MARCH 12, 2024",
-    author: "Creative Team",
-    category: "CULTURE",
-    excerpt: "Building effective creative teams and fostering collaboration in remote and hybrid work environments. Discover the tools and techniques that drive innovation.",
-    content: "Building effective creative teams and fostering collaboration in remote and hybrid work environments...",
+    author: "প্রীতি",
+    category: "কবিতা",
+    excerpt: "কবিতাটি “বৃষ্টি”কে কেন্দ্র করে, যেখানে শহরের প্রতিটি মানুষ বৃষ্টিকে ভিন্নভাবে অনুভব করে। কারো কাছে এটি প্রেমের সুর, কারো কাছে আশ্রয়ের নীরবতা।",
+    content: "কবিতাটি “বৃষ্টি”কে কেন্দ্র করে, যেখানে শহরের প্রতিটি মানুষ বৃষ্টিকে ভিন্নভাবে অনুভব করে। কারো কাছে এটি প্রেমের সুর, কারো কাছে আশ্রয়ের নীরবতা।",
     fullContent: `
-      <p>In today's rapidly evolving creative landscape, collaboration has become the cornerstone of innovation. The art of bringing diverse minds together to create something extraordinary requires both skill and strategy.</p>
-      <p>Remote and hybrid work environments have transformed how creative teams operate. The challenge lies not just in maintaining productivity, but in fostering the spontaneous interactions that often lead to breakthrough ideas.</p>
-      <p>Successful creative collaboration starts with establishing clear communication channels and shared goals. When team members understand their roles and the project vision, they can contribute more effectively to the collective effort.</p>
-      <p>The tools we use matter, but the culture we build matters more. Creating an environment where ideas can flow freely, where constructive criticism is welcomed, and where every voice is heard is essential for true collaboration.</p>
+     <p>কবিতাটি “বৃষ্টি”কে কেন্দ্র করে, যেখানে শহরের প্রতিটি মানুষ বৃষ্টিকে ভিন্নভাবে অনুভব করে। কারো কাছে এটি প্রেমের সুর, কারো কাছে আশ্রয়ের নীরবতা।</p>
+<p>কেউ রোমান্টিক গানে হারিয়ে যায়, কেউ ভালোবাসার স্মৃতিতে ডুবে থাকে। আবার কেউ জানালার পাশে দাঁড়িয়ে জীবনের রঙিন প্রবাহ দেখে।</p>
+<p>বৃষ্টি কখনো আনন্দের নাচ, কখনো সংগ্রামের প্রতিচ্ছবি। প্রতিটি ফোঁটা যেন নতুন অনুভবের গল্প বলে।</p>
+<p>শেষে বোঝা যায়—যে যেভাবেই দেখুক, সবাই বৃষ্টিতে ভিজে যায় অনুভবে, এক অদ্ভুত শান্তির ছোঁয়ায়।</p>
+
     `,
     image: "/second.jpg"
   },

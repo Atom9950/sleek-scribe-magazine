@@ -9,19 +9,18 @@ const ArtOfCreativeCollaborationPage = () => {
   const [showImageModal, setShowImageModal] = useState(false);
 
   const articleData = {
-    title: "The Art of Creative Collaboration",
+    title: "বৃষ্টি",
     date: "MARCH 12, 2024",
-    author: "Creative Team",
+    author: "প্রীতি",
     category: "CULTURE",
     excerpt: "Building effective creative teams and fostering collaboration in remote and hybrid work environments. Discover the tools and techniques that drive innovation.",
     image: "/second.jpg",
     fullContent: `
-      <p>In today's rapidly evolving creative landscape, collaboration has become the cornerstone of innovation. The art of bringing diverse minds together to create something extraordinary requires both skill and strategy.</p>
-      <p>Remote and hybrid work environments have transformed how creative teams operate. The challenge lies not just in maintaining productivity, but in fostering the spontaneous interactions that often lead to breakthrough ideas.</p>
-      <p>Successful creative collaboration starts with establishing clear communication channels and shared goals. When team members understand their roles and the project vision, they can contribute more effectively to the collective effort.</p>
-      <p>The tools we use matter, but the culture we build matters more. Creating an environment where ideas can flow freely, where constructive criticism is welcomed, and where every voice is heard is essential for true collaboration.</p>
-      <p>Digital collaboration platforms have revolutionized how we work together, but they cannot replace the human element of creativity. The best collaborative efforts combine technological efficiency with human empathy and understanding.</p>
-      <p>Building trust within creative teams is fundamental. When team members feel safe to share their ideas, take risks, and even fail, the collective creative output increases exponentially.</p>
+      <p>কবিতাটি “বৃষ্টি”কে কেন্দ্র করে, যেখানে শহরের প্রতিটি মানুষ বৃষ্টিকে ভিন্নভাবে অনুভব করে। কারো কাছে এটি প্রেমের সুর, কারো কাছে আশ্রয়ের নীরবতা।</p>
+<p>কেউ রোমান্টিক গানে হারিয়ে যায়, কেউ ভালোবাসার স্মৃতিতে ডুবে থাকে। আবার কেউ জানালার পাশে দাঁড়িয়ে জীবনের রঙিন প্রবাহ দেখে।</p>
+<p>বৃষ্টি কখনো আনন্দের নাচ, কখনো সংগ্রামের প্রতিচ্ছবি। প্রতিটি ফোঁটা যেন নতুন অনুভবের গল্প বলে।</p>
+<p>শেষে বোঝা যায়—যে যেভাবেই দেখুক, সবাই বৃষ্টিতে ভিজে যায় অনুভবে, এক অদ্ভুত শান্তির ছোঁয়ায়।</p>
+
     `
   };
 
@@ -89,34 +88,35 @@ const ArtOfCreativeCollaborationPage = () => {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span>Like</span>
+              <span>লাইক</span>
             </button>
 
             <button onClick={() => setSaved(!saved)} className={`flex items-center space-x-2 ${saved ? 'text-blue-500' : 'text-gray-500'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={saved ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
               </svg>
-              <span>Save</span>
+              <span>সেভ</span>
             </button>
           </div>
 
           {/* Comments Section */}
           <div className="pt-12">
-            <h3 className="text-xl font-semibold mb-6">Comments ({comments.length})</h3>
+            <h3 className="text-xl font-semibold mb-6">মন্তব্য ({comments.length})</h3>
             
             <form onSubmit={handleSubmitComment} className="mb-8">
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Write your comment..."
+                placeholder="আপনার মন্তব্য লিখুন...
+"
                 rows={4}
               />
               <button
                 type="submit"
                 className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Post Comment
+                পোস্ট করুন
               </button>
             </form>
 

@@ -214,7 +214,7 @@ const HeroSection = () => {
               </motion.article>
               </Link>
 
-              <Link to="/article/color-psychology-brand-identity">
+              <Link to="/article/বৃষ্টি">
                 <motion.article 
                   className="group cursor-pointer trending-article"
                   whileHover={{ x: 5 }}
@@ -222,19 +222,19 @@ const HeroSection = () => {
                 >
                   <div className="space-y-3">
                     <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                      OPINION
+                    সর্বশেষ নিবন্ধ
                     </div>
                   <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight">
-                    Color Psychology in Brand Identity
+                  বৃষ্টি
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    How colors influence consumer behavior and brand perception in the digital age.
+                  কবিতাটি বৃষ্টির শহরের নানা অনুভূতি তুলে ধরে—কেউ পায় রোমান্স, কেউ আশ্রয়, আবার কেউ বাঁচে বা নাচে জীবনের বাস্তবতায়.
                   </p>
                 </div>
               </motion.article>
               </Link>
 
-              <Link to="/article/sustainable-design-practices">
+              {/* <Link to="/article/sustainable-design-practices">
                 <motion.article 
                   className="group cursor-pointer trending-article"
                   whileHover={{ x: 5 }}
@@ -252,7 +252,7 @@ const HeroSection = () => {
                     </p>
                   </div>
                 </motion.article>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </motion.div>

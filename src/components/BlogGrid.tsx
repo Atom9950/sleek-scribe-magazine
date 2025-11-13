@@ -32,9 +32,9 @@ const BlogGrid = () => {
   }, []);
 
   const featuredPost = {
-    title: "The Art of Creative Collaboration",
-    excerpt: "Building effective creative teams and fostering collaboration in remote and hybrid work environments. Discover the tools and techniques that drive innovation.",
-    category: "CULTURE",
+    title: "বৃষ্টি",
+    excerpt: "কবিতাটি বৃষ্টির শহরের নানা অনুভূতি তুলে ধরে—কেউ পায় রোমান্স, কেউ আশ্রয়, আবার কেউ বাঁচে বা নাচে জীবনের বাস্তবতায়",
+    category: "কবিতা",
     date: "MARCH 12, 2024",
     image: "/second.jpg",
     slug: "creative-collaboration"
