@@ -9,21 +9,16 @@ const UserExperienceMobilePage = () => {
   const [showImageModal, setShowImageModal] = useState(false);
 
   const articleData = {
-    title: "User Experience in Mobile Applications",
-    date: "MARCH 10, 2024",
-    author: "UX Team",
-    category: "DESIGN",
-    excerpt: "Best practices for creating intuitive and engaging mobile user experiences that convert and retain users in today's competitive landscape.",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop",
+    title: "আমার রাজ্য",
+    date: "MARCH 10, 2025",
+    author: "সায়নদীপ",
+    category: "গল্প",
+    excerpt: "লেখাটি রাজ্যের বর্তমান অবস্থা ও অতীত গৌরবের তুলনা করে প্রশ্ন তোলে—এটাই কি সত্যিই সেই গর্বের রাজ্য?.",
+    image: "/third.jpg",
     fullContent: `
-      <p>Mobile user experience design has evolved far beyond simple responsive layouts. Today's users expect seamless, intuitive interactions that feel natural and effortless.</p>
-      <p>The key to successful mobile UX lies in understanding user behavior patterns and designing for thumb-friendly navigation. Every tap, swipe, and gesture should feel purposeful and responsive.</p>
-      <p>Performance is a crucial aspect of mobile UX. Users abandon apps that take more than 3 seconds to load, making optimization not just a technical concern but a user experience imperative.</p>
-      <p>Personalization and contextual awareness are becoming increasingly important. Apps that adapt to user preferences and location create more engaging and valuable experiences.</p>
-      <p>Mobile-first design thinking has shifted from being a trend to a necessity. With over 60% of web traffic coming from mobile devices, designing for mobile first ensures better experiences across all platforms.</p>
-      <p>Accessibility in mobile design is not optional. Creating inclusive experiences that work for users with disabilities not only expands your audience but often results in better design for everyone.</p>
-      <p>The future of mobile UX lies in anticipatory design - interfaces that predict user needs and provide solutions before users even realize they need them.</p>
-    `
+      <p>লেখাটি রাজ্যের নৈতিক ও সামাজিক অবক্ষয়ের চিত্র তুলে ধরে, যেখানে বেকারত্ব, নারী নির্যাতন ও অবিচার বেড়েছে।</p>
+<p>লেখক অতীতের গৌরব—বিদ্যাসাগর, নোবেলপ্রাপ্তি, প্রথম নারী ডাক্তার—এর উল্লেখ করে বর্তমানের সঙ্গে তুলনা করেছেন।</p>
+<p>শেষে তিনি প্রশ্ন তুলেছেন, “এটাই কি সত্যিই আমার রাজ্য?”, এক গভীর হতাশা ও ব্যথার সুরে।</p> `
   };
 
   const handleSubmitComment = (e) => {
@@ -90,34 +85,35 @@ const UserExperienceMobilePage = () => {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span>Like</span>
+              <span>লাইক</span>
             </button>
 
             <button onClick={() => setSaved(!saved)} className={`flex items-center space-x-2 ${saved ? 'text-blue-500' : 'text-gray-500'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={saved ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
               </svg>
-              <span>Save</span>
+              <span>সেভ</span>
             </button>
           </div>
 
           {/* Comments Section */}
           <div className="pt-12">
-            <h3 className="text-xl font-semibold mb-6">Comments ({comments.length})</h3>
+            <h3 className="text-xl font-semibold mb-6">মন্তব্য ({comments.length})</h3>
             
             <form onSubmit={handleSubmitComment} className="mb-8">
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Write your comment..."
+                placeholder="আপনার মন্তব্য লিখুন...
+"
                 rows={4}
               />
               <button
                 type="submit"
                 className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Post Comment
+                পোস্ট করুন
               </button>
             </form>
 

@@ -49,20 +49,20 @@ export const articles: Article[] = [
   },
   {
     id: "3",
-    slug: "user-experience-mobile-applications",
-    title: "User Experience in Mobile Applications",
-    date: "MARCH 10, 2024",
-    author: "UX Team",
-    category: "DESIGN",
+    slug: "আমার রাজ্য",
+    title: "আমার রাজ্য",
+    date: "MARCH 10, 2025",
+    author: "সায়নদীপ",
+    category: "গল্প",
     excerpt: "Best practices for creating intuitive and engaging mobile user experiences that convert and retain users in today's competitive landscape.",
     content: "Best practices for creating intuitive and engaging mobile user experiences...",
     fullContent: `
-      <p>Mobile user experience design has evolved far beyond simple responsive layouts. Today's users expect seamless, intuitive interactions that feel natural and effortless.</p>
-      <p>The key to successful mobile UX lies in understanding user behavior patterns and designing for thumb-friendly navigation. Every tap, swipe, and gesture should feel purposeful and responsive.</p>
-      <p>Performance is a crucial aspect of mobile UX. Users abandon apps that take more than 3 seconds to load, making optimization not just a technical concern but a user experience imperative.</p>
-      <p>Personalization and contextual awareness are becoming increasingly important. Apps that adapt to user preferences and location create more engaging and valuable experiences.</p>
+      <p>লেখাটি রাজ্যের নৈতিক ও সামাজিক অবক্ষয়ের চিত্র তুলে ধরে, যেখানে বেকারত্ব, নারী নির্যাতন ও অবিচার বেড়েছে।</p>
+<p>লেখক অতীতের গৌরব—বিদ্যাসাগর, নোবেলপ্রাপ্তি, প্রথম নারী ডাক্তার—এর উল্লেখ করে বর্তমানের সঙ্গে তুলনা করেছেন।</p>
+<p>শেষে তিনি প্রশ্ন তুলেছেন, “এটাই কি সত্যিই আমার রাজ্য?”, এক গভীর হতাশা ও ব্যথার সুরে।</p>
+
     `,
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop"
+    image: "/third.jpg"
   },
   {
     id: "4",

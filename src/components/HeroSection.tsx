@@ -234,7 +234,7 @@ const HeroSection = () => {
               </motion.article>
               </Link>
 
-              {/* <Link to="/article/sustainable-design-practices">
+              <Link to="/article/আমার রাজ্য">
                 <motion.article 
                   className="group cursor-pointer trending-article"
                   whileHover={{ x: 5 }}
@@ -242,17 +242,17 @@ const HeroSection = () => {
                 >
                   <div className="space-y-3">
                     <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                      TECH
+                    গল্প
                     </div>
                     <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight">
-                      Sustainable Design Practices
+                    আমার রাজ্য
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Exploring eco-friendly approaches that are reshaping the creative industry.
+                    লেখাটি রাজ্যের বর্তমান অবস্থা ও অতীত গৌরবের তুলনা করে প্রশ্ন তোলে—এটাই কি সত্যিই সেই গর্বের রাজ্য?
                     </p>
                   </div>
                 </motion.article>
-              </Link> */}
+              </Link>
             </div>
           </div>
         </motion.div>

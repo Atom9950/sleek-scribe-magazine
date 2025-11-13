@@ -11,6 +11,7 @@ import UserExperienceMobilePage from "./pages/UserExperienceMobilePage";
 import EmergingTechnologiesPage from "./pages/EmergingTechnologiesPage";
 import VisualStorytellingPage from "./pages/VisualStorytellingPage";
 import SustainableDesignPage from "./pages/SustainableDesignPage";
+import NewsletterPage from "./pages/NewsletterPage";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,9 @@ const App = () => (
           <Route path="/emerging-tech" element={<EmergingTechnologiesPage />} />
           <Route path="/visual-storytelling" element={<VisualStorytellingPage />} />
           <Route path="/sustainable-design" element={<SustainableDesignPage />} />
+          
+          {/* Newsletter Page */}
+          <Route path="/newsletter" element={<NewsletterPage />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>

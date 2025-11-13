@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 
 const menuItemVariants = {
@@ -51,15 +52,14 @@ const Header = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex items-center"
             >
-              <div className="flex items-center gap-4">
-                  <h1 className="text-2xl font-bold">পাতা</h1>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="34" height="34" fill="none" stroke="black" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 12v40c0 2 2 4 4 4h20c2 0 4 2 4 4V20c0-2-2-4-4-4H8c-2 0-4-2-4-4z" />
-                    <path d="M60 12v40c0 2-2 4-4 4H36c-2 0-4 2-4 4V20c0-2 2-4 4-4h20c2 0 4-2 4-4z" />
-                    <path d="M32 20v32" />
-                  </svg>
-              </div>
-
+              <Link to="/" className="flex items-center gap-4">
+                <h1 className="text-2xl font-bold">পাতা</h1>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="34" height="34" fill="none" stroke="black" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 12v40c0 2 2 4 4 4h20c2 0 4 2 4 4V20c0-2-2-4-4-4H8c-2 0-4-2-4-4z" />
+                  <path d="M60 12v40c0 2-2 4-4 4H36c-2 0-4 2-4 4V20c0-2 2-4 4-4h20c2 0 4-2 4-4z" />
+                  <path d="M32 20v32" />
+                </svg>
+              </Link>
             </motion.div>
 
             {/* Menu Button */}
@@ -112,23 +112,27 @@ const Header = () => {
                   <div className="flex flex-col md:flex-row h-full">
                     {/* Left Column - Main Navigation */}
                     <div className="w-full md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                      <nav className="space-y-6">
-                        {["হোম", "বিষয়বস্তু", "সম্পর্কে", "পোস্ট", "নিউজলেটার"].map((item, i) => (
+                      <nav className="space-y-10">
+                        {[
+                          { label: "হোম", path: "/" },
+                          { label: "পোস্ট", path: "/" },
+                          { label: "নিউজলেটার", path: "/newsletter" }
+                        ].map((item, i) => (
                           <motion.div
-                            key={item}
+                            key={item.label}
                             custom={i}
                             variants={menuItemVariants}
                             initial="hidden"
                             animate="visible"
                           >
                             <span className="text-xs text-gray-500">({String(i + 1).padStart(2, '0')})</span>
-                            <a 
-                              href="#" 
+                            <Link 
+                              to={item.path}
                               className="block text-4xl md:text-6xl font-bold font-serif text-white mt-1"
                               onClick={toggleMenu}
                             >
-                              {item}
-                            </a>
+                              {item.label}
+                            </Link>
                           </motion.div>
                         ))}
                       </nav>
@@ -142,17 +146,21 @@ const Header = () => {
                       className="w-full md:w-1/2 md:pl-8 md:border-l md:border-gray-700"
                     >
                       <nav className="space-y-6">
-                        {["অবদান করুণ", "শেয়ার করুণ", "দান করুণ", "আমাদের কাছে পৌঁছান"].map((item, i) => (
-                          <motion.a
+                        {["শেয়ার করুণ", "দান করুণ", "আমাদের কাছে পৌঁছান"].map((item, i) => (
+                          <motion.div
                             key={item}
-                            href="#"
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 + (i * 0.1), duration: 0.5 }}
-                            className="block text-lg md:text-xl font-medium text-white"
                           >
-                            {item}
-                          </motion.a>
+                            <Link
+                              to="/"
+                              className="block text-lg md:text-xl font-medium text-white"
+                              onClick={toggleMenu}
+                            >
+                              {item}
+                            </Link>
+                          </motion.div>
                         ))}
                         
                         <motion.div

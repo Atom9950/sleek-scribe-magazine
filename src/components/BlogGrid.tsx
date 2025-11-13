@@ -42,36 +42,36 @@ const BlogGrid = () => {
 
   const posts = [
     {
-      title: "User Experience in Mobile Applications",
-      excerpt: "Best practices for creating intuitive and engaging mobile user experiences that convert and retain users in today's competitive landscape.",
-      category: "DESIGN",
-      date: "MARCH 10, 2024",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop",
+      title: "আমার রাজ্য",
+      excerpt: "লেখাটি রাজ্যের বর্তমান অবস্থা ও অতীত গৌরবের তুলনা করে প্রশ্ন তোলে—এটাই কি সত্যিই সেই গর্বের রাজ্য?",
+      category: "গল্প",
+      date: "MARCH 10, 2025",
+      image: "/third.jpg",
       slug: "mobile-ux"
     },
     {
-      title: "Emerging Technologies in Design",
-      excerpt: "From AI-assisted design tools to AR/VR interfaces, discover the technologies shaping the future of creative work and digital innovation.",
-      category: "TECH",
-      date: "MARCH 08, 2024",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop",
-      slug: "emerging-tech"
+    //   title: "Emerging Technologies in Design",
+    //   excerpt: "From AI-assisted design tools to AR/VR interfaces, discover the technologies shaping the future of creative work and digital innovation.",
+    //   category: "TECH",
+    //   date: "MARCH 08, 2024",
+      image: "/coming soon.avif",
+    //   slug: "emerging-tech"
     },
     {
-      title: "The Psychology of Visual Storytelling",
-      excerpt: "How visual narratives influence human behavior and decision-making in the digital age of content consumption.",
-      category: "OPINION",
-      date: "MARCH 05, 2024",
-      image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=300&fit=crop",
-      slug: "visual-storytelling"
+    //   title: "The Psychology of Visual Storytelling",
+    //   excerpt: "How visual narratives influence human behavior and decision-making in the digital age of content consumption.",
+    //   category: "OPINION",
+    //   date: "MARCH 05, 2024",
+      image: "/coming soon.avif",
+    //   slug: "visual-storytelling"
     },
     {
-      title: "Sustainable Design Philosophy",
-      excerpt: "Exploring eco-conscious design principles and their impact on both environmental sustainability and creative innovation.",
-      category: "CULTURE",
-      date: "MARCH 03, 2024",
-      image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop",
-      slug: "sustainable-design"
+    //   title: "Sustainable Design Philosophy",
+    //   excerpt: "Exploring eco-conscious design principles and their impact on both environmental sustainability and creative innovation.",
+    //   category: "CULTURE",
+    //   date: "MARCH 03, 2024",
+      image: "/coming soon.avif",
+    //   slug: "sustainable-design"
     }
   ];
 
@@ -121,13 +121,13 @@ const BlogGrid = () => {
           transition={{ duration: 0.5 }}
           className="text-center pt-8 border-t border-border"
         >
-          <motion.button 
+          {/* <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-foreground text-background px-8 py-3 text-sm font-medium tracking-wide hover:bg-muted-foreground transition-colors"
           >
             VIEW ALL ARTICLES
-          </motion.button>
+          </motion.button> */}
         </motion.div>
       </div>
     </section>
