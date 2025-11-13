@@ -11,7 +11,7 @@ import UserExperienceMobilePage from "./pages/UserExperienceMobilePage";
 import EmergingTechnologiesPage from "./pages/EmergingTechnologiesPage";
 import VisualStorytellingPage from "./pages/VisualStorytellingPage";
 import SustainableDesignPage from "./pages/SustainableDesignPage";
-import NewsletterPage from "./pages/NewsletterPage";
+import NewsletterPage from "./components/Newsletter";
 
 const queryClient = new QueryClient();
 
