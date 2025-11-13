@@ -2,6 +2,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 import gsap from "gsap";
 
 const menuItemVariants = {
@@ -33,6 +34,24 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     document.body.style.overflow = !isMenuOpen ? 'hidden' : 'unset';
+  };
+
+  const handleShare = async () => {
+    const url = "https://blog-page-jade-three.vercel.app/";
+    try {
+      await navigator.clipboard.writeText(url);
+      toast({
+        title: "লিঙ্ক কপি হয়েছে!",
+        description: "ওয়েবসাইট লিঙ্ক ক্লিপবোর্ডে কপি করা হয়েছে।",
+      });
+      toggleMenu();
+    } catch (err) {
+      toast({
+        title: "ত্রুটি",
+        description: "লিঙ্ক কপি করতে সমস্যা হয়েছে।",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -153,13 +172,22 @@ const Header = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 + (i * 0.1), duration: 0.5 }}
                           >
-                            <Link
-                              to="/"
-                              className="block text-lg md:text-xl font-medium text-white"
-                              onClick={toggleMenu}
-                            >
-                              {item}
-                            </Link>
+                            {item === "শেয়ার করুণ" ? (
+                              <button
+                                onClick={handleShare}
+                                className="block text-lg md:text-xl font-medium text-white text-left w-full hover:opacity-80 transition-opacity"
+                              >
+                                {item}
+                              </button>
+                            ) : (
+                              <Link
+                                to="/"
+                                className="block text-lg md:text-xl font-medium text-white"
+                                onClick={toggleMenu}
+                              >
+                                {item}
+                              </Link>
+                            )}
                           </motion.div>
                         ))}
                         
