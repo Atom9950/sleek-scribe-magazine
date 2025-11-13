@@ -85,17 +85,24 @@ export const toggleArticleLike = async (slug: string): Promise<number> => {
   
   try {
     const userId = getUserSessionId();
+    console.log('Toggling like for slug:', slug, 'userId:', userId);
     
     // Check if user has already liked
-    const { data: existingLike } = await supabase
+    const { data: existingLike, error: checkError } = await supabase
       .from('article_likes')
       .select('id')
       .eq('article_slug', slug)
       .eq('user_id', userId)
-      .single();
+      .maybeSingle();
+
+    if (checkError && checkError.code !== 'PGRST116') {
+      console.error('Error checking existing like:', checkError);
+      console.error('Error details:', JSON.stringify(checkError, null, 2));
+    }
 
     if (existingLike) {
       // Unlike: delete the like
+      console.log('Unliking - deleting existing like');
       const { error } = await supabase
         .from('article_likes')
         .delete()
@@ -103,28 +110,46 @@ export const toggleArticleLike = async (slug: string): Promise<number> => {
         .eq('user_id', userId);
 
       if (error) {
-        console.error('Error unliking:', error);
-        return await getArticleLikes(slug);
+        console.error('❌ Error unliking:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        console.error('Error details:', error.details);
+        console.error('Error hint:', error.hint);
+        throw error;
       }
+      console.log('✅ Successfully unliked');
     } else {
       // Like: insert new like
-      const { error } = await supabase
+      console.log('Liking - inserting new like');
+      const { data, error } = await supabase
         .from('article_likes')
         .insert({
           article_slug: slug,
           user_id: userId
-        });
+        })
+        .select();
 
       if (error) {
-        console.error('Error liking:', error);
-        return await getArticleLikes(slug);
+        console.error('❌ Error liking:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        console.error('Error details:', error.details);
+        console.error('Error hint:', error.hint);
+        throw error;
       }
+      console.log('✅ Successfully liked, inserted data:', data);
     }
 
     // Return updated like count
-    return await getArticleLikes(slug);
-  } catch (error) {
-    console.error('Error toggling like:', error);
+    const count = await getArticleLikes(slug);
+    console.log('Updated like count:', count);
+    return count;
+  } catch (error: any) {
+    console.error('❌ Error toggling like:', error);
+    if (error?.code === '42501') {
+      console.error('🔒 PERMISSION DENIED - Check your RLS policies!');
+      console.error('Make sure your RLS policies allow anonymous INSERT and DELETE');
+    }
     return await getArticleLikes(slug);
   }
 };
@@ -169,12 +194,15 @@ export const addArticleComment = async (slug: string, text: string): Promise<Com
   
   try {
     const userId = getUserSessionId();
+    const commentText = text.trim();
+    
+    console.log('Adding comment for slug:', slug, 'userId:', userId, 'text:', commentText);
     
     const { data, error } = await supabase
       .from('article_comments')
       .insert({
         article_slug: slug,
-        text: text.trim(),
+        text: commentText,
         user_id: userId,
         timestamp: new Date().toISOString()
       })
@@ -182,13 +210,24 @@ export const addArticleComment = async (slug: string, text: string): Promise<Com
       .single();
 
     if (error) {
-      console.error('Error adding comment:', error);
-      return await getArticleComments(slug);
+      console.error('❌ Error adding comment:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
+      console.error('Error details:', error.details);
+      console.error('Error hint:', error.hint);
+      
+      if (error.code === '42501') {
+        console.error('🔒 PERMISSION DENIED - Check your RLS policies!');
+        console.error('Make sure your RLS policies allow anonymous INSERT');
+      }
+      
+      throw error;
     }
 
+    console.log('✅ Successfully added comment, data:', data);
     return await getArticleComments(slug);
-  } catch (error) {
-    console.error('Error adding comment:', error);
+  } catch (error: any) {
+    console.error('❌ Error adding comment:', error);
     return await getArticleComments(slug);
   }
 };
