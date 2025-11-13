@@ -1,29 +1,70 @@
 import { useParams, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './Header';
 import { getArticleBySlug } from '../data/articles';
+import { 
+  getArticleLikes, 
+  toggleArticleLike, 
+  hasUserLiked,
+  getArticleComments, 
+  addArticleComment,
+  deleteArticleComment,
+  isCommentOwner,
+  type Comment 
+} from '../lib/articleInteractions';
 
 const ArticlePage = () => {
   const { slug } = useParams(); // Get the slug from URL
   const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
   const [saved, setSaved] = useState(false);
   const [comment, setComment] = useState('');
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [showImageModal, setShowImageModal] = useState(false);
 
   // Get article data based on slug
   const articleData = slug ? getArticleBySlug(slug) : null;
+
+  // Load likes and comments from localStorage on mount
+  useEffect(() => {
+    if (slug) {
+      const initialLikes = getArticleLikes(slug);
+      const initialComments = getArticleComments(slug);
+      const userHasLiked = hasUserLiked(slug);
+      
+      setLikeCount(initialLikes);
+      setLiked(userHasLiked);
+      setComments(initialComments);
+    }
+  }, [slug]);
 
   // If article not found, redirect to 404
   if (!articleData) {
     return <Navigate to="/404" replace />;
   }
 
-  const handleSubmitComment = (e) => {
+  const handleLike = () => {
+    if (slug) {
+      const newLikeCount = toggleArticleLike(slug);
+      const userHasLiked = hasUserLiked(slug);
+      setLikeCount(newLikeCount);
+      setLiked(userHasLiked);
+    }
+  };
+
+  const handleSubmitComment = (e: React.FormEvent) => {
     e.preventDefault();
-    if (comment.trim()) {
-      setComments([...comments, comment]);
+    if (comment.trim() && slug) {
+      const updatedComments = addArticleComment(slug, comment);
+      setComments(updatedComments);
       setComment('');
+    }
+  };
+
+  const handleDeleteComment = (commentId: string) => {
+    if (slug) {
+      const updatedComments = deleteArticleComment(slug, commentId);
+      setComments(updatedComments);
     }
   };
 
@@ -79,11 +120,11 @@ const ArticlePage = () => {
 
           {/* Like/Save Buttons */}
           <div className="flex items-center space-x-6 pt-8">
-            <button onClick={() => setLiked(!liked)} className={`flex items-center space-x-2 ${liked ? 'text-red-500' : 'text-gray-500'}`}>
+            <button onClick={handleLike} className={`flex items-center space-x-2 ${liked ? 'text-red-500' : 'text-gray-500'} hover:opacity-80 transition-opacity`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span>লাইক</span>
+              <span>লাইক ({likeCount})</span>
             </button>
 
             <button onClick={() => setSaved(!saved)} className={`flex items-center space-x-2 ${saved ? 'text-blue-500' : 'text-gray-500'}`}>
@@ -115,11 +156,38 @@ const ArticlePage = () => {
             </form>
 
             <div className="space-y-6">
-              {comments.map((comment, index) => (
-                <div key={index} className="p-4 bg-gray-50 rounded-lg">
-                  <p>{comment}</p>
-                </div>
-              ))}
+              {comments.length === 0 ? (
+                <p className="text-gray-500 text-center py-8">কোন মন্তব্য নেই। প্রথম মন্তব্য করুন!</p>
+              ) : (
+                comments.map((comment) => {
+                  const canDelete = comment.userId && isCommentOwner(comment);
+                  return (
+                    <div key={comment.id} className="p-4 bg-gray-50 rounded-lg border border-gray-200 relative group">
+                      <p className="text-gray-800 whitespace-pre-wrap pr-12">{comment.text}</p>
+                      <div className="flex items-center justify-between mt-2">
+                        <p className="text-xs text-gray-500">
+                          {new Date(comment.timestamp).toLocaleString('bn-BD', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </p>
+                        {canDelete && (
+                          <button
+                            onClick={() => handleDeleteComment(comment.id)}
+                            className="text-xs text-red-600 hover:text-red-800 hover:underline transition-colors"
+                            title="মন্তব্য মুছুন"
+                          >
+                            মুছুন
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
+              )}
             </div>
           </div>
         </article>
