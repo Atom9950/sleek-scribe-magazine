@@ -165,7 +165,7 @@ const Header = () => {
                       className="w-full md:w-1/2 md:pl-8 md:border-l md:border-gray-700"
                     >
                       <nav className="space-y-6">
-                        {["শেয়ার করুণ", "দান করুণ", "আমাদের কাছে পৌঁছান"].map((item, i) => (
+                        {["শেয়ার করুণ", "অবদান করুণ", "আমাদের কাছে পৌঁছান"].map((item, i) => (
                           <motion.div
                             key={item}
                             initial={{ opacity: 0, x: 20 }}
@@ -179,6 +179,16 @@ const Header = () => {
                               >
                                 {item}
                               </button>
+                            ) : item === "অবদান করুণ" ? (
+                              <a
+                                href="https://mail.google.com/mail/?view=cm&to=sdroy001@gmail.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block text-lg md:text-xl font-medium text-white hover:opacity-80 transition-opacity"
+                                onClick={toggleMenu}
+                              >
+                                {item}
+                              </a>
                             ) : (
                               <Link
                                 to="/"
