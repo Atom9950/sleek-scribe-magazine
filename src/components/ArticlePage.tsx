@@ -11,7 +11,7 @@ import {
   deleteArticleComment,
   isCommentOwner,
   type Comment 
-} from '../lib/articleInteractions';
+} from '../lib/supabaseInteractions';
 
 const ArticlePage = () => {
   const { slug } = useParams(); // Get the slug from URL
@@ -21,21 +21,36 @@ const ArticlePage = () => {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<Comment[]>([]);
   const [showImageModal, setShowImageModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [submittingComment, setSubmittingComment] = useState(false);
 
   // Get article data based on slug
   const articleData = slug ? getArticleBySlug(slug) : null;
 
-  // Load likes and comments from localStorage on mount
+  // Load likes and comments from Supabase on mount
   useEffect(() => {
-    if (slug) {
-      const initialLikes = getArticleLikes(slug);
-      const initialComments = getArticleComments(slug);
-      const userHasLiked = hasUserLiked(slug);
-      
-      setLikeCount(initialLikes);
-      setLiked(userHasLiked);
-      setComments(initialComments);
-    }
+    const loadData = async () => {
+      if (slug) {
+        try {
+          setLoading(true);
+          const [likes, userLiked, articleComments] = await Promise.all([
+            getArticleLikes(slug),
+            hasUserLiked(slug),
+            getArticleComments(slug)
+          ]);
+          
+          setLikeCount(likes);
+          setLiked(userLiked);
+          setComments(articleComments);
+        } catch (error) {
+          console.error('Error loading data:', error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadData();
   }, [slug]);
 
   // If article not found, redirect to 404
@@ -43,28 +58,43 @@ const ArticlePage = () => {
     return <Navigate to="/404" replace />;
   }
 
-  const handleLike = () => {
+  const handleLike = async () => {
     if (slug) {
-      const newLikeCount = toggleArticleLike(slug);
-      const userHasLiked = hasUserLiked(slug);
-      setLikeCount(newLikeCount);
-      setLiked(userHasLiked);
+      try {
+        const newLikeCount = await toggleArticleLike(slug);
+        const userHasLiked = await hasUserLiked(slug);
+        setLikeCount(newLikeCount);
+        setLiked(userHasLiked);
+      } catch (error) {
+        console.error('Error toggling like:', error);
+      }
     }
   };
 
-  const handleSubmitComment = (e: React.FormEvent) => {
+  const handleSubmitComment = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (comment.trim() && slug) {
-      const updatedComments = addArticleComment(slug, comment);
-      setComments(updatedComments);
-      setComment('');
+    if (comment.trim() && slug && !submittingComment) {
+      try {
+        setSubmittingComment(true);
+        const updatedComments = await addArticleComment(slug, comment);
+        setComments(updatedComments);
+        setComment('');
+      } catch (error) {
+        console.error('Error submitting comment:', error);
+      } finally {
+        setSubmittingComment(false);
+      }
     }
   };
 
-  const handleDeleteComment = (commentId: string) => {
+  const handleDeleteComment = async (commentId: string) => {
     if (slug) {
-      const updatedComments = deleteArticleComment(slug, commentId);
-      setComments(updatedComments);
+      try {
+        const updatedComments = await deleteArticleComment(slug, commentId);
+        setComments(updatedComments);
+      } catch (error) {
+        console.error('Error deleting comment:', error);
+      }
     }
   };
 
@@ -149,9 +179,10 @@ const ArticlePage = () => {
               />
               <button
                 type="submit"
-                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                disabled={submittingComment}
+                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                পোস্ট করুন
+                {submittingComment ? 'পোস্ট করা হচ্ছে...' : 'পোস্ট করুন'}
               </button>
             </form>
 
