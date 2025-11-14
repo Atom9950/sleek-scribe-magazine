@@ -1,12 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../components/Header';
+import { 
+  getArticleLikes, 
+  toggleArticleLike, 
+  hasUserLiked,
+  getArticleComments, 
+  addArticleComment,
+  deleteArticleComment,
+  isCommentOwner,
+  type Comment 
+} from '../lib/supabaseInteractions';
 
 const ArtOfCreativeCollaborationPage = () => {
+  const slug = 'বৃষ্টি';
   const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
   const [saved, setSaved] = useState(false);
   const [comment, setComment] = useState('');
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [showImageModal, setShowImageModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [submittingComment, setSubmittingComment] = useState(false);
 
   const articleData = {
     title: "বৃষ্টি",
@@ -24,11 +38,63 @@ const ArtOfCreativeCollaborationPage = () => {
     `
   };
 
-  const handleSubmitComment = (e) => {
+  // Load likes and comments from Supabase on mount
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const [likes, userLiked, articleComments] = await Promise.all([
+          getArticleLikes(slug),
+          hasUserLiked(slug),
+          getArticleComments(slug)
+        ]);
+        
+        setLikeCount(likes);
+        setLiked(userLiked);
+        setComments(articleComments);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [slug]);
+
+  const handleLike = async () => {
+    try {
+      const newLikeCount = await toggleArticleLike(slug);
+      const userHasLiked = await hasUserLiked(slug);
+      setLikeCount(newLikeCount);
+      setLiked(userHasLiked);
+    } catch (error) {
+      console.error('Error toggling like:', error);
+    }
+  };
+
+  const handleSubmitComment = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (comment.trim()) {
-      setComments([...comments, comment]);
-      setComment('');
+    if (comment.trim() && !submittingComment) {
+      try {
+        setSubmittingComment(true);
+        const updatedComments = await addArticleComment(slug, comment);
+        setComments(updatedComments);
+        setComment('');
+      } catch (error) {
+        console.error('Error submitting comment:', error);
+      } finally {
+        setSubmittingComment(false);
+      }
+    }
+  };
+
+  const handleDeleteComment = async (commentId: string) => {
+    try {
+      const updatedComments = await deleteArticleComment(slug, commentId);
+      setComments(updatedComments);
+    } catch (error) {
+      console.error('Error deleting comment:', error);
     }
   };
 
@@ -84,11 +150,11 @@ const ArtOfCreativeCollaborationPage = () => {
 
           {/* Like/Save Buttons */}
           <div className="flex items-center space-x-6 pt-8">
-            <button onClick={() => setLiked(!liked)} className={`flex items-center space-x-2 ${liked ? 'text-red-500' : 'text-gray-500'}`}>
+            <button onClick={handleLike} className={`flex items-center space-x-2 ${liked ? 'text-red-500' : 'text-gray-500'} hover:opacity-80 transition-opacity`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span>লাইক</span>
+              <span>লাইক ({likeCount})</span>
             </button>
 
             <button onClick={() => setSaved(!saved)} className={`flex items-center space-x-2 ${saved ? 'text-blue-500' : 'text-gray-500'}`}>
@@ -108,24 +174,51 @@ const ArtOfCreativeCollaborationPage = () => {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="আপনার মন্তব্য লিখুন...
-"
+                placeholder="আপনার মন্তব্য লিখুন..."
                 rows={4}
               />
               <button
                 type="submit"
-                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                disabled={submittingComment}
+                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                পোস্ট করুন
+                {submittingComment ? 'পোস্ট করা হচ্ছে...' : 'পোস্ট করুন'}
               </button>
             </form>
 
             <div className="space-y-6">
-              {comments.map((comment, index) => (
-                <div key={index} className="p-4 bg-gray-50 rounded-lg">
-                  <p>{comment}</p>
-                </div>
-              ))}
+              {comments.length === 0 ? (
+                <p className="text-gray-500 text-center py-8">কোন মন্তব্য নেই। প্রথম মন্তব্য করুন!</p>
+              ) : (
+                comments.map((comment) => {
+                  const canDelete = comment.userId && isCommentOwner(comment);
+                  return (
+                    <div key={comment.id} className="p-4 bg-gray-50 rounded-lg border border-gray-200 relative group">
+                      <p className="text-gray-800 whitespace-pre-wrap pr-12">{comment.text}</p>
+                      <div className="flex items-center justify-between mt-2">
+                        <p className="text-xs text-gray-500">
+                          {new Date(comment.timestamp).toLocaleString('bn-BD', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </p>
+                        {canDelete && (
+                          <button
+                            onClick={() => handleDeleteComment(comment.id)}
+                            className="text-xs text-red-600 hover:text-red-800 hover:underline transition-colors"
+                            title="মন্তব্য মুছুন"
+                          >
+                            মুছুন
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
+              )}
             </div>
           </div>
         </article>
