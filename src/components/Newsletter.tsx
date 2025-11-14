@@ -1,14 +1,19 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { subscribeToNewsletter } from "@/lib/supabaseInteractions";
+import { useToast } from "@/hooks/use-toast";
 gsap.registerPlugin(ScrollTrigger);
 
 const Newsletter = () => {
   const sectionRef = useRef(null);
   const formRef = useRef(null);
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -39,6 +44,48 @@ const Newsletter = () => {
 
     return () => ctx.revert();
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email.trim()) {
+      toast({
+        title: "ইমেইল প্রয়োজন",
+        description: "অনুগ্রহ করে আপনার ইমেইল ঠিকানা লিখুন।",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      const result = await subscribeToNewsletter(email);
+      
+      if (result.success) {
+        toast({
+          title: "সফল!",
+          description: result.message,
+        });
+        setEmail(""); // Clear the form on success
+      } else {
+        toast({
+          title: "ত্রুটি",
+          description: result.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      toast({
+        title: "ত্রুটি",
+        description: "একটি সমস্যা হয়েছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#f0f0f0]">
@@ -87,9 +134,10 @@ const Newsletter = () => {
             </motion.p>
           </motion.div>
 
-          <motion.div 
+          <motion.form 
             ref={formRef}
             className="max-w-md mx-auto"
+            onSubmit={handleSubmit}
           >
             <div className="flex flex-col sm:flex-row gap-3">
               <motion.input
@@ -99,18 +147,24 @@ const Newsletter = () => {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 type="email"
                 placeholder="আপনার ইমেইল ঠিকানা"
-                className="flex-1 px-4 py-3 bg-transparent text-background border border-background text-sm placeholder-opacity-80"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
+                required
+                className="flex-1 px-4 py-3 bg-transparent text-background border border-background text-sm placeholder-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-background/50"
               />
               <motion.button 
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300"
+                whileHover={!isLoading ? { scale: 1.05 } : {}}
+                whileTap={!isLoading ? { scale: 0.95 } : {}}
+                type="submit"
+                disabled={isLoading}
+                className="text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
-                সাবস্ক্রাইব করুন
+                {isLoading ? "অপেক্ষা করুন..." : "সাবস্ক্রাইব করুন"}
               </motion.button>
             </div>
             <motion.p 
@@ -122,7 +176,7 @@ const Newsletter = () => {
             >
               যেকোনো সময় সদস্যতা বাতিল করুন। গোপনীয়তা নীতিমালা।
             </motion.p>
-          </motion.div>
+          </motion.form>
         </div>
       </div>
     </section>

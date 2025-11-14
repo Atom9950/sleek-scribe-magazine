@@ -1,5 +1,6 @@
 // Supabase service for managing article likes and comments
 import { supabase, isSupabaseConfigured } from './supabase';
+import { sendNewsletterConfirmationEmail } from './emailService';
 
 export interface Comment {
   id: string;
@@ -283,5 +284,176 @@ export const isCommentOwner = (comment: Comment): boolean => {
   if (!comment.userId) return false;
   const userId = getUserSessionId();
   return comment.userId === userId;
+};
+
+// Newsletter subscription functions
+export interface NewsletterSubscription {
+  id: string;
+  email: string;
+  subscribed_at: string;
+  status: 'active' | 'unsubscribed';
+}
+
+// Subscribe to newsletter
+export const subscribeToNewsletter = async (email: string): Promise<{ success: boolean; message: string }> => {
+  if (!isSupabaseConfigured) {
+    return {
+      success: false,
+      message: 'Newsletter service is not configured. Please contact support.'
+    };
+  }
+
+  // Basic email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email.trim())) {
+    return {
+      success: false,
+      message: 'Please enter a valid email address.'
+    };
+  }
+
+  try {
+    const normalizedEmail = email.trim().toLowerCase();
+    
+    // Check if email already exists
+    const { data: existing, error: checkError } = await supabase
+      .from('newsletter_subscriptions')
+      .select('id, status')
+      .eq('email', normalizedEmail)
+      .maybeSingle();
+
+    if (checkError && checkError.code !== 'PGRST116') {
+      console.error('Error checking existing subscription:', checkError);
+      return {
+        success: false,
+        message: 'An error occurred. Please try again later.'
+      };
+    }
+
+    // If already subscribed and active, return success message
+    if (existing && existing.status === 'active') {
+      return {
+        success: true,
+        message: 'You are already subscribed to our newsletter!'
+      };
+    }
+
+    // If exists but unsubscribed, reactivate
+    if (existing && existing.status === 'unsubscribed') {
+      const { error: updateError } = await supabase
+        .from('newsletter_subscriptions')
+        .update({
+          status: 'active',
+          subscribed_at: new Date().toISOString()
+        })
+        .eq('id', existing.id);
+
+      if (updateError) {
+        console.error('Error reactivating subscription:', updateError);
+        return {
+          success: false,
+          message: 'An error occurred. Please try again later.'
+        };
+      }
+
+      // Send welcome back email (don't fail if email fails)
+      sendNewsletterConfirmationEmail(normalizedEmail).catch((error) => {
+        console.warn('Failed to send welcome back email:', error);
+      });
+
+      return {
+        success: true,
+        message: 'Welcome back! You have been resubscribed to our newsletter. Check your inbox for a confirmation email!'
+      };
+    }
+
+    // New subscription
+    const { error: insertError } = await supabase
+      .from('newsletter_subscriptions')
+      .insert({
+        email: normalizedEmail,
+        status: 'active',
+        subscribed_at: new Date().toISOString()
+      });
+
+    if (insertError) {
+      console.error('Error subscribing to newsletter:', insertError);
+      
+      if (insertError.code === '23505') { // Unique constraint violation
+        return {
+          success: false,
+          message: 'This email is already subscribed.'
+        };
+      }
+
+      if (insertError.code === '42501') {
+        console.error('🔒 PERMISSION DENIED - Check your RLS policies!');
+        return {
+          success: false,
+          message: 'Permission denied. Please check your database configuration.'
+        };
+      }
+
+      return {
+        success: false,
+        message: 'An error occurred. Please try again later.'
+      };
+    }
+
+    // Send confirmation email (don't fail subscription if email fails)
+    sendNewsletterConfirmationEmail(normalizedEmail).catch((error) => {
+      console.warn('Failed to send confirmation email:', error);
+      // Subscription is still successful even if email fails
+    });
+
+    return {
+      success: true,
+      message: 'Thank you for subscribing! Check your inbox for a confirmation email.'
+    };
+  } catch (error: any) {
+    console.error('❌ Error subscribing to newsletter:', error);
+    return {
+      success: false,
+      message: 'An unexpected error occurred. Please try again later.'
+    };
+  }
+};
+
+// Unsubscribe from newsletter
+export const unsubscribeFromNewsletter = async (email: string): Promise<{ success: boolean; message: string }> => {
+  if (!isSupabaseConfigured) {
+    return {
+      success: false,
+      message: 'Newsletter service is not configured.'
+    };
+  }
+
+  try {
+    const normalizedEmail = email.trim().toLowerCase();
+    
+    const { error } = await supabase
+      .from('newsletter_subscriptions')
+      .update({ status: 'unsubscribed' })
+      .eq('email', normalizedEmail);
+
+    if (error) {
+      console.error('Error unsubscribing:', error);
+      return {
+        success: false,
+        message: 'An error occurred. Please try again later.'
+      };
+    }
+
+    return {
+      success: true,
+      message: 'You have been unsubscribed from our newsletter.'
+    };
+  } catch (error: any) {
+    console.error('❌ Error unsubscribing:', error);
+    return {
+      success: false,
+      message: 'An unexpected error occurred. Please try again later.'
+    };
+  }
 };
 
