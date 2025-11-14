@@ -408,7 +408,7 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
 
     return {
       success: true,
-      message: 'Thank you for subscribing! Check your inbox for a confirmation email.'
+      message: 'ধন্যবাদ সাবস্ক্রাইব করার জন্য! আপনার ইমেলটি আমাদের তালিকায় যোগ করা হয়েছে।'
     };
   } catch (error: any) {
     console.error('❌ Error subscribing to newsletter:', error);
