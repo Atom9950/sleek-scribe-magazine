@@ -10,6 +10,7 @@ import {
   isCommentOwner,
   type Comment 
 } from '../lib/supabaseInteractions';
+import Footer from '@/components/Footer';
 
 const UserExperienceMobilePage = () => {
   const articleSlug = 'আমার রাজ্য'; // Slug from articles.ts
@@ -229,6 +230,7 @@ const UserExperienceMobilePage = () => {
           </div>
         </article>
       </section>
+      <Footer />
     </div>
   );
 };

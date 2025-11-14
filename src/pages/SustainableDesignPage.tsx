@@ -10,6 +10,7 @@ import {
   isCommentOwner,
   type Comment 
 } from '../lib/supabaseInteractions';
+import Footer from '@/components/Footer';
 
 const SustainableDesignPage = () => {
   const slug = 'sustainable-design-philosophy';
@@ -242,6 +243,7 @@ const SustainableDesignPage = () => {
           </div>
         </article>
       </section>
+      <Footer />
     </div>
   );
 };

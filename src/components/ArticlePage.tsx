@@ -12,6 +12,7 @@ import {
   isCommentOwner,
   type Comment 
 } from '../lib/supabaseInteractions';
+import Footer from './Footer';
 
 const ArticlePage = () => {
   const { slug } = useParams(); // Get the slug from URL
@@ -232,6 +233,7 @@ const ArticlePage = () => {
           </div>
         </article>
       </section>
+      <Footer />
     </div>
   );
 };

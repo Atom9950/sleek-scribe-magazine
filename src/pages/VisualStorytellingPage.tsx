@@ -10,6 +10,7 @@ import {
   isCommentOwner,
   type Comment,
 } from "../lib/supabaseInteractions";
+import Footer from "@/components/Footer";
 
 const VisualStorytellingPage = () => {
   const slug = "psychology-visual-storytelling";
@@ -277,6 +278,7 @@ const VisualStorytellingPage = () => {
           </div>
         </article>
       </section>
+      <Footer />
     </div>
   );
 };

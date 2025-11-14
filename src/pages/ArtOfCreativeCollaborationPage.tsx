@@ -10,6 +10,7 @@ import {
   isCommentOwner,
   type Comment 
 } from '../lib/supabaseInteractions';
+import Footer from '@/components/Footer';
 
 const ArtOfCreativeCollaborationPage = () => {
   const slug = 'বৃষ্টি';
@@ -232,6 +233,7 @@ const ArtOfCreativeCollaborationPage = () => {
           </div>
         </article>
       </section>
+      <Footer />
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
   isCommentOwner,
   type Comment 
 } from '../lib/supabaseInteractions';
+import Footer from '@/components/Footer';
 
 const EmergingTechnologiesPage = () => {
   const slug = 'emerging-technologies-design'; // Article slug
@@ -235,6 +236,7 @@ const EmergingTechnologiesPage = () => {
           </div>
         </article>
       </section>
+      <Footer />
     </div>
   );
 };
