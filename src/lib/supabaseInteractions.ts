@@ -299,7 +299,7 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
   if (!isSupabaseConfigured) {
     return {
       success: false,
-      message: 'Newsletter service is not configured. Please contact support.'
+      message: 'নিউজলেটার সার্ভিস কনফিগার করা হয়নি। অনুগ্রহ করে সাপোর্টের সঙ্গে যোগাযোগ করুন।'
     };
   }
 
@@ -308,7 +308,7 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
   if (!emailRegex.test(email.trim())) {
     return {
       success: false,
-      message: 'Please enter a valid email address.'
+      message: 'অনুগ্রহ করে একটি বৈধ ইমেল ঠিকানা লিখুন।'
     };
   }
 
@@ -326,7 +326,7 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
       console.error('Error checking existing subscription:', checkError);
       return {
         success: false,
-        message: 'An error occurred. Please try again later.'
+        message: 'একটি ত্রুটি ঘটেছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।'
       };
     }
 
@@ -334,7 +334,7 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
     if (existing && existing.status === 'active') {
       return {
         success: true,
-        message: 'You are already subscribed to our newsletter!'
+        message: 'আপনি ইতিমধ্যেই আমাদের নিউজলেটারে সাবস্ক্রাইব করেছেন!'
       };
     }
 
@@ -352,7 +352,7 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
         console.error('Error reactivating subscription:', updateError);
         return {
           success: false,
-          message: 'An error occurred. Please try again later.'
+          message: 'একটি ত্রুটি ঘটেছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।'
         };
       }
 
@@ -363,7 +363,7 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
 
       return {
         success: true,
-        message: 'Welcome back! You have been resubscribed to our newsletter. Check your inbox for a confirmation email!'
+        message: 'ফিরে আসার জন্য স্বাগতম! আপনাকে আবার আমাদের নিউজলেটারে সাবস্ক্রাইব করা হয়েছে।'
       };
     }
 
@@ -382,7 +382,7 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
       if (insertError.code === '23505') { // Unique constraint violation
         return {
           success: false,
-          message: 'This email is already subscribed.'
+          message: 'এই ইমেলটি ইতিমধ্যেই সাবস্ক্রাইব করা রয়েছে।'
         };
       }
 
@@ -390,13 +390,13 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
         console.error('🔒 PERMISSION DENIED - Check your RLS policies!');
         return {
           success: false,
-          message: 'Permission denied. Please check your database configuration.'
+          message: 'অনুমতি অস্বীকৃত হয়েছে। অনুগ্রহ করে আপনার ডাটাবেস কনফিগারেশন পরীক্ষা করুন।'
         };
       }
 
       return {
         success: false,
-        message: 'An error occurred. Please try again later.'
+        message: 'একটি ত্রুটি ঘটেছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।'
       };
     }
 
@@ -414,7 +414,7 @@ export const subscribeToNewsletter = async (email: string): Promise<{ success: b
     console.error('❌ Error subscribing to newsletter:', error);
     return {
       success: false,
-      message: 'An unexpected error occurred. Please try again later.'
+      message: 'একটি ত্রুটি ঘটেছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।'
     };
   }
 };
@@ -424,7 +424,7 @@ export const unsubscribeFromNewsletter = async (email: string): Promise<{ succes
   if (!isSupabaseConfigured) {
     return {
       success: false,
-      message: 'Newsletter service is not configured.'
+      message: 'নিউজলেটার সার্ভিস কনফিগার করা হয়নি।'
     };
   }
 
@@ -440,19 +440,19 @@ export const unsubscribeFromNewsletter = async (email: string): Promise<{ succes
       console.error('Error unsubscribing:', error);
       return {
         success: false,
-        message: 'An error occurred. Please try again later.'
+        message: 'একটি ত্রুটি ঘটেছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।'
       };
     }
 
     return {
       success: true,
-      message: 'You have been unsubscribed from our newsletter.'
+      message: 'আপনাকে আমাদের নিউজলেটার থেকে আনসাবস্ক্রাইব করা হয়েছে।'
     };
   } catch (error: any) {
     console.error('❌ Error unsubscribing:', error);
     return {
       success: false,
-      message: 'An unexpected error occurred. Please try again later.'
+      message: 'একটি ত্রুটি ঘটেছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।'
     };
   }
 };
