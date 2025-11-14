@@ -10,6 +10,8 @@ export interface EmailOptions {
 // This function will be called from the Vercel serverless function
 export const sendNewsletterConfirmationEmail = async (email: string): Promise<{ success: boolean; error?: string }> => {
   try {
+    console.log('📧 Attempting to send confirmation email to:', email);
+    
     const response = await fetch('/api/send-newsletter-email', {
       method: 'POST',
       headers: {
@@ -18,14 +20,20 @@ export const sendNewsletterConfirmationEmail = async (email: string): Promise<{ 
       body: JSON.stringify({ email }),
     });
 
+    console.log('📧 Email API response status:', response.status);
+
     if (!response.ok) {
-      const error = await response.json().catch(() => ({ error: 'Failed to send email' }));
-      return { success: false, error: error.error || 'Failed to send email' };
+      const errorData = await response.json().catch(() => ({ error: 'Failed to send email' }));
+      console.error('📧 Email API error response:', errorData);
+      const errorMessage = errorData.error || errorData.details || 'Failed to send email';
+      return { success: false, error: errorMessage };
     }
 
+    const result = await response.json().catch(() => ({}));
+    console.log('📧 Email sent successfully:', result);
     return { success: true };
   } catch (error: any) {
-    console.error('Error sending email:', error);
+    console.error('📧 Error sending email (network/fetch error):', error);
     return { success: false, error: error.message || 'Failed to send email' };
   }
 };

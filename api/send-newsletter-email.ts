@@ -1,9 +1,6 @@
 import { Resend } from 'resend';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-// Initialize Resend with API key from environment variable
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Email template for newsletter confirmation
 const getNewsletterConfirmationTemplate = (email: string): string => {
   return `
@@ -81,7 +78,7 @@ export default async function handler(
 
   // Check if Resend API key is configured
   if (!process.env.RESEND_API_KEY) {
-    console.error('RESEND_API_KEY is not configured');
+    console.error('❌ RESEND_API_KEY is not configured');
     return response.status(500).json({ 
       error: 'Email service is not configured. Please set RESEND_API_KEY environment variable.' 
     });
@@ -102,35 +99,46 @@ export default async function handler(
   }
 
   try {
+    // Initialize Resend inside the handler to ensure env vars are available
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    
     // Get the "from" email from environment variable or use a default
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+    const toEmail = email.trim().toLowerCase();
+    
+    console.log('📧 Attempting to send email from:', fromEmail, 'to:', toEmail);
     
     // Send email using Resend
-    const { data, error } = await resend.emails.send({
+    const result = await resend.emails.send({
       from: fromEmail,
-      to: email.trim().toLowerCase(),
+      to: toEmail,
       subject: 'Welcome to Our Newsletter! 🎉',
       html: getNewsletterConfirmationTemplate(email.trim()),
     });
 
-    if (error) {
-      console.error('Resend error:', error);
+    // Resend returns { data, error } structure
+    if (result.error) {
+      console.error('❌ Resend API error:', JSON.stringify(result.error, null, 2));
       return response.status(500).json({ 
         error: 'Failed to send email',
-        details: error.message 
+        details: result.error.message || 'Unknown Resend API error'
       });
     }
 
-    console.log('Email sent successfully:', data);
+    console.log('✅ Email sent successfully! Message ID:', result.data?.id);
     return response.status(200).json({ 
       success: true, 
-      messageId: data?.id 
+      messageId: result.data?.id 
     });
   } catch (error: any) {
-    console.error('Error sending email:', error);
+    console.error('❌ Unexpected error sending email:', error);
+    console.error('Error type:', error?.constructor?.name);
+    console.error('Error message:', error?.message);
+    console.error('Error stack:', error?.stack);
+    
     return response.status(500).json({ 
       error: 'Failed to send email',
-      details: error.message 
+      details: error?.message || 'Unknown error occurred'
     });
   }
 }
