@@ -108,7 +108,7 @@ const Footer = () => {
           >
             <h4 className="text-sm font-medium tracking-widest uppercase">বিষয়</h4>
             <div className="space-y-3">
-              {["প্রহসন", "Technology", "Innovation", "Sustainability"].map((item, i) => (
+              {["প্রহসন", "গল্প", "কবিতা",].map((item, i) => (
                 <motion.a
                   key={item}
                   custom={i}
