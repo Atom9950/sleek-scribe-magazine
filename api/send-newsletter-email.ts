@@ -19,7 +19,7 @@ const getNewsletterConfirmationTemplate = (email: string): string => {
           <!-- Header -->
           <tr>
             <td style="padding: 40px 40px 20px; text-align: center; background-color: #1a1a1a; border-radius: 8px 8px 0 0;">
-              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">Welcome!</h1>
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">Welcome to পাতা!</h1>
             </td>
           </tr>
           
@@ -112,7 +112,7 @@ export default async function handler(
     const result = await resend.emails.send({
       from: fromEmail,
       to: toEmail,
-      subject: 'Welcome to Our Newsletter! 🎉',
+      subject: 'Greetings from পাতা! 🎉',
       html: getNewsletterConfirmationTemplate(email.trim()),
     });
 
