@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import BlogGrid from "@/components/BlogGrid";
 import Newsletter from "@/components/Newsletter";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
 
 const pageVariants = {
   initial: {
@@ -41,7 +41,7 @@ const Index = () => {
       <HeroSection />
       <BlogGrid />
       <Newsletter />
-      <Footer />
+      {/* <Footer /> */}
     </motion.div>
   );
 };
