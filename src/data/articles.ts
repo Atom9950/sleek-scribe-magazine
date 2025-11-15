@@ -14,7 +14,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     id: "1",
-    slug: "amra-naki-adhunik-manush",
+    slug: "আমরা নাকি আধুনিক মানুষ",
     title: "আমরা নাকি আধুনিক মানুষ ?",
     date: "AUGUST 16, 2024",
     author: "প্রীতি",
@@ -66,8 +66,8 @@ export const articles: Article[] = [
   },
   {
     id: "4",
-    slug: "emerging-technologies-design",
-    title: "Emerging Technologies in Design",
+    slug: "বাংলার প্রতি বাঙালির উদাসীনতা",
+    title: "বাংলার প্রতি বাঙালির উদাসীনতা",
     date: "MARCH 08, 2024",
     author: "Tech Team",
     category: "TECH",

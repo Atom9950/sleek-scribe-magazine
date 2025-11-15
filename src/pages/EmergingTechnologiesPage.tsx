@@ -18,17 +18,20 @@ const EmergingTechnologiesPage = () => {
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<Comment[]>([]);
+  const [modalImage, setModalImage] = useState('');
   const [showImageModal, setShowImageModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submittingComment, setSubmittingComment] = useState(false);
 
   const articleData = {
-    title: "Emerging Technologies in Design",
+    title: "বাংলার প্রতি বাঙালির উদাসীনতা",
     date: "MARCH 08, 2024",
     author: "Tech Team",
     category: "TECH",
     excerpt: "From AI-assisted design tools to AR/VR interfaces, discover the technologies shaping the future of creative work and digital innovation.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop",
+    image: "/fourth.jpg",
+    image2: "/fourth(2).jpg",
+    image3: "/fourth(3).jpg",
     fullContent: `
       <p>The design industry is experiencing a technological revolution. AI-powered tools are not replacing designers but augmenting their capabilities, allowing for faster iteration and more creative exploration.</p>
       <p>Augmented and Virtual Reality are opening new frontiers for immersive design experiences. These technologies are transforming how we conceptualize and interact with digital spaces.</p>
@@ -127,26 +130,45 @@ const EmergingTechnologiesPage = () => {
             {articleData.title}
           </h1>
 
-          {/* Hero Image */}
-          <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => setShowImageModal(true)}>
-            <img 
-              src={articleData.image} 
-              alt="Featured article"
-              className="w-full h-auto max-h-[500px] object-cover"
-            />
+          {/* Hero Images */}
+          <div className="space-y-4">
+            <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image); setShowImageModal(true); }}>
+              <img 
+                src={articleData.image} 
+                alt="Featured article"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image2); setShowImageModal(true); }}>
+              <img 
+                src={articleData.image2} 
+                alt="Second featured image"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image3); setShowImageModal(true); }}>
+              <img 
+                src={articleData.image3} 
+                alt="Third featured image"
+                className="w-full h-auto object-contain"
+              />
+            </div>
           </div>
 
           {/* Image Modal */}
           {showImageModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80" onClick={() => setShowImageModal(false)}>
-              <img 
-                src={articleData.image} 
-                alt="Featured article full view"
-                className="max-w-full max-h-full rounded-lg shadow-lg"
-                style={{ cursor: 'zoom-out' }}
-              />
+            <div className="fixed inset-0 z-50 bg-black bg-opacity-80 overflow-auto" onClick={() => setShowImageModal(false)}>
+              <div className="min-h-screen flex items-start justify-center p-8">
+                <img 
+                  src={modalImage}
+                  alt="Featured article full view"
+                  className="max-w-full h-auto rounded-lg shadow-lg"
+                  style={{ cursor: 'zoom-out' }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
               <button
-                className="absolute top-8 right-8 text-white text-3xl font-bold bg-black bg-opacity-40 rounded-full px-4 py-2"
+                className="fixed top-8 right-8 text-white text-3xl font-bold bg-black bg-opacity-40 rounded-full px-4 py-2"
                 onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
                 aria-label="Close"
               >

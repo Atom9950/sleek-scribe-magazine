@@ -37,7 +37,7 @@ const BlogGrid = () => {
     category: "কবিতা",
     date: "MARCH 12, 2024",
     image: "/second.jpg",
-    slug: "creative-collaboration"
+    slug: "বৃষ্টি"
   };
 
   const posts = [
@@ -47,15 +47,15 @@ const BlogGrid = () => {
       category: "গল্প",
       date: "MARCH 10, 2025",
       image: "/third.jpg",
-      slug: "mobile-ux"
+      slug: "আমার রাজ্য"
     },
     {
-    //   title: "Emerging Technologies in Design",
-    //   excerpt: "From AI-assisted design tools to AR/VR interfaces, discover the technologies shaping the future of creative work and digital innovation.",
-    //   category: "TECH",
-    //   date: "MARCH 08, 2024",
-      image: "/coming soon.avif",
-    //   slug: "emerging-tech"
+      title: "বাংলার প্রতি বাঙালির উদাসীনতা",
+      excerpt: "From AI-assisted design tools to AR/VR interfaces, discover the technologies shaping the future of creative work and digital innovation.",
+      category: "TECH",
+      date: "MARCH 08, 2024",
+      image: "/fourth.jpg",
+      slug: "বাংলার প্রতি বাঙালির উদাসীনতা"
     },
     {
     //   title: "The Psychology of Visual Storytelling",

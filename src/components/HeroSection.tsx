@@ -130,7 +130,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="pt-4"
               >
-                <Link to="/article/amra-naki-adhunik-manush">
+                <Link to="/article/আমরা নাকি আধুনিক মানুষ">
                 <motion.span 
                   whileHover={{ x: 10 }}
                   className="text-sm font-medium tracking-wide uppercase hover:text-muted-foreground transition-colors cursor-pointer inline-block"
@@ -146,7 +146,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="relative overflow-hidden"
               >
-                <Link to="/article/amra-naki-adhunik-manush">
+                <Link to="/article/আমরা নাকি আধুনিক মানুষ">
                   <motion.div
                     initial="initial"
                     whileHover="hover"
@@ -193,7 +193,7 @@ const HeroSection = () => {
             
             <div className="space-y-6">
               {/* Trending articles with className for GSAP animations */}
-              <Link to="/article/amra-naki-adhunik-manush">
+              <Link to="/article/আমরা নাকি আধুনিক মানুষ">
                 <motion.article 
                 className="group cursor-pointer trending-article"
                 whileHover={{ x: 5 }}

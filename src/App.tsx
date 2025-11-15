@@ -27,9 +27,9 @@ const App = () => (
           <Route path="/article/:slug" element={<ArticlePage />} />
           
           {/* Individual Article Pages */}
-          <Route path="/creative-collaboration" element={<ArtOfCreativeCollaborationPage />} />
-          <Route path="/mobile-ux" element={<UserExperienceMobilePage />} />
-          <Route path="/emerging-tech" element={<EmergingTechnologiesPage />} />
+          <Route path="/বৃষ্টি" element={<ArtOfCreativeCollaborationPage />} />
+          <Route path="/আমার রাজ্য" element={<UserExperienceMobilePage />} />
+          <Route path="/বাংলার প্রতি বাঙালির উদাসীনতা" element={<EmergingTechnologiesPage />} />
           <Route path="/visual-storytelling" element={<VisualStorytellingPage />} />
           <Route path="/sustainable-design" element={<SustainableDesignPage />} />
           
