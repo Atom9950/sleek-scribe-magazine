@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "@/components/Header";
@@ -15,7 +15,73 @@ const Newsletter = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [emailMessage, setEmailMessage] = useState("");
+  const [emailAlreadyExists, setEmailAlreadyExists] = useState(false);
+  const [isCheckingEmail, setIsCheckingEmail] = useState(false);
   const { toast } = useToast();
+
+  // Debounce function to limit API calls
+  const debounce = (func: Function, delay: number) => {
+    let timeoutId: NodeJS.Timeout;
+    return (...args: any[]) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func.apply(null, args), delay);
+    };
+  };
+
+  // Check email status function
+  const checkEmailStatus = async (emailToCheck: string) => {
+    if (!emailToCheck.trim()) {
+      setEmailMessage("");
+      setEmailAlreadyExists(false);
+      setIsCheckingEmail(false);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailToCheck.trim())) {
+      setEmailMessage("");
+      setEmailAlreadyExists(false);
+      setIsCheckingEmail(false);
+      return;
+    }
+
+    // Don't check if already subscribed via localStorage
+    if (isSubscribed) {
+      setIsCheckingEmail(false);
+      return;
+    }
+
+    setIsCheckingEmail(true);
+    
+    try {
+      const status = await checkNewsletterStatus(emailToCheck);
+      
+      if (status.exists && status.status === 'active') {
+        setEmailMessage("⚠️ এই ইমেলটি ইতিমধ্যেই সাবস্ক্রাইব করা রয়েছে।");
+        setEmailAlreadyExists(true);
+      } else if (status.exists && status.status === 'unsubscribed') {
+        setEmailMessage("ℹ️ এই ইমেলটি আগে সাবস্ক্রাইব ছিল। আবার সাবস্ক্রাইব করতে পারবেন।");
+        setEmailAlreadyExists(false);
+      } else {
+        setEmailMessage("");
+        setEmailAlreadyExists(false);
+      }
+    } catch (error) {
+      console.error("Error checking email status:", error);
+      setEmailMessage("");
+      setEmailAlreadyExists(false);
+    } finally {
+      setIsCheckingEmail(false);
+    }
+  };
+
+  // Debounced version of checkEmailStatus
+  const debouncedCheckEmail = useCallback(
+    debounce((emailToCheck: string) => {
+      checkEmailStatus(emailToCheck);
+    }, 500), // 500ms delay
+    [isSubscribed]
+  );
 
   // Load subscribed email from localStorage on mount
   useEffect(() => {
@@ -25,6 +91,17 @@ const Newsletter = () => {
       setIsSubscribed(true);
     }
   }, []);
+
+  // Check email status whenever email changes
+  useEffect(() => {
+    if (email.trim()) {
+      debouncedCheckEmail(email);
+    } else {
+      setEmailMessage("");
+      setEmailAlreadyExists(false);
+      setIsCheckingEmail(false);
+    }
+  }, [email, debouncedCheckEmail]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -74,6 +151,16 @@ const Newsletter = () => {
       return;
     }
 
+    // Prevent submission if email already exists and is active
+    if (emailAlreadyExists) {
+      toast({
+        title: "ইমেইল বিদ্যমান",
+        description: "এই ইমেইলটি ইতিমধ্যেই সাবস্ক্রাইব করা রয়েছে।",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
     
     try {
@@ -86,6 +173,8 @@ const Newsletter = () => {
         });
         localStorage.setItem('newsletter_email', email.trim().toLowerCase());
         setIsSubscribed(true);
+        setEmailMessage(""); // Clear any existing messages
+        setEmailAlreadyExists(false);
       } else {
         toast({
           title: "ত্রুটি",
@@ -129,6 +218,7 @@ const Newsletter = () => {
         setIsSubscribed(false);
         setEmail("");
         setEmailMessage("");
+        setEmailAlreadyExists(false);
       } else {
         toast({
           title: "ত্রুটি",
@@ -145,39 +235,6 @@ const Newsletter = () => {
       });
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleEmailBlur = async () => {
-    if (!email.trim()) {
-      setEmailMessage("");
-      return;
-    }
-
-    // Don't check if already subscribed via localStorage
-    if (isSubscribed) {
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.trim())) {
-      setEmailMessage("");
-      return;
-    }
-
-    try {
-      const status = await checkNewsletterStatus(email);
-      
-      if (status.exists && status.status === 'active') {
-        setEmailMessage("⚠️ এই ইমেলটি ইতিমধ্যেই সাবস্ক্রাইব করা রয়েছে।");
-      } else if (status.exists && status.status === 'unsubscribed') {
-        setEmailMessage("ℹ️ এই ইমেলটি আগে সাবস্ক্রাইব ছিল। আবার সাবস্ক্রাইব করতে পারবেন।");
-      } else {
-        setEmailMessage("");
-      }
-    } catch (error) {
-      console.error("Error checking email status:", error);
-      setEmailMessage("");
     }
   };
 
@@ -234,32 +291,38 @@ const Newsletter = () => {
             onSubmit={handleSubmit}
           >
             <div className="flex flex-col sm:flex-row gap-3">
-              <motion.input
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                type="email"
-                placeholder="আপনার ইমেইল ঠিকানা"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setEmailMessage("");
-                }}
-                onBlur={handleEmailBlur}
-                disabled={isLoading || isSubscribed}
-                required
-                className="flex-1 px-4 py-3 bg-transparent text-background border border-background text-sm placeholder-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-background/50"
-              />
+              <div className="flex-1 relative">
+                <motion.input
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  type="email"
+                  placeholder="আপনার ইমেইল ঠিকানা"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    // The useEffect will automatically trigger the debounced check
+                  }}
+                  disabled={isLoading || isSubscribed}
+                  required
+                  className="w-full px-4 py-3 bg-transparent text-background border border-background text-sm placeholder-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-background/50"
+                />
+                {isCheckingEmail && (
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                    <div className="w-4 h-4 border-2 border-background/30 border-t-background rounded-full animate-spin"></div>
+                  </div>
+                )}
+              </div>
               <motion.button 
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                whileHover={!isLoading ? { scale: 1.05 } : {}}
-                whileTap={!isLoading ? { scale: 0.95 } : {}}
+                whileHover={!isLoading && !emailAlreadyExists ? { scale: 1.05 } : {}}
+                whileTap={!isLoading && !emailAlreadyExists ? { scale: 0.95 } : {}}
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || emailAlreadyExists}
                 className="text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {isLoading ? "অপেক্ষা করুন..." : isSubscribed ? "আনসাবস্ক্রাইব করুন" : "সাবস্ক্রাইব করুন"}
@@ -271,7 +334,9 @@ const Newsletter = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="text-xs mt-2 text-background/90"
+                className={`text-xs mt-2 text-background/90 ${
+                  emailAlreadyExists ? 'text-black' : ''
+                }`}
               >
                 {emailMessage}
               </motion.p>
