@@ -110,19 +110,20 @@ export const articles: Article[] = [
   },
   {
     id: "6",
-    slug: "sustainable-design-philosophy",
-    title: "Sustainable Design Philosophy",
-    date: "MARCH 03, 2024",
-    author: "Sustainability Team",
-    category: "CULTURE",
-    excerpt: "Exploring eco-conscious design principles and their impact on both environmental sustainability and creative innovation.",
-    content: "Exploring eco-conscious design principles and their impact on environmental sustainability...",
+    slug: "কালো নয়, কলঙ্ক",
+    title: "কালো নয়, কলঙ্ক",
+    date: "JUNE 20, 2025",
+    author: "প্রীতি",
+    category: "গল্প",
+    excerpt: "সমাজ এখনো গায়ের রঙে মেয়েদের বিচার করে; প্রতিভার চেয়ে রূপ প্রাধান্য পায়, আর ভণ্ডামির কারণে কালো মেয়েরা অবহেলা-অপমানে কষ্ট পায়।",
+    content: "সমাজ এখনো গায়ের রঙে মেয়েদের বিচার করে; প্রতিভার চেয়ে রূপ প্রাধান্য পায়, আর ভণ্ডামির কারণে কালো মেয়েরা অবহেলা-অপমানে কষ্ট পায়।",
     fullContent: `
-      <p>Sustainable design is more than a trend—it's a fundamental shift in how we approach creativity and problem-solving. It challenges designers to consider the long-term impact of their decisions.</p>
-      <p>The principles of sustainable design extend beyond material choices to include digital sustainability, energy-efficient processes, and designs that promote longevity over disposability.</p>
-      <p>Eco-conscious design often leads to more innovative solutions. Constraints breed creativity, and the challenge of working within environmental limits often results in breakthrough ideas.</p>
-      <p>The future of design must balance aesthetic appeal with environmental responsibility. This balance is not a limitation but an opportunity to create more meaningful and impactful work.</p>
-    `,
+      <p>সমাজে এখনো মেয়েদের বিচার হয় রূপ দেখে—বিশেষ করে গায়ের রঙ দিয়ে। একটু কালো হলেই শুরু হয় তির্যক মন্তব্য, অপমান ও অবহেলা, যেন মেয়েদের একমাত্র পরিচয় তাদের চেহারা।</p>
+
+<p>তাদের প্রতিভা, দক্ষতা বা স্বপ্নের কোন মূল্য নেই অনেকের কাছে। বরং বাহ্যিক সৌন্দর্যের প্রতিযোগিতায় ঠেলে দেওয়া হয়, যেখানে সাজগোজ, ফিল্টার, এডিটই হয়ে ওঠে মানদণ্ড।</p>
+
+<p>বিরোধাভাস হলো—আমরা কৃষ্ণঠাকুরের মতো কালো দেবতার পূজা করি, আবার বাস্তবে কালো মেয়েকে অপমান করি বিনা দ্বিধায়। এই ভণ্ডামির পরিবর্তন না ঘটলে সমাজ পিছিয়ে থাকবেই।</p>
+`,
     image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop"
   },
   {

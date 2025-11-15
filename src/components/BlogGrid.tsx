@@ -66,12 +66,12 @@ const BlogGrid = () => {
       slug: "অদৃশ্য নায়ক"
     },
     {
-    //   title: "Sustainable Design Philosophy",
-    //   excerpt: "Exploring eco-conscious design principles and their impact on both environmental sustainability and creative innovation.",
-    //   category: "CULTURE",
-    //   date: "MARCH 03, 2024",
-      image: "/coming soon.avif",
-    //   slug: "sustainable-design"
+      title: "কালো নয়, কলঙ্ক",
+      excerpt: "সমাজ এখনো গায়ের রঙে মেয়েদের বিচার করে; প্রতিভার চেয়ে রূপ প্রাধান্য পায়, আর ভণ্ডামির কারণে কালো মেয়েরা অবহেলা-অপমানে কষ্ট পায়।",
+      category: "গল্প",
+      date: "JUNE 20, 2025",
+      image: "/sixth.jpg",
+      slug: "কালো নয়, কলঙ্ক"
     }
   ];
 

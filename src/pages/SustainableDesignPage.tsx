@@ -13,32 +13,31 @@ import {
 import Footer from '@/components/Footer';
 
 const SustainableDesignPage = () => {
-  const slug = 'sustainable-design-philosophy';
+  const slug = 'কালো নয়, কলঙ্ক';
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<Comment[]>([]);
+  const [modalImage, setModalImage] = useState('');
   const [showImageModal, setShowImageModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submittingComment, setSubmittingComment] = useState(false);
 
   const articleData = {
-    title: "Sustainable Design Philosophy",
-    date: "MARCH 03, 2024",
-    author: "Sustainability Team",
-    category: "CULTURE",
-    excerpt: "Exploring eco-conscious design principles and their impact on both environmental sustainability and creative innovation.",
-    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop",
+    title: "কালো নয়, কলঙ্ক",
+    date: "JUNE 20, 2025",
+    author: "প্রীতি",
+    category: "গল্প",
+    excerpt: "সমাজ এখনো গায়ের রঙে মেয়েদের বিচার করে; প্রতিভার চেয়ে রূপ প্রাধান্য পায়, আর ভণ্ডামির কারণে কালো মেয়েরা অবহেলা-অপমানে কষ্ট পায়।",
+    image: "/sixth.jpg",
+    image2: "/sixth(2).jpg",
+    image3: "/sixth(3).jpg",
     fullContent: `
-      <p>Sustainable design is more than a trend—it's a fundamental shift in how we approach creativity and problem-solving. It challenges designers to consider the long-term impact of their decisions.</p>
-      <p>The principles of sustainable design extend beyond material choices to include digital sustainability, energy-efficient processes, and designs that promote longevity over disposability.</p>
-      <p>Eco-conscious design often leads to more innovative solutions. Constraints breed creativity, and the challenge of working within environmental limits often results in breakthrough ideas.</p>
-      <p>The future of design must balance aesthetic appeal with environmental responsibility. This balance is not a limitation but an opportunity to create more meaningful and impactful work.</p>
-      <p>Circular design principles are revolutionizing how we think about product lifecycles. Instead of linear "take-make-dispose" models, designers are creating systems where waste becomes input for new products.</p>
-      <p>Biomimicry is inspiring sustainable design solutions by learning from nature's 3.8 billion years of research and development. From self-cleaning surfaces inspired by lotus leaves to energy-efficient buildings modeled after termite mounds.</p>
-      <p>The concept of "design for disassembly" is gaining traction, where products are created with their end-of-life in mind, making recycling and material recovery more efficient.</p>
-      <p>Digital sustainability is becoming increasingly important as our digital footprint grows. Optimizing websites, reducing data transfer, and choosing green hosting providers are all part of sustainable design practice.</p>
-      <p>Consumer awareness of environmental issues is driving demand for sustainable design. Brands that embrace these principles are not only doing good but also gaining competitive advantages in the marketplace.</p>
+      <p>সমাজে এখনো মেয়েদের বিচার হয় রূপ দেখে—বিশেষ করে গায়ের রঙ দিয়ে। একটু কালো হলেই শুরু হয় তির্যক মন্তব্য, অপমান ও অবহেলা, যেন মেয়েদের একমাত্র পরিচয় তাদের চেহারা।</p>
+
+      <p>তাদের প্রতিভা, দক্ষতা বা স্বপ্নের কোন মূল্য নেই অনেকের কাছে। বরং বাহ্যিক সৌন্দর্যের প্রতিযোগিতায় ঠেলে দেওয়া হয়, যেখানে সাজগোজ, ফিল্টার, এডিটই হয়ে ওঠে মানদণ্ড।</p>
+
+      <p>বিরোধাভাস হলো—আমরা কৃষ্ণঠাকুরের মতো কালো দেবতার পূজা করি, আবার বাস্তবে কালো মেয়েকে অপমান করি বিনা দ্বিধায়। এই ভণ্ডামির পরিবর্তন না ঘটলে সমাজ পিছিয়ে থাকবেই।</p>
     `
   };
 
@@ -134,31 +133,50 @@ const SustainableDesignPage = () => {
             {articleData.title}
           </h1>
 
-          {/* Hero Image */}
-          <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => setShowImageModal(true)}>
-            <img 
-              src={articleData.image} 
-              alt="Featured article"
-              className="w-full h-auto max-h-[500px] object-cover"
-            />
+          {/* Hero Images */}
+          <div className="space-y-4">
+            <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image); setShowImageModal(true); }}>
+              <img 
+                src={articleData.image} 
+                alt="Featured article"
+                className="w-full h-auto max-h-[500px] object-cover"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image2); setShowImageModal(true); }}>
+              <img 
+                src={articleData.image2} 
+                alt="Second featured image"
+                className="w-full h-auto max-h-[500px] object-cover"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image3); setShowImageModal(true); }}>
+              <img 
+                src={articleData.image3} 
+                alt="Third featured image"
+                className="w-full h-auto max-h-[500px] object-cover"
+              />
+            </div>
           </div>
 
           {/* Image Modal */}
           {showImageModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80" onClick={() => setShowImageModal(false)}>
-              <img 
-                src={articleData.image} 
-                alt="Featured article full view"
-                className="max-w-full max-h-full rounded-lg shadow-lg"
-                style={{ cursor: 'zoom-out' }}
-              />
-              <button
-                className="absolute top-8 right-8 text-white text-3xl font-bold bg-black bg-opacity-40 rounded-full px-4 py-2"
-                onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
-                aria-label="Close"
-              >
-                ×
-              </button>
+            <div className="fixed inset-0 z-50 bg-black bg-opacity-90 overflow-auto" onClick={() => setShowImageModal(false)}>
+              <div className="relative min-h-screen flex items-center justify-center p-4 md:p-8">
+                <button
+                  className="absolute top-12 right-4 md:top-8 md:right-8 text-white text-2xl font-bold rounded-full w-14 h-14 flex items-center justify-center z-50 shadow-2xl border-2 border-white"
+                  onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
+                  aria-label="Close"
+                >
+                  ×
+                </button>
+                <img 
+                  src={modalImage}
+                  alt="Featured article full view"
+                  className="max-w-full max-h-screen object-contain rounded-lg shadow-lg"
+                  style={{ cursor: 'zoom-out' }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
             </div>
           )}
 
@@ -174,7 +192,7 @@ const SustainableDesignPage = () => {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span>Like ({likeCount})</span>
+              <span>লাইক ({likeCount})</span>
             </button>
 
             <button onClick={handleShare} className="flex items-center space-x-2 text-gray-500 hover:text-blue-500 transition-colors">
@@ -187,7 +205,7 @@ const SustainableDesignPage = () => {
 
           {/* Comments Section */}
           <div className="pt-12">
-            <h3 className="text-xl font-semibold mb-6">Comments ({comments.length})</h3>
+            <h3 className="text-xl font-semibold mb-6">মন্তব্য ({comments.length})</h3>
             
             <form onSubmit={handleSubmitComment} className="mb-8">
               <textarea

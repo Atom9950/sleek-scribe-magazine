@@ -31,7 +31,7 @@ const App = () => (
           <Route path="/আমার রাজ্য" element={<UserExperienceMobilePage />} />
           <Route path="/বাংলার প্রতি বাঙালির উদাসীনতা" element={<EmergingTechnologiesPage />} />
           <Route path="/অদৃশ্য নায়ক" element={<VisualStorytellingPage />} />
-          <Route path="/sustainable-design" element={<SustainableDesignPage />} />
+          <Route path="/কালো নয়, কলঙ্ক" element={<SustainableDesignPage />} />
           
           {/* Newsletter Page */}
           <Route path="/newsletter" element={<NewsletterPage />} />
