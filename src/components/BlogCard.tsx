@@ -122,7 +122,7 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false, slu
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-2xl lg:text-xl font-serif  group-hover:text-muted-foreground transition-colors leading-tight"
+              className="text-xl lg:text-xl font-serif  group-hover:text-muted-foreground transition-colors leading-tight"
             >
               {title}
             </motion.h2>
