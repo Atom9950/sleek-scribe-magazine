@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { subscribeToNewsletter, unsubscribeFromNewsletter } from "@/lib/supabaseInteractions";
+import { subscribeToNewsletter, unsubscribeFromNewsletter, checkNewsletterStatus } from "@/lib/supabaseInteractions";
 import { useToast } from "@/hooks/use-toast";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +14,7 @@ const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [emailMessage, setEmailMessage] = useState("");
   const { toast } = useToast();
 
   // Load subscribed email from localStorage on mount
@@ -127,6 +128,7 @@ const Newsletter = () => {
         localStorage.removeItem('newsletter_email');
         setIsSubscribed(false);
         setEmail("");
+        setEmailMessage("");
       } else {
         toast({
           title: "ত্রুটি",
@@ -143,6 +145,39 @@ const Newsletter = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleEmailBlur = async () => {
+    if (!email.trim()) {
+      setEmailMessage("");
+      return;
+    }
+
+    // Don't check if already subscribed via localStorage
+    if (isSubscribed) {
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setEmailMessage("");
+      return;
+    }
+
+    try {
+      const status = await checkNewsletterStatus(email);
+      
+      if (status.exists && status.status === 'active') {
+        setEmailMessage("⚠️ এই ইমেলটি ইতিমধ্যেই সাবস্ক্রাইব করা রয়েছে।");
+      } else if (status.exists && status.status === 'unsubscribed') {
+        setEmailMessage("ℹ️ এই ইমেলটি আগে সাবস্ক্রাইব ছিল। আবার সাবস্ক্রাইব করতে পারবেন।");
+      } else {
+        setEmailMessage("");
+      }
+    } catch (error) {
+      console.error("Error checking email status:", error);
+      setEmailMessage("");
     }
   };
 
@@ -207,7 +242,11 @@ const Newsletter = () => {
                 type="email"
                 placeholder="আপনার ইমেইল ঠিকানা"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailMessage("");
+                }}
+                onBlur={handleEmailBlur}
                 disabled={isLoading || isSubscribed}
                 required
                 className="flex-1 px-4 py-3 bg-transparent text-background border border-background text-sm placeholder-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-background/50"
@@ -226,6 +265,17 @@ const Newsletter = () => {
                 {isLoading ? "অপেক্ষা করুন..." : isSubscribed ? "আনসাবস্ক্রাইব করুন" : "সাবস্ক্রাইব করুন"}
               </motion.button>
             </div>
+            
+            {emailMessage && (
+              <motion.p
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="text-xs mt-2 text-background/90"
+              >
+                {emailMessage}
+              </motion.p>
+            )}
             
             <motion.p 
               initial={{ opacity: 0 }}

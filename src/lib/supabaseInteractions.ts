@@ -457,3 +457,34 @@ export const unsubscribeFromNewsletter = async (email: string): Promise<{ succes
   }
 };
 
+// Check newsletter subscription status
+export const checkNewsletterStatus = async (email: string): Promise<{ exists: boolean; status?: 'active' | 'unsubscribed' }> => {
+  if (!isSupabaseConfigured) {
+    return { exists: false };
+  }
+
+  try {
+    const normalizedEmail = email.trim().toLowerCase();
+    
+    const { data, error } = await supabase
+      .from('newsletter_subscriptions')
+      .select('status')
+      .eq('email', normalizedEmail)
+      .maybeSingle();
+
+    if (error && error.code !== 'PGRST116') {
+      console.error('Error checking newsletter status:', error);
+      return { exists: false };
+    }
+
+    if (data) {
+      return { exists: true, status: data.status };
+    }
+
+    return { exists: false };
+  } catch (error) {
+    console.error('Error checking newsletter status:', error);
+    return { exists: false };
+  }
+};
+
