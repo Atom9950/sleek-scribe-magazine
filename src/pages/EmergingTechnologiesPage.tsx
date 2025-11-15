@@ -220,7 +220,7 @@ const EmergingTechnologiesPage = () => {
               <button
                 type="submit"
                 disabled={submittingComment}
-                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="mt-4 px-6 py-2 bg-black text-white rounded-lg hover:bg-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submittingComment ? 'পোস্ট করা হচ্ছে...' : 'পোস্ট করুন'}
               </button>
