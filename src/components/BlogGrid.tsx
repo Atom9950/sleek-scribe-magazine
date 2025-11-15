@@ -55,7 +55,7 @@ const BlogGrid = () => {
       category: "গল্প",
       date: "MARCH 08, 2024",
       image: "/fourth.jpg",
-      slug: "banglar-prati-bangalir-urudasinota"
+      slug: "banglar-prati-bangalir-udashinota"
     },
     {
       title: "অদৃশ্য নায়ক",

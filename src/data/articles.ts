@@ -66,7 +66,7 @@ export const articles: Article[] = [
   },
   {
     id: "4",
-    slug: "banglar-prati-bangalir-urudasinota",
+    slug: "banglar-prati-bangalir-udashinota",
     title: "বাংলার প্রতি বাঙালির উদাসীনতা",
     date: "MARCH 08, 2024",
     author: "প্রীতি",

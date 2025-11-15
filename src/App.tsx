@@ -34,7 +34,7 @@ const App = () => (
           {/* Individual Article Pages */}
           <Route path="/brishti" element={<ArtOfCreativeCollaborationPage />} />
           <Route path="/amar-rajya" element={<UserExperienceMobilePage />} />
-          <Route path="/banglar-prati-bangalir-urudasinota" element={<EmergingTechnologiesPage />} />
+          <Route path="/banglar-prati-bangalir-udashinota" element={<EmergingTechnologiesPage />} />
           <Route path="/odrishya-nayak" element={<VisualStorytellingPage />} />
           <Route path="/kalo-noy-kalanka" element={<SustainableDesignPage />} />
           
