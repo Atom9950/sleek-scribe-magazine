@@ -194,7 +194,7 @@ const SustainableDesignPage = () => {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Write your comment..."
+                placeholder="আপনার মন্তব্য লিখুন..."
                 rows={4}
               />
               <button
@@ -231,7 +231,7 @@ const SustainableDesignPage = () => {
                             className="text-xs text-red-600 hover:text-red-800 hover:underline transition-colors"
                             title="Delete comment"
                           >
-                            Delete
+                            মুছুন
                           </button>
                         )}
                       </div>
