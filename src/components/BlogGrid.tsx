@@ -60,7 +60,7 @@ const BlogGrid = () => {
     {
       title: "অদৃশ্য নায়ক",
       excerpt: "How visual narratives influence human behavior and decision-making in the digital age of content consumption.",
-      category: "OPINION",
+      category: "গল্প",
       date: "MARCH 05, 2024",
       image: "/fifth.jpg",
       slug: "অদৃশ্য নায়ক"
