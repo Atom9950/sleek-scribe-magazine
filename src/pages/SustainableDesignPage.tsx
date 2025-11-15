@@ -148,6 +148,7 @@ const SustainableDesignPage = () => {
                 className="w-full h-auto max-h-[500px] object-cover"
               />
             </div>
+            <h1 className='text-2xl font-serif justify-center text-center py-2 '>পৃষ্ঠা-১</h1>
             <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image2); setShowImageModal(true); }}>
               <img 
                 src={articleData.image2} 
@@ -155,6 +156,7 @@ const SustainableDesignPage = () => {
                 className="w-full h-auto max-h-[500px] object-cover"
               />
             </div>
+            <h1 className='text-2xl font-serif justify-center text-center py-2 '>পৃষ্ঠা-২</h1>
             <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image3); setShowImageModal(true); }}>
               <img 
                 src={articleData.image3} 
@@ -162,6 +164,7 @@ const SustainableDesignPage = () => {
                 className="w-full h-auto max-h-[500px] object-cover"
               />
             </div>
+            <h1 className='text-2xl font-serif justify-center text-center py-2 '>পৃষ্ঠা-৩</h1>
           </div>
 
           {/* Image Modal */}
