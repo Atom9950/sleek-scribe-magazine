@@ -11,6 +11,7 @@ import {
   type Comment 
 } from '../lib/supabaseInteractions';
 import Footer from '@/components/Footer';
+import { toast } from '@/hooks/use-toast';
 
 const SustainableDesignPage = () => {
   const slug = 'কালো নয়, কলঙ্ক';
@@ -111,7 +112,12 @@ const SustainableDesignPage = () => {
     try {
       const url = window.location.href;
       await navigator.clipboard.writeText(url);
-      alert('লিংক কপি হয়েছে!');
+       toast({
+        title: "সফল",
+        description: "লিংক কপি হয়েছে!",
+        variant: "destructive",
+        className: "bg-black text-white border-border"
+      });
     } catch (error) {
       console.error('Error copying to clipboard:', error);
     }
