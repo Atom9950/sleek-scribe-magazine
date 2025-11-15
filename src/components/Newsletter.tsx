@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { subscribeToNewsletter } from "@/lib/supabaseInteractions";
+import { subscribeToNewsletter, unsubscribeFromNewsletter } from "@/lib/supabaseInteractions";
 import { useToast } from "@/hooks/use-toast";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +13,17 @@ const Newsletter = () => {
   const formRef = useRef(null);
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const { toast } = useToast();
+
+  // Load subscribed email from localStorage on mount
+  useEffect(() => {
+    const subscribedEmail = localStorage.getItem('newsletter_email');
+    if (subscribedEmail) {
+      setEmail(subscribedEmail);
+      setIsSubscribed(true);
+    }
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -48,6 +58,12 @@ const Newsletter = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // If already subscribed, unsubscribe instead
+    if (isSubscribed) {
+      handleUnsubscribe();
+      return;
+    }
+    
     if (!email.trim()) {
       toast({
         title: "ইমেইল প্রয়োজন",
@@ -67,7 +83,8 @@ const Newsletter = () => {
           title: "সফল!",
           description: result.message,
         });
-        setEmail(""); // Clear the form on success
+        localStorage.setItem('newsletter_email', email.trim().toLowerCase());
+        setIsSubscribed(true);
       } else {
         toast({
           title: "ত্রুটি",
@@ -77,6 +94,48 @@ const Newsletter = () => {
       }
     } catch (error) {
       console.error("Newsletter subscription error:", error);
+      toast({
+        title: "ত্রুটি",
+        description: "একটি সমস্যা হয়েছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleUnsubscribe = async () => {
+    if (!email.trim()) {
+      toast({
+        title: "ইমেইল প্রয়োজন",
+        description: "অনুগ্রহ করে আপনার ইমেইল ঠিকানা লিখুন।",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      const result = await unsubscribeFromNewsletter(email);
+      
+      if (result.success) {
+        toast({
+          title: "সফল!",
+          description: result.message,
+        });
+        localStorage.removeItem('newsletter_email');
+        setIsSubscribed(false);
+        setEmail("");
+      } else {
+        toast({
+          title: "ত্রুটি",
+          description: result.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Newsletter unsubscription error:", error);
       toast({
         title: "ত্রুটি",
         description: "একটি সমস্যা হয়েছে। অনুগ্রহ করে পরে আবার চেষ্টা করুন।",
@@ -149,7 +208,7 @@ const Newsletter = () => {
                 placeholder="আপনার ইমেইল ঠিকানা"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                disabled={isLoading}
+                disabled={isLoading || isSubscribed}
                 required
                 className="flex-1 px-4 py-3 bg-transparent text-background border border-background text-sm placeholder-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-background/50"
               />
@@ -164,9 +223,10 @@ const Newsletter = () => {
                 disabled={isLoading}
                 className="text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
-                {isLoading ? "অপেক্ষা করুন..." : "সাবস্ক্রাইব করুন"}
+                {isLoading ? "অপেক্ষা করুন..." : isSubscribed ? "আনসাবস্ক্রাইব করুন" : "সাবস্ক্রাইব করুন"}
               </motion.button>
             </div>
+            
             <motion.p 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 0.7 }}
