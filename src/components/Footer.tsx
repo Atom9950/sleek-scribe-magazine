@@ -135,18 +135,24 @@ const Footer = () => {
           >
             <h4 className="text-sm font-medium tracking-widest uppercase">সংযোগ করুন</h4>
             <div className="space-y-3">
-              {["Twitter", "Instagram", "Facebook"].map((item, i) => (
+              {[
+                { name: "Twitter", url: "https://x.com/SdeepR0" },
+                { name: "Instagram", url: "https://www.instagram.com/panja.preeti?igsh=cHVkaXBoc3p0MXZy" },
+                { name: "Facebook", url: "https://www.facebook.com/share/1BRy3vhqKi/" }
+              ].map((social, i) => (
                 <motion.a
-                  key={item}
+                  key={social.name}
                   custom={i}
                   variants={listItemVariants}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  href="#"
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {item}
+                  {social.name}
                 </motion.a>
               ))}
             </div>

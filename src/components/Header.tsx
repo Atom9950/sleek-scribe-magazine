@@ -191,7 +191,7 @@ const Header = () => {
                               </a>
                             ) : (
                               <Link
-                                to="/"
+                                to="/Newsletter"
                                 className="block text-lg md:text-xl font-medium text-white"
                                 onClick={toggleMenu}
                               >
@@ -207,9 +207,25 @@ const Header = () => {
                           transition={{ delay: 0.8, duration: 0.5 }}
                           className="pt-8 space-y-2"
                         >
-                          <p className="magazine-subtle text-sm md:text-base text-gray-400">sd-atom.vercel.app</p>
-                          <p className="magazine-subtle text-sm md:text-base text-gray-400">+91 99000 55000</p>
-                          <p className="magazine-subtle text-sm md:text-base text-gray-400">sdroy001@gmail.com</p>
+                          <p className="magazine-subtle text-sm md:text-base text-gray-400">
+                          <a 
+                            href="https://sd-atom.vercel.app" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="hover:text-white transition-colors duration-300"
+                          >
+                            sd-atom.vercel.app
+                          </a>
+                        </p>
+                        <p className="magazine-subtle text-sm md:text-base text-gray-400">+91 99000 55000</p>
+                        <p className="magazine-subtle text-sm md:text-base text-gray-400">
+                          <a 
+                            href="mailto:sdroy001@gmail.com"
+                            className="hover:text-white transition-colors duration-300"
+                          >
+                            sdroy001@gmail.com
+                          </a>
+                        </p>
                         </motion.div>
                         
                         <motion.div
@@ -218,13 +234,13 @@ const Header = () => {
                           transition={{ delay: 0.9, duration: 0.5 }}
                           className="pt-8 flex space-x-6"
                         >
-                          <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
+                          <a href="https://x.com/SdeepR0" className="magazine-subtle text-sm md:text-base font-medium text-white">
                             Twitter
                           </a>
-                          <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
+                          <a href="https://www.instagram.com/panja.preeti?igsh=cHVkaXBoc3p0MXZy" className="magazine-subtle text-sm md:text-base font-medium text-white">
                             Instagram
                           </a>
-                          <a href="#" className="magazine-subtle text-sm md:text-base font-medium text-white">
+                          <a href="https://www.facebook.com/share/1BRy3vhqKi/" className="magazine-subtle text-sm md:text-base font-medium text-white">
                             Facebook
                           </a>
                         </motion.div>

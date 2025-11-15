@@ -200,10 +200,6 @@ const HeroSection = () => {
                 transition={{ duration: 0.2 }}
               >
                 <div className="space-y-3">
-                  <div className="text-sm uppercase tracking-widest text-muted-foreground">
-                    প্রহসন
-
-                  </div>
                   <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight">
                     আমরা নাকি আধুনিক মানুষ?
                   </h3>
@@ -220,10 +216,7 @@ const HeroSection = () => {
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <div className="space-y-3">
-                    <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                    সর্বশেষ নিবন্ধ
-                    </div>
+                  <div className="space-y-3 py-5">
                   <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight">
                   বৃষ্টি
                   </h3>
@@ -241,9 +234,6 @@ const HeroSection = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <div className="space-y-3">
-                    <div className="text-xs uppercase tracking-widest text-muted-foreground">
-                    গল্প
-                    </div>
                     <h3 className="text-lg font-serif font-medium group-hover:text-muted-foreground transition-colors leading-tight">
                     আমার রাজ্য
                     </h3>
