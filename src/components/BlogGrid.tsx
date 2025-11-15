@@ -51,8 +51,8 @@ const BlogGrid = () => {
     },
     {
       title: "বাংলার প্রতি বাঙালির উদাসীনতা",
-      excerpt: "From AI-assisted design tools to AR/VR interfaces, discover the technologies shaping the future of creative work and digital innovation.",
-      category: "TECH",
+      excerpt: "মেট্রোতে শিশুদের আচরণ, তাদের বাংলাবিমুখতা ও অভিভাবকদের অবহেলা দেখে লেখিকা ভাষা-সমস্যা ও মাতৃভাষার প্রতি উদাসীনতা উপলব্ধি করেন।",
+      category: "গল্প",
       date: "MARCH 08, 2024",
       image: "/fourth.jpg",
       slug: "বাংলার প্রতি বাঙালির উদাসীনতা"

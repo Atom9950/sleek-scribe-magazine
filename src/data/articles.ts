@@ -69,17 +69,24 @@ export const articles: Article[] = [
     slug: "বাংলার প্রতি বাঙালির উদাসীনতা",
     title: "বাংলার প্রতি বাঙালির উদাসীনতা",
     date: "MARCH 08, 2024",
-    author: "Tech Team",
-    category: "TECH",
-    excerpt: "From AI-assisted design tools to AR/VR interfaces, discover the technologies shaping the future of creative work and digital innovation.",
-    content: "From AI-assisted design tools to AR/VR interfaces, discover the technologies shaping the future...",
+    author: "প্রীতি",
+    category: "গল্প",
+    excerpt: "মেট্রোতে শিশুদের আচরণ, তাদের বাংলাবিমুখতা ও অভিভাবকদের অবহেলা দেখে লেখিকা ভাষা-সমস্যা ও মাতৃভাষার প্রতি উদাসীনতা উপলব্ধি করেন।",
+    content: "মেট্রোতে শিশুদের আচরণ, তাদের বাংলাবিমুখতা ও অভিভাবকদের অবহেলা দেখে লেখিকা ভাষা-সমস্যা ও মাতৃভাষার প্রতি উদাসীনতা উপলব্ধি করেন।",
     fullContent: `
-      <p>The design industry is experiencing a technological revolution. AI-powered tools are not replacing designers but augmenting their capabilities, allowing for faster iteration and more creative exploration.</p>
-      <p>Augmented and Virtual Reality are opening new frontiers for immersive design experiences. These technologies are transforming how we conceptualize and interact with digital spaces.</p>
-      <p>Machine learning algorithms can now analyze user behavior patterns and suggest design improvements, making data-driven design more accessible than ever before.</p>
-      <p>The future of design lies in the seamless integration of human creativity with technological capabilities. Designers who embrace these tools will lead the next wave of innovation.</p>
-    `,
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop"
+      <p>স্কুল থেকে ফিরতে গিয়ে লেখিকা মেট্রোয় দুটি মোটা শিশু দেখে মায়ের সঙ্গে তাদের আচরণ লক্ষ্য করেন।</p>
+
+      <p>বাচ্চাদের জন্য তিনি ও তার মা সিট ছেড়ে দিলে তাদের কৃতজ্ঞতাহীন আচরণে বিস্মিত হন।</p>
+
+      <p>পরে ট্রেনে অভিভাবকদের আড্ডায় জানা যায়—তাদের সন্তানের বাংলার নম্বর কমেছে কারণ সে বাংলা পড়তে চায় না, ইংরেজিতেই স্বাচ্ছন্দ্য।</p>
+
+      <p>শিশুরা নিজেদের মাতৃভাষাকে অবহেলা করছে, অথচ অভিভাবকরাও তা গুরুত্ব দিচ্ছেন না।</p>
+
+      <p>ইংরেজি বলতে পারলেই যেন গর্ব, কিন্তু বাংলা বললে লজ্জা।</p>
+
+      <p>শেষে লেখিকা উপলব্ধি করেন—বাংলা ভাষা নিয়ে এ উদাসীনতাই আজকের সমাজের বড় সমস্যা, অথচ আমরা ভাষাদিবস উদযাপনের কথা বলি।</p>
+`,
+    image: "/fourth.jpg"
   },
   {
     id: "5",

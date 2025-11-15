@@ -197,9 +197,10 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false, slu
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xs uppercase tracking-widest text-muted-foreground"
+            className="flex items-center space-x-4 text-xs uppercase tracking-widest"
           >
-            {category}
+            <span className="font-medium">{category}</span>
+            <span className="text-muted-foreground">{date}</span>
           </motion.div>
           
           <motion.h3 
@@ -221,16 +222,6 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false, slu
           >
             {excerpt}
           </motion.p>
-          
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-xs text-muted-foreground"
-          >
-            {date}
-          </motion.div>
 
           <Link to={slug ? `/${slug}` : '#'}>
             <motion.span 

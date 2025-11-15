@@ -26,9 +26,9 @@ const EmergingTechnologiesPage = () => {
   const articleData = {
     title: "বাংলার প্রতি বাঙালির উদাসীনতা",
     date: "MARCH 08, 2024",
-    author: "Tech Team",
-    category: "TECH",
-    excerpt: "From AI-assisted design tools to AR/VR interfaces, discover the technologies shaping the future of creative work and digital innovation.",
+    author: "প্রীতি",
+    category: "গল্প",
+    excerpt: "মেট্রোতে শিশুদের আচরণ, তাদের বাংলাবিমুখতা ও অভিভাবকদের অবহেলা দেখে লেখিকা ভাষা-সমস্যা ও মাতৃভাষার প্রতি উদাসীনতা উপলব্ধি করেন।",
     image: "/fourth.jpg",
     image2: "/fourth(2).jpg",
     image3: "/fourth(3).jpg",
