@@ -100,7 +100,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.5 }}
                 className="flex items-center space-x-4 text-xs uppercase tracking-widest"
               >
-                <span className="text-lg">প্রীতি</span>
+                <span className="text-lg">কবিতা</span>
                 <span className="text-muted-foreground text-lg">AUGUST 16, 2024</span>
               </motion.div>
               
