@@ -13,7 +13,7 @@ import {
 import Footer from '@/components/Footer';
 
 const EmergingTechnologiesPage = () => {
-  const slug = 'emerging-technologies-design'; // Article slug
+  const slug = 'বাংলার প্রতি বাঙালির উদাসীনতা'; // Article slug
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState('');
@@ -33,14 +33,19 @@ const EmergingTechnologiesPage = () => {
     image2: "/fourth(2).jpg",
     image3: "/fourth(3).jpg",
     fullContent: `
-      <p>The design industry is experiencing a technological revolution. AI-powered tools are not replacing designers but augmenting their capabilities, allowing for faster iteration and more creative exploration.</p>
-      <p>Augmented and Virtual Reality are opening new frontiers for immersive design experiences. These technologies are transforming how we conceptualize and interact with digital spaces.</p>
-      <p>Machine learning algorithms can now analyze user behavior patterns and suggest design improvements, making data-driven design more accessible than ever before.</p>
-      <p>The future of design lies in the seamless integration of human creativity with technological capabilities. Designers who embrace these tools will lead the next wave of innovation.</p>
-      <p>Generative design powered by AI is enabling designers to explore thousands of design variations in minutes, uncovering solutions that might never have been discovered through traditional methods.</p>
-      <p>Voice interfaces and conversational design are becoming increasingly important as smart speakers and voice assistants become ubiquitous in our daily lives.</p>
-      <p>Blockchain technology is creating new possibilities for digital ownership and authenticity in design, particularly in the realm of digital art and NFTs.</p>
-      <p>The Internet of Things (IoT) is expanding the designer's canvas beyond screens to include physical objects and environments, creating new challenges and opportunities.</p>
+      <p>স্কুল থেকে ফিরতে গিয়ে লেখিকা মেট্রোয় দুটি মোটা শিশু দেখে মায়ের সঙ্গে তাদের আচরণ লক্ষ্য করেন।</p>
+
+<p>বাচ্চাদের জন্য তিনি ও তার মা সিট ছেড়ে দিলে তাদের কৃতজ্ঞতাহীন আচরণে বিস্মিত হন।</p>
+
+<p>পরে ট্রেনে অভিভাবকদের আড্ডায় জানা যায়—তাদের সন্তানের বাংলার নম্বর কমেছে কারণ সে বাংলা পড়তে চায় না, ইংরেজিতেই স্বাচ্ছন্দ্য।</p>
+
+<p>শিশুরা নিজেদের মাতৃভাষাকে অবহেলা করছে, অথচ অভিভাবকরাও তা গুরুত্ব দিচ্ছেন না।</p>
+
+<p>ইংরেজি বলতে পারলেই যেন গর্ব, কিন্তু বাংলা বললে লজ্জা।</p>
+
+<p>শেষে লেখিকা উপলব্ধি করেন—বাংলা ভাষা নিয়ে এ উদাসীনতাই আজকের সমাজের বড় সমস্যা।</p>
+
+<p>বাংলা ভাষা নিয়ে এ উদাসীনতাই আজকের সমাজের বড় সমস্যা, অথচ আমরা ভাষাদিবস উদযাপনের কথা বলি।</p>
     `
   };
 
@@ -189,7 +194,7 @@ const EmergingTechnologiesPage = () => {
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={liked ? "currentColor" : "none"} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span>Like ({likeCount})</span>
+              <span>লাইক ({likeCount})</span>
             </button>
 
             <button onClick={handleShare} className="flex items-center space-x-2 text-gray-500 hover:text-blue-500 transition-colors">

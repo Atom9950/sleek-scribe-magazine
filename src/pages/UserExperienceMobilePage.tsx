@@ -18,6 +18,7 @@ const UserExperienceMobilePage = () => {
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState<Comment[]>([]);
+  const [modalImage, setModalImage] = useState('');
   const [showImageModal, setShowImageModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submittingComment, setSubmittingComment] = useState(false);
@@ -122,7 +123,7 @@ const UserExperienceMobilePage = () => {
           </h1>
 
           {/* Hero Image */}
-          <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => setShowImageModal(true)}>
+          <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image); setShowImageModal(true); }}>
             <img 
               src={articleData.image} 
               alt="Featured article"
@@ -131,23 +132,26 @@ const UserExperienceMobilePage = () => {
           </div>
 
           {/* Image Modal */}
-          {showImageModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80" onClick={() => setShowImageModal(false)}>
-              <img 
-                src={articleData.image} 
-                alt="Featured article full view"
-                className="max-w-full max-h-full rounded-lg shadow-lg"
-                style={{ cursor: 'zoom-out' }}
-              />
-              <button
-                className="absolute top-8 right-8 text-white text-3xl font-bold bg-black bg-opacity-40 rounded-full px-4 py-2"
-                onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
-                aria-label="Close"
-              >
-                ×
-              </button>
-            </div>
-          )}
+                 {showImageModal && (
+                  <div className="fixed inset-0 z-50 bg-black bg-opacity-90 overflow-auto" onClick={() => setShowImageModal(false)}>
+                    <div className="relative min-h-screen flex items-center justify-center p-4 md:p-8">
+                      <img 
+                        src={modalImage} 
+                        alt="Featured article full view"
+                        className="max-w-full max-h-screen object-contain rounded-lg shadow-lg"
+                        style={{ cursor: 'zoom-out' }}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                      <button
+                        className="absolute top-12 right-4 md:top-8 md:right-8 text-white text-2xl font-bold rounded-full w-14 h-14 flex items-center justify-center z-50 shadow-2xl border-2 border-white"
+                        onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
+                        aria-label="Close"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  </div>
+                )}
 
           {/* Article Content */}
           <div 
