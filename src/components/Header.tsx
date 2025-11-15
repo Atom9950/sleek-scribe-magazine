@@ -134,7 +134,7 @@ const Header = () => {
                       <nav className="space-y-10">
                         {[
                           { label: "হোম", path: "/" },
-                          { label: "পোস্ট", path: "/" },
+                          { label: "পোস্ট", path:"/posts" },
                           { label: "নিউজলেটার", path: "/newsletter" }
                         ].map((item, i) => (
                           <motion.div

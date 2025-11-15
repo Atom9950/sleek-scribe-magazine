@@ -81,18 +81,22 @@ const Footer = () => {
           >
             <h4 className="text-sm font-medium tracking-widest uppercase">নেভিগেট করুন</h4>
             <div className="space-y-3">
-              {["হোম", "বিষয়বস্তু", "সম্পর্কে", "পোস্ট", "নিউজলেটার"].map((item, i) => (
+              {[
+                { name: "হোম", href: "/" },
+                { name: "পোস্ট", href: "/posts" },
+                { name: "নিউজলেটার", href: "/Newsletter" }
+              ].map((item, i) => (
                 <motion.a
-                  key={item}
+                  key={item.name}
                   custom={i}
                   variants={listItemVariants}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  href="#"
+                  href={item.href}
                   className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  {item}
+                  {item.name}
                 </motion.a>
               ))}
             </div>

@@ -13,6 +13,7 @@ import VisualStorytellingPage from "./pages/VisualStorytellingPage";
 import SustainableDesignPage from "./pages/SustainableDesignPage";
 import NewsletterPage from "./components/Newsletter";
 import ScrollToTop from "./components/ScrollToTop";
+import PostsPage from "./pages/PostPage";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/posts" element={<PostsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="/article/:slug" element={<ArticlePage />} />
           
