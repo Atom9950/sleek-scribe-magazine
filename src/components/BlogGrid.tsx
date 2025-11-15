@@ -59,7 +59,7 @@ const BlogGrid = () => {
     },
     {
       title: "অদৃশ্য নায়ক",
-      excerpt: "How visual narratives influence human behavior and decision-making in the digital age of content consumption.",
+      excerpt: "বর্ষার দিনে ডেলিভারি বয়কে দেখে লেখিকার উপলব্ধি—আমাদের সুবিধার জন্যই তারা কষ্ট সহ্য করে, অথচ আমরা তাদের মানুষ হিসেবেই দেখি না।",
       category: "গল্প",
       date: "MARCH 05, 2024",
       image: "/fifth.jpg",
