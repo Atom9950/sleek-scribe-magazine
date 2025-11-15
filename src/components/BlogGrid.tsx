@@ -37,7 +37,7 @@ const BlogGrid = () => {
     category: "কবিতা",
     date: "MARCH 12, 2024",
     image: "/second.jpg",
-    slug: "বৃষ্টি"
+    slug: "brishti"
   };
 
   const posts = [
@@ -47,7 +47,7 @@ const BlogGrid = () => {
       category: "গল্প",
       date: "MARCH 10, 2025",
       image: "/third.jpg",
-      slug: "আমার রাজ্য"
+      slug: "amar-rajya"
     },
     {
       title: "বাংলার প্রতি বাঙালির উদাসীনতা",
@@ -55,7 +55,7 @@ const BlogGrid = () => {
       category: "গল্প",
       date: "MARCH 08, 2024",
       image: "/fourth.jpg",
-      slug: "বাংলার প্রতি বাঙালির উদাসীনতা"
+      slug: "banglar-prati-bangalir-urudasinota"
     },
     {
       title: "অদৃশ্য নায়ক",
@@ -63,7 +63,7 @@ const BlogGrid = () => {
       category: "গল্প",
       date: "MARCH 05, 2024",
       image: "/fifth.jpg",
-      slug: "অদৃশ্য নায়ক"
+      slug: "odrishya-nayak"
     },
     {
       title: "কালো নয়, কলঙ্ক",
@@ -71,7 +71,7 @@ const BlogGrid = () => {
       category: "গল্প",
       date: "JUNE 20, 2025",
       image: "/sixth.jpg",
-      slug: "কালো নয়, কলঙ্ক"
+      slug: "kalo-noy-kalanka"
     }
   ];
 

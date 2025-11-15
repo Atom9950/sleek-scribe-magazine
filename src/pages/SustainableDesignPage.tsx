@@ -14,7 +14,7 @@ import Footer from '@/components/Footer';
 import { toast } from '@/hooks/use-toast';
 
 const SustainableDesignPage = () => {
-  const slug = 'কালো নয়, কলঙ্ক';
+  const slug = 'kalo-noy-kalanka';
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState('');

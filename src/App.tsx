@@ -29,11 +29,11 @@ const App = () => (
           <Route path="/article/:slug" element={<ArticlePage />} />
           
           {/* Individual Article Pages */}
-          <Route path="/বৃষ্টি" element={<ArtOfCreativeCollaborationPage />} />
-          <Route path="/আমার রাজ্য" element={<UserExperienceMobilePage />} />
-          <Route path="/বাংলার প্রতি বাঙালির উদাসীনতা" element={<EmergingTechnologiesPage />} />
-          <Route path="/অদৃশ্য নায়ক" element={<VisualStorytellingPage />} />
-          <Route path="/কালো নয়, কলঙ্ক" element={<SustainableDesignPage />} />
+          <Route path="/brishti" element={<ArtOfCreativeCollaborationPage />} />
+          <Route path="/amar-rajya" element={<UserExperienceMobilePage />} />
+          <Route path="/banglar-prati-bangalir-urudasinota" element={<EmergingTechnologiesPage />} />
+          <Route path="/odrishya-nayak" element={<VisualStorytellingPage />} />
+          <Route path="/kalo-noy-kalanka" element={<SustainableDesignPage />} />
           
           {/* Newsletter Page */}
           <Route path="/newsletter" element={<NewsletterPage />} />

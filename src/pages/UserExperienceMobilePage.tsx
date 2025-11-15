@@ -14,7 +14,7 @@ import Footer from '@/components/Footer';
 import { toast } from '@/hooks/use-toast';
 
 const UserExperienceMobilePage = () => {
-  const articleSlug = 'আমার রাজ্য'; // Slug from articles.ts
+  const articleSlug = 'amar-rajya'; // Slug from articles.ts
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState('');

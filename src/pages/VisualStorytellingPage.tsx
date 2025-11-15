@@ -14,7 +14,7 @@ import Footer from "@/components/Footer";
 import { toast } from "@/hooks/use-toast";
 
 const VisualStorytellingPage = () => {
-  const slug = "অদৃশ্য নায়ক";
+  const slug = "odrishya-nayak";
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState("");

@@ -14,7 +14,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     id: "1",
-    slug: "আমরা নাকি আধুনিক মানুষ",
+    slug: "amra-naki-adhunik-manush",
     title: "আমরা নাকি আধুনিক মানুষ ?",
     date: "AUGUST 16, 2024",
     author: "প্রীতি",
@@ -31,7 +31,7 @@ export const articles: Article[] = [
   },
   {
     id: "2",
-    slug: "বৃষ্টি",
+    slug: "b  ",
     title: "বৃষ্টি",
     date: "MARCH 12, 2024",
     author: "প্রীতি",
@@ -49,7 +49,7 @@ export const articles: Article[] = [
   },
   {
     id: "3",
-    slug: "আমার রাজ্য",
+    slug: "amar-rajya",
     title: "আমার রাজ্য",
     date: "MARCH 10, 2025",
     author: "সায়নদীপ",
@@ -66,7 +66,7 @@ export const articles: Article[] = [
   },
   {
     id: "4",
-    slug: "বাংলার প্রতি বাঙালির উদাসীনতা",
+    slug: "banglar-prati-bangalir-urudasinota",
     title: "বাংলার প্রতি বাঙালির উদাসীনতা",
     date: "MARCH 08, 2024",
     author: "প্রীতি",
@@ -90,7 +90,7 @@ export const articles: Article[] = [
   },
   {
     id: "5",
-    slug: "অদৃশ্য নায়ক",
+    slug: "odrishya-nayak",
     title: "অদৃশ্য নায়ক",
     date: "MARCH 05, 2025",
     author: "প্রীতি",
@@ -110,7 +110,7 @@ export const articles: Article[] = [
   },
   {
     id: "6",
-    slug: "কালো নয়, কলঙ্ক",
+    slug: "kalo-noy-kalanka",
     title: "কালো নয়, কলঙ্ক",
     date: "JUNE 20, 2025",
     author: "প্রীতি",
