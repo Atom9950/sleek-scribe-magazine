@@ -90,20 +90,23 @@ export const articles: Article[] = [
   },
   {
     id: "5",
-    slug: "psychology-visual-storytelling",
-    title: "The Psychology of Visual Storytelling",
-    date: "MARCH 05, 2024",
-    author: "Content Team",
-    category: "OPINION",
-    excerpt: "How visual narratives influence human behavior and decision-making in the digital age of content consumption.",
-    content: "How visual narratives influence human behavior and decision-making...",
+    slug: "অদৃশ্য নায়ক",
+    title: "অদৃশ্য নায়ক",
+    date: "MARCH 05, 2025",
+    author: "প্রীতি",
+    category: "গল্প",
+    excerpt: "বর্ষার দিনে ডেলিভারি বয়কে দেখে লেখিকার উপলব্ধি—আমাদের সুবিধার জন্যই তারা কষ্ট সহ্য করে, অথচ আমরা তাদের মানুষ হিসেবেই দেখি না।",
+    content: "বর্ষার দিনে ডেলিভারি বয়কে দেখে লেখিকার উপলব্ধি—আমাদের সুবিধার জন্যই তারা কষ্ট সহ্য করে, অথচ আমরা তাদের মানুষ হিসেবেই দেখি না।",
     fullContent: `
-      <p>Visual storytelling taps into fundamental aspects of human psychology. Our brains are wired to process visual information faster than text, making images a powerful tool for communication.</p>
-      <p>The emotional impact of visual narratives can drive decision-making in ways that pure logic cannot. Colors, composition, and visual metaphors all play crucial roles in how messages are received and interpreted.</p>
-      <p>In the digital age, attention spans are shorter, making the ability to convey complex ideas through visual means more valuable than ever. A single image can communicate what might take paragraphs to explain.</p>
-      <p>Understanding the psychology behind visual perception allows creators to craft more effective and engaging content that resonates with their audience on a deeper level.</p>
-    `,
-    image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=300&fit=crop"
+      <p>বর্ষার অলস সকালে লেখিকা ডেলিভারি বয়কে দেখে হঠাৎ ভাবনায় ডুবে যান। নিজের পছন্দের জামা পেয়ে আনন্দ পেলেও বৃষ্টিতে ভিজে ক্লান্ত লোকটার মুখ যেন মন ছুঁয়ে যায়।</p>
+
+<p>তিনি উপলব্ধি করেন—এই ডেলিভারি কর্মীরা দিনরাত, রোদ-বৃষ্টি, ঝড়-ঝঞ্ঝা উপেক্ষা করে শুধু আমাদের প্রয়োজন মেটানোর জন্য ছুটে চলে। সময়মতো না পৌঁছালে তিরস্কার, রাস্তায় বকাঝকা—সবটাই সহ্য করতে হয় তাদেরই।</p>
+
+<p>তবুও আমরা তাদের মানুষ হিসেবে ভাবতেই ভুলে যাই। লকডাউনে সবচেয়ে বেশি ক্ষতিগ্রস্ত হওয়া সত্ত্বেও, আমাদের সুবিধার জন্যই তারা সবকিছু চালিয়ে গেছে।</p>
+
+<p>শেষে লেখিকা প্রশ্ন তোলেন—আমরা কি সত্যিই আত্মনির্ভর, নাকি তাদের ওপরই নির্ভরশীল?</p>
+           `,
+    image: "/fifth.jpg"
   },
   {
     id: "6",

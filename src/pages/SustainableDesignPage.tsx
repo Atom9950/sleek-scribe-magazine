@@ -202,13 +202,13 @@ const SustainableDesignPage = () => {
                 disabled={submittingComment}
                 className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {submittingComment ? 'Posting...' : 'Post Comment'}
+                {submittingComment ? 'পোস্ট করা হচ্ছে...' : 'পোস্ট করুন'}
               </button>
             </form>
 
             <div className="space-y-6">
               {comments.length === 0 ? (
-                <p className="text-gray-500 text-center py-8">No comments yet. Be the first to comment!</p>
+                <p className="text-gray-500 text-center py-8">কোন মন্তব্য নেই। প্রথম মন্তব্য করুন!</p>
               ) : (
                 comments.map((comment) => {
                   const canDelete = comment.userId && isCommentOwner(comment);

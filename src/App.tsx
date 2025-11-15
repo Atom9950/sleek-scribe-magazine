@@ -30,7 +30,7 @@ const App = () => (
           <Route path="/বৃষ্টি" element={<ArtOfCreativeCollaborationPage />} />
           <Route path="/আমার রাজ্য" element={<UserExperienceMobilePage />} />
           <Route path="/বাংলার প্রতি বাঙালির উদাসীনতা" element={<EmergingTechnologiesPage />} />
-          <Route path="/visual-storytelling" element={<VisualStorytellingPage />} />
+          <Route path="/অদৃশ্য নায়ক" element={<VisualStorytellingPage />} />
           <Route path="/sustainable-design" element={<SustainableDesignPage />} />
           
           {/* Newsletter Page */}

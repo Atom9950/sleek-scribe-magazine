@@ -13,33 +13,34 @@ import {
 import Footer from "@/components/Footer";
 
 const VisualStorytellingPage = () => {
-  const slug = "psychology-visual-storytelling";
+  const slug = "অদৃশ্য নায়ক";
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState<Comment[]>([]);
+  const [modalImage, setModalImage] = useState('');
   const [showImageModal, setShowImageModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submittingComment, setSubmittingComment] = useState(false);
 
   const articleData = {
-    title: "The Psychology of Visual Storytelling",
-    date: "MARCH 05, 2024",
-    author: "Content Team",
-    category: "OPINION",
+    title: "অদৃশ্য নায়ক",
+    date: "MARCH 05, 2025",
+    author: "প্রীতি",
+    category: "গল্প",
     excerpt:
-      "How visual narratives influence human behavior and decision-making in the digital age of content consumption.",
-    image:
-      "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=400&h=300&fit=crop",
+      "বর্ষার দিনে ডেলিভারি বয়কে দেখে লেখিকার উপলব্ধি—আমাদের সুবিধার জন্যই তারা কষ্ট সহ্য করে, অথচ আমরা তাদের মানুষ হিসেবেই দেখি না।",
+    image:"/fifth.jpg",
+    image2:"/fifth(2).jpg",
+    image3:"/fifth(3).jpg",
     fullContent: `
-      <p>Visual storytelling taps into fundamental aspects of human psychology. Our brains are wired to process visual information faster than text, making images a powerful tool for communication.</p>
-      <p>The emotional impact of visual narratives can drive decision-making in ways that pure logic cannot. Colors, composition, and visual metaphors all play crucial roles in how messages are received and interpreted.</p>
-      <p>In the digital age, attention spans are shorter, making the ability to convey complex ideas through visual means more valuable than ever. A single image can communicate what might take paragraphs to explain.</p>
-      <p>Understanding the psychology behind visual perception allows creators to craft more effective and engaging content that resonates with their audience on a deeper level.</p>
-      <p>The rise of social media has transformed visual storytelling from a nice-to-have skill to an essential competency. Platforms like Instagram, TikTok, and Pinterest have made visual content the primary language of digital communication.</p>
-      <p>Neuroscience research shows that visual information is processed 60,000 times faster than text by the human brain, explaining why visual storytelling is so effective at capturing and maintaining attention.</p>
-      <p>Cultural context plays a significant role in visual interpretation. What resonates in one culture may have completely different meanings in another, making cultural sensitivity crucial for global visual communication.</p>
-      <p>The future of visual storytelling lies in interactive and immersive experiences that engage multiple senses and create memorable, emotional connections with audiences.</p>
+      <p>বর্ষার অলস সকালে লেখিকা ডেলিভারি বয়কে দেখে হঠাৎ ভাবনায় ডুবে যান। নিজের পছন্দের জামা পেয়ে আনন্দ পেলেও বৃষ্টিতে ভিজে ক্লান্ত লোকটার মুখ যেন মন ছুঁয়ে যায়।</p>
+
+<p>তিনি উপলব্ধি করেন—এই ডেলিভারি কর্মীরা দিনরাত, রোদ-বৃষ্টি, ঝড়-ঝঞ্ঝা উপেক্ষা করে শুধু আমাদের প্রয়োজন মেটানোর জন্য ছুটে চলে। সময়মতো না পৌঁছালে তিরস্কার, রাস্তায় বকাঝকা—সবটাই সহ্য করতে হয় তাদেরই।</p>
+
+<p>তবুও আমরা তাদের মানুষ হিসেবে ভাবতেই ভুলে যাই। লকডাউনে সবচেয়ে বেশি ক্ষতিগ্রস্ত হওয়া সত্ত্বেও, আমাদের সুবিধার জন্যই তারা সবকিছু চালিয়ে গেছে।</p>
+
+<p>শেষে লেখিকা প্রশ্ন তোলেন—আমরা কি সত্যিই আত্মনির্ভর, নাকি তাদের ওপরই নির্ভরশীল?</p>
     `,
   };
 
@@ -134,40 +135,50 @@ const VisualStorytellingPage = () => {
             {articleData.title}
           </h1>
 
-          {/* Hero Image */}
-          <div
-            className="relative overflow-hidden rounded-lg cursor-pointer"
-            onClick={() => setShowImageModal(true)}
-          >
-            <img
-              src={articleData.image}
-              alt="Featured article"
-              className="w-full h-auto max-h-[500px] object-cover"
-            />
+          {/* Hero Images */}
+          <div className="space-y-4">
+            <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image); setShowImageModal(true); }}>
+              <img 
+                src={articleData.image} 
+                alt="Featured article"
+                className="w-full h-auto max-h-[500px] object-cover"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image2); setShowImageModal(true); }}>
+              <img 
+                src={articleData.image2} 
+                alt="Second featured image"
+                className="w-full h-auto max-h-[500px] object-cover"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-lg cursor-pointer" onClick={() => { setModalImage(articleData.image3); setShowImageModal(true); }}>
+              <img 
+                src={articleData.image3} 
+                alt="Third featured image"
+                className="w-full h-auto max-h-[500px] object-cover"
+              />
+            </div>
           </div>
 
           {/* Image Modal */}
           {showImageModal && (
-            <div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80"
-              onClick={() => setShowImageModal(false)}
-            >
-              <img
-                src={articleData.image}
-                alt="Featured article full view"
-                className="max-w-full max-h-full rounded-lg shadow-lg"
-                style={{ cursor: "zoom-out" }}
-              />
-              <button
-                className="absolute top-8 right-8 text-white text-3xl font-bold bg-black bg-opacity-40 rounded-full px-4 py-2"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowImageModal(false);
-                }}
-                aria-label="Close"
-              >
-                ×
-              </button>
+            <div className="fixed inset-0 z-50 bg-black bg-opacity-90 overflow-auto" onClick={() => setShowImageModal(false)}>
+              <div className="relative min-h-screen flex items-center justify-center p-4 md:p-8">
+                <button
+                  className="absolute top-12 right-4 md:top-8 md:right-8 text-white text-2xl font-bold rounded-full w-14 h-14 flex items-center justify-center z-50 shadow-2xl border-2 border-white"
+                  onClick={(e) => { e.stopPropagation(); setShowImageModal(false); }}
+                  aria-label="Close"
+                >
+                  ×
+                </button>
+                <img 
+                  src={modalImage}
+                  alt="Featured article full view"
+                  className="max-w-full max-h-screen object-contain rounded-lg shadow-lg"
+                  style={{ cursor: 'zoom-out' }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
             </div>
           )}
 
@@ -200,7 +211,7 @@ const VisualStorytellingPage = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 />
               </svg>
-              <span>Like ({likeCount})</span>
+              <span>লাইক  ({likeCount})</span>
             </button>
 
             <button onClick={handleShare} className="flex items-center space-x-2 text-gray-500 hover:text-blue-500 transition-colors">
@@ -214,7 +225,7 @@ const VisualStorytellingPage = () => {
           {/* Comments Section */}
           <div className="pt-12">
             <h3 className="text-xl font-semibold mb-6">
-              Comments ({comments.length})
+              মন্তব্য  ({comments.length})
             </h3>
 
             <form onSubmit={handleSubmitComment} className="mb-8">
@@ -230,14 +241,14 @@ const VisualStorytellingPage = () => {
                 disabled={submittingComment}
                 className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {submittingComment ? "Posting..." : "Post Comment"}
+                {submittingComment ? "পোস্ট করা হচ্ছে..." : "পোস্ট করুন"}
               </button>
             </form>
 
             <div className="space-y-6">
               {comments.length === 0 ? (
                 <p className="text-gray-500 text-center py-8">
-                  No comments yet. Be the first to comment!
+                  কোন মন্তব্য নেই। প্রথম মন্তব্য করুন!
                 </p>
               ) : (
                 comments.map((comment) => {
