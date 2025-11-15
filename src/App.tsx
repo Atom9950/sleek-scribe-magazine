@@ -12,6 +12,7 @@ import EmergingTechnologiesPage from "./pages/EmergingTechnologiesPage";
 import VisualStorytellingPage from "./pages/VisualStorytellingPage";
 import SustainableDesignPage from "./pages/SustainableDesignPage";
 import NewsletterPage from "./components/Newsletter";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
