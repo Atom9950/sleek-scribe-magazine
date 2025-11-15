@@ -140,7 +140,7 @@ const ArticlePage = () => {
               className="w-full h-auto max-h-[500px] object-cover"
             />
           </div>
-          <h1 className='text-2xl font-serif justify-center text-center py-2 '>পৃষ্ঠা-১</h1>
+          <h1 className='text-xl font-serif justify-center text-center py-2 '>পৃষ্ঠা-১</h1>
 
            {/* Image Modal */}
                  {showImageModal && (
