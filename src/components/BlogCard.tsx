@@ -122,7 +122,7 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false, slu
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-xl lg:text-xl font-serif font-bold  group-hover:text-muted-foreground transition-colors leading-tight"
+              className="text-2xl lg:text-2xl font-serif font-bold  group-hover:text-muted-foreground transition-colors leading-tight"
             >
               {title}
             </motion.h2>
@@ -208,7 +208,7 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false, slu
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg font-serif font-bold group-hover:text-muted-foreground transition-colors leading-tight line-clamp-2"
+            className="text-2xl font-serif font-bold group-hover:text-muted-foreground transition-colors leading-tight line-clamp-2"
           >
             {title}
           </motion.h3>
