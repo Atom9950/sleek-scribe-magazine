@@ -130,7 +130,7 @@ const AllPostsPage = () => {
   return (
     <div className="min-h-screen bg-[#f0f0f0]">
       <Header />
-    <div className="min-h-screen bg-background pt-5">
+    <div className="min-h-screen bg-background pt-0">
       <div className="max-w-6xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
         {/* Header */}
         <motion.div
@@ -141,7 +141,7 @@ const AllPostsPage = () => {
         >
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl lg:text-2xl font-bold font-serif mb-4">
+              <h1 className="text-3xl lg:text-4xl font-bold font-serif mb-4">
                 {categoryFilter ? `${categoryFilter} - বিভাগ` : searchQuery ? `অনুসন্ধান ফলাফল` : "সমস্ত নিবন্ধ"}
               </h1>
               <p className="text-muted-foreground">
