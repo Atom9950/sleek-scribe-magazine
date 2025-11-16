@@ -1,9 +1,11 @@
-import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Menu, X, Search, X as CloseIcon } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
 import gsap from "gsap";
+import { articles, getAllArticles } from "@/data/articles";
+import { Input } from "@/components/ui/input";
 
 const menuItemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -20,6 +22,14 @@ const menuItemVariants = {
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<{
+    articles: typeof articles;
+    categories: string[];
+  }>({ articles: [], categories: [] });
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -30,6 +40,145 @@ const Header = () => {
       );
     }
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
+  // Helper function to check if text contains Bengali characters
+  const containsBengali = (text: string): boolean => {
+    // Bengali Unicode range: \u0980-\u09FF
+    return /[\u0980-\u09FF]/.test(text);
+  };
+
+  // Search logic - supports both English and Bengali input
+  useEffect(() => {
+    if (searchQuery.trim().length === 0) {
+      setSearchResults({ articles: [], categories: [] });
+      return;
+    }
+
+    const query = searchQuery.trim();
+    const queryLower = query.toLowerCase();
+    const allArticles = getAllArticles();
+    
+    // Filter to only Bengali articles (articles with Bengali titles)
+    const bengaliArticles = allArticles.filter(article =>
+      containsBengali(article.title)
+    );
+    
+    // Search articles by title, slug, and excerpt
+    // This allows searching in both English (via slug) and Bengali (via title)
+    const matchedArticles = bengaliArticles.filter(article => {
+      const title = article.title;
+      const slug = article.slug.trim();
+      const excerpt = article.excerpt;
+      
+      // Normalize for search - handle both case-sensitive and case-insensitive
+      const titleLower = title.toLowerCase();
+      const slugLower = slug.toLowerCase();
+      const excerptLower = excerpt.toLowerCase();
+      
+      // Search in title (Bengali) - check both original and lowercase
+      const matchesTitle = title.includes(query) || titleLower.includes(queryLower);
+      
+      // Search in slug (English/transliteration) - allows English input to find Bengali articles
+      const matchesSlug = slug.includes(query) || slugLower.includes(queryLower);
+      
+      // Search in excerpt (Bengali) - check both original and lowercase
+      const matchesExcerpt = excerpt.includes(query) || excerptLower.includes(queryLower);
+      
+      return matchesTitle || matchesSlug || matchesExcerpt;
+    });
+
+    // Filter to only Bengali categories
+    const bengaliCategories = Array.from(new Set(bengaliArticles.map(a => a.category)))
+      .filter(category => containsBengali(category));
+    
+    // Search categories (supports both English and Bengali input)
+    const matchedCategories = bengaliCategories.filter(category => {
+      const categoryLower = category.toLowerCase();
+      // Check both original case and lowercase
+      return category.includes(query) || categoryLower.includes(queryLower);
+    });
+
+    setSearchResults({
+      articles: matchedArticles.slice(0, 5), // Limit to 5 suggestions
+      categories: matchedCategories
+    });
+  }, [searchQuery]);
+
+  const handleSearchToggle = () => {
+    setIsSearchOpen(!isSearchOpen);
+    if (!isSearchOpen) {
+      setSearchQuery("");
+      setSearchResults({ articles: [], categories: [] });
+    }
+  };
+
+  const handleArticleClick = (slug: string) => {
+    // Clean slug (remove extra spaces)
+    const cleanSlug = slug.trim();
+    
+    // Map slugs to their actual routes (handling discrepancies)
+    // Note: Some slugs have spaces or don't match the route exactly
+    const slugToRoute: Record<string, string> = {
+      'b': '/brishti',  // "b  " trimmed becomes "b"
+      'b  ': '/brishti',  // Original with spaces
+      'brishti': '/brishti',
+      'amar-rajya': '/amar-rajya',
+      'banglar-prati-bangalir-udashinota': '/banglar-prati-bangalir-udashinota',
+      'odrishya-nayak': '/odrishya-nayak',
+      'kalo-noy-kalanka': '/kalo-noy-kalanka',
+      // 'amra-naki-adhunik-manush' doesn't have a direct route, use /article/:slug
+    };
+    
+    // Check if we have a direct route mapping
+    const route = slugToRoute[cleanSlug] || slugToRoute[slug]; // Check both cleaned and original
+    if (route) {
+      navigate(route);
+    } else {
+      // Use article route for other articles (like amra-naki-adhunik-manush)
+      // Don't encode the slug - ArticlePage will handle it
+      navigate(`/article/${cleanSlug}`);
+    }
+    
+    setIsSearchOpen(false);
+    setSearchQuery("");
+    setSearchResults({ articles: [], categories: [] });
+  };
+
+  const handleCategoryClick = (category: string) => {
+    navigate(`/posts?category=${encodeURIComponent(category)}`);
+    setIsSearchOpen(false);
+    setSearchQuery("");
+    setSearchResults({ articles: [], categories: [] });
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim().length === 0) return;
+
+    // If there's exactly one article match, navigate to it
+    if (searchResults.articles.length === 1 && searchResults.categories.length === 0) {
+      handleArticleClick(searchResults.articles[0].slug);
+      return;
+    }
+
+    // If there's exactly one category match, navigate to it
+    if (searchResults.categories.length === 1 && searchResults.articles.length === 0) {
+      handleCategoryClick(searchResults.categories[0]);
+      return;
+    }
+
+    // Otherwise, navigate to posts page with search query
+    navigate(`/posts?search=${encodeURIComponent(searchQuery)}`);
+    setIsSearchOpen(false);
+    setSearchQuery("");
+    setSearchResults({ articles: [], categories: [] });
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -81,13 +230,29 @@ const Header = () => {
               </Link>
             </motion.div>
 
-            {/* Menu Button */}
+            {/* Search and Menu Buttons */}
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex"
+              className="flex items-center gap-2"
             >
+              {/* Search Button */}
+              <button
+                onClick={handleSearchToggle}
+                className={`focus:outline-none p-2 transition-colors duration-300 ${
+                  isSearchOpen ? 'text-white' : 'text-black'
+                }`}
+                aria-label={isSearchOpen ? 'Close search' : 'Open search'}
+              >
+                {isSearchOpen ? (
+                  <CloseIcon size={24} strokeWidth={1.5} />
+                ) : (
+                  <Search size={24} strokeWidth={1.5} />
+                )}
+              </button>
+
+              {/* Menu Button */}
               <button
                 onClick={toggleMenu}
                 className={`focus:outline-none p-4 transition-colors duration-300 relative ${
@@ -257,6 +422,85 @@ const Header = () => {
                     </motion.div>
                   </div>
                 </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Search Overlay */}
+        <AnimatePresence>
+          {isSearchOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="absolute top-full left-0 right-0 z-[80] newspaper-bg border-b border-white shadow-lg"
+            >
+              <div className="max-w-6xl mx-auto px-6 py-4">
+                <form onSubmit={handleSearchSubmit} className="relative">
+                  <Input
+                    ref={searchInputRef}
+                    type="text"
+                    placeholder="নিবন্ধ বা বিভাগ অনুসন্ধান করুন..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pr-10 text-base"
+                  />
+                  <Search 
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                    size={20}
+                  />
+                </form>
+
+                {/* Search Results */}
+                {(searchResults.articles.length > 0 || searchResults.categories.length > 0) && searchQuery.trim().length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 max-h-96 overflow-y-auto bg-white rounded-md shadow-lg border border-gray-200"
+                  >
+                    {/* Article Suggestions */}
+                    {searchResults.articles.length > 0 && (
+                      <div className="p-2">
+                        <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3 py-2">
+                          নিবন্ধ
+                        </div>
+                        {searchResults.articles.map((article) => (
+                          <button
+                            key={article.id}
+                            onClick={() => handleArticleClick(article.slug)}
+                            className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-md transition-colors"
+                          >
+                            <div className="font-medium text-sm">{article.title}</div>
+                            <div className="text-xs text-muted-foreground mt-1">{article.category}</div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Category Suggestions */}
+                    {searchResults.categories.length > 0 && (
+                      <div className="p-2 border-t border-gray-200">
+                        <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3 py-2">
+                          বিভাগ
+                        </div>
+                        {searchResults.categories.map((category) => (
+                          <button
+                            key={category}
+                            onClick={() => handleCategoryClick(category)}
+                            className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-md transition-colors"
+                          >
+                            <div className="font-medium text-sm">{category}</div>
+                            <div className="text-xs text-muted-foreground mt-1">
+                              {articles.filter(a => a.category === category).length}টি নিবন্ধ
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           )}

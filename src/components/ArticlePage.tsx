@@ -16,7 +16,7 @@ import Footer from './Footer';
 import { toast } from '@/hooks/use-toast';
 
 const ArticlePage = () => {
-  const { slug } = useParams(); // Get the slug from URL
+  const { slug: urlSlug } = useParams(); // Get the slug from URL
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState('');
@@ -25,6 +25,9 @@ const ArticlePage = () => {
   const [showImageModal, setShowImageModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submittingComment, setSubmittingComment] = useState(false);
+
+  // Decode and clean the slug from URL
+  const slug = urlSlug ? decodeURIComponent(urlSlug).trim() : null;
 
   // Get article data based on slug
   const articleData = slug ? getArticleBySlug(slug) : null;

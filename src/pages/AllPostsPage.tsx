@@ -1,18 +1,22 @@
 // src/pages/AllPostsPage.tsx
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import BlogCard from "../components/BlogCard";
 import Header from "@/components/Header";
 import Newsletter from "@/components/Newsletter";
 
 const AllPostsPage = () => {
-  // Combine all posts manually
+  const [searchParams] = useSearchParams();
+  const categoryFilter = searchParams.get("category");
+  const searchQuery = searchParams.get("search");
+  
+  // Combine all posts manually (matching the structure from articles data)
   const allPosts = [
     // Hero Section Posts
     {
       title: "আমরা নাকি আধুনিক মানুষ?",
       excerpt: "ধর্ম-জাতির মোহে আমরা আধুনিক হলেও মানবতা হারিয়েছি। দেশপ্রেমের মুখোশ পরে চলছে পিশাচের রাজ। নিরাপত্তাহীন সমাজে ভালো মানুষরা হারিয়ে যাচ্ছে, অসুরেরা দাপট দেখাচ্ছে।",
-      category: "কবিতা",
+      category: "প্রহসন",
       date: "AUGUST 16, 2024",
       image: "/hero.jpg",
       slug: "amra-naki-adhunik-manush",
@@ -47,7 +51,7 @@ const AllPostsPage = () => {
       title: "অদৃশ্য নায়ক",
       excerpt: "বর্ষার দিনে ডেলিভারি বয়কে দেখে লেখিকার উপলব্ধি—আমাদের সুবিধার জন্যই তারা কষ্ট সহ্য করে, অথচ আমরা তাদের মানুষ হিসেবেই দেখি না।",
       category: "গল্প",
-      date: "MARCH 05, 2024",
+      date: "MARCH 05, 2025",
       image: "/fifth.jpg", 
       slug: "odrishya-nayak",
     },
@@ -61,8 +65,51 @@ const AllPostsPage = () => {
     }
   ];
 
+  // Helper function to check if text contains Bengali characters
+  const containsBengali = (text: string): boolean => {
+    // Bengali Unicode range: \u0980-\u09FF
+    return /[\u0980-\u09FF]/.test(text);
+  };
+
+  // Filter posts based on search query or category
+  // Only show Bengali posts (posts with Bengali titles)
+  const bengaliPosts = allPosts.filter(post => containsBengali(post.title));
+  
+  let filteredPosts = bengaliPosts;
+  
+  if (categoryFilter) {
+    filteredPosts = bengaliPosts.filter(post => post.category === categoryFilter);
+  } else if (searchQuery) {
+    const query = searchQuery.trim();
+    const queryLower = query.toLowerCase();
+    // Search supports both English (via slug) and Bengali (via title/excerpt)
+    filteredPosts = bengaliPosts.filter(post => {
+      const title = post.title;
+      const slug = post.slug;
+      const category = post.category;
+      const excerpt = post.excerpt;
+      
+      // Normalize for search
+      const titleLower = title.toLowerCase();
+      const slugLower = slug.toLowerCase();
+      const categoryLower = category.toLowerCase();
+      const excerptLower = excerpt.toLowerCase();
+      
+      return (
+        // Search in title (Bengali) - check both original and lowercase
+        title.includes(query) || titleLower.includes(queryLower) ||
+        // Search in slug (English/transliteration) - allows English input
+        slug.includes(query) || slugLower.includes(queryLower) ||
+        // Search in category (Bengali) - check both original and lowercase
+        category.includes(query) || categoryLower.includes(queryLower) ||
+        // Search in excerpt (Bengali) - check both original and lowercase
+        excerpt.includes(query) || excerptLower.includes(queryLower)
+      );
+    });
+  }
+
   // Group posts by category
-  const postsByCategory = allPosts.reduce((acc, post) => {
+  const postsByCategory = filteredPosts.reduce((acc, post) => {
     if (!acc[post.category]) {
       acc[post.category] = [];
     }
@@ -75,7 +122,10 @@ const AllPostsPage = () => {
     .sort(([, postsA], [, postsB]) => postsB.length - postsA.length);
 
   // Calculate total posts count
-  const totalPosts = allPosts.length;
+  const totalPosts = filteredPosts.length;
+  
+  // Check if search has no results
+  const hasNoResults = (categoryFilter || searchQuery) && filteredPosts.length === 0;
 
   return (
     <div className="min-h-screen bg-[#f0f0f0]">
@@ -92,77 +142,106 @@ const AllPostsPage = () => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl lg:text-2xl font-bold font-serif mb-4">
-                সমস্ত নিবন্ধ
+                {categoryFilter ? `${categoryFilter} - বিভাগ` : searchQuery ? `অনুসন্ধান ফলাফল` : "সমস্ত নিবন্ধ"}
               </h1>
               <p className="text-muted-foreground">
-                বিভাগ অনুযায়ী সকল প্রকাশিত নিবন্ধ
+                {categoryFilter 
+                  ? `${categoryFilter} বিভাগের সকল নিবন্ধ`
+                  : searchQuery 
+                  ? `"${searchQuery}" এর জন্য অনুসন্ধান ফলাফল`
+                  : "বিভাগ অনুযায়ী সকল প্রকাশিত নিবন্ধ"}
               </p>
             </div>
           </div>
         </motion.div>
 
-        {/* Category Navigation */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-12"
-        >
-          <div className="flex flex-wrap gap-4">
-            {sortedCategories.map(([category, posts]) => (
-              <a
+        {/* No Results Message */}
+        {hasNoResults && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center py-16"
+          >
+            <p className="text-xl font-medium mb-2">কোনো অনুসন্ধান ফলাফল পাওয়া যায়নি</p>
+            <p className="text-muted-foreground mb-4">
+              {searchQuery ? `"${searchQuery}" এর জন্য কোনো নিবন্ধ পাওয়া যায়নি` : `${categoryFilter} বিভাগে কোনো নিবন্ধ নেই`}
+            </p>
+            <Link 
+              to="/posts" 
+              className="text-primary hover:underline"
+            >
+              সমস্ত নিবন্ধ দেখুন
+            </Link>
+          </motion.div>
+        )}
+
+        {/* Category Navigation - Only show if not filtering */}
+        {!categoryFilter && !searchQuery && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mb-12"
+          >
+            <div className="flex flex-wrap gap-4">
+              {sortedCategories.map(([category, posts]) => (
+                <a
+                  key={category}
+                  href={`#${category}`}
+                  className="px-4 py-2 bg-muted rounded-full text-sm hover:bg-muted-foreground hover:text-background transition-colors"
+                >
+                  {category} ({posts.length})
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* Posts by Category or Search Results */}
+        {!hasNoResults && (
+          <div className="space-y-16">
+            {sortedCategories.map(([category, posts], categoryIndex) => (
+              <motion.section
                 key={category}
-                href={`#${category}`}
-                className="px-4 py-2 bg-muted rounded-full text-sm hover:bg-muted-foreground hover:text-background transition-colors"
+                id={category}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: categoryIndex * 0.1 + 0.3 }}
+                className="scroll-mt-20"
               >
-                {category} ({posts.length})
-              </a>
+                {/* Category Header */}
+                <div className="flex items-center justify-between mb-8 pb-4 border-b border-border">
+                  <div>
+                    <h2 className="text-2xl lg:text-2xl font-bold font-serif mb-2">
+                      {category}
+                    </h2>
+                    <p className="text-muted-foreground">
+                      {posts.length}টি নিবন্ধ
+                    </p>
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    বিভাগ
+                  </div>
+                </div>
+
+                {/* Posts Grid for this Category */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {posts.map((post, postIndex) => (
+                    <motion.div
+                      key={post.slug}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: (categoryIndex * 0.05) + (postIndex * 0.1) }}
+                    >
+                      <BlogCard {...post} />
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.section>
             ))}
           </div>
-        </motion.div>
-
-        {/* Posts by Category */}
-        <div className="space-y-16">
-          {sortedCategories.map(([category, posts], categoryIndex) => (
-            <motion.section
-              key={category}
-              id={category}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: categoryIndex * 0.1 + 0.3 }}
-              className="scroll-mt-20"
-            >
-              {/* Category Header */}
-              <div className="flex items-center justify-between mb-8 pb-4 border-b border-border">
-                <div>
-                  <h2 className="text-2xl lg:text-2xl font-bold font-serif mb-2">
-                    {category}
-                  </h2>
-                  <p className="text-muted-foreground">
-                    {posts.length}টি নিবন্ধ
-                  </p>
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  বিভাগ
-                </div>
-              </div>
-
-              {/* Posts Grid for this Category */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post, postIndex) => (
-                  <motion.div
-                    key={post.slug}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: (categoryIndex * 0.05) + (postIndex * 0.1) }}
-                  >
-                    <BlogCard {...post} />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.section>
-          ))}
-        </div>
+        )}
 
         {/* Total Count */}
         <motion.div
