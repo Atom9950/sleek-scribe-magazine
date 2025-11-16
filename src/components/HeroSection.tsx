@@ -210,7 +210,7 @@ const HeroSection = () => {
               </motion.article>
               </Link>
 
-              <Link to="/article/brishti">
+              <Link to="/brishti">
                 <motion.article 
                   className="group cursor-pointer trending-article"
                   whileHover={{ x: 5 }}
@@ -227,7 +227,7 @@ const HeroSection = () => {
               </motion.article>
               </Link>
 
-              <Link to="/article/amar-rajya">
+              <Link to="/amar-rajya">
                 <motion.article 
                   className="group cursor-pointer trending-article"
                   whileHover={{ x: 5 }}

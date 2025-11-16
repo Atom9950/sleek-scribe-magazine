@@ -29,6 +29,7 @@ const Header = () => {
     categories: string[];
   }>({ articles: [], categories: [] });
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchOverlayRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,6 +45,42 @@ const Header = () => {
   useEffect(() => {
     if (isSearchOpen && searchInputRef.current) {
       searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
+  // Close search when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      
+      // Don't close if clicking inside the search overlay
+      if (searchOverlayRef.current?.contains(target)) {
+        return;
+      }
+      
+      // Don't close if clicking the search button
+      if (target.closest('button[aria-label*="search"]') || target.closest('button[aria-label*="Search"]')) {
+        return;
+      }
+      
+      // Close search if clicking anywhere else
+      if (isSearchOpen) {
+        setIsSearchOpen(false);
+        setSearchQuery("");
+        setSearchResults({ articles: [], categories: [] });
+      }
+    };
+
+    if (isSearchOpen) {
+      // Use a small delay to avoid closing immediately when opening
+      const timeoutId = setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+      }, 100);
+
+      return () => {
+        clearTimeout(timeoutId);
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
     }
   }, [isSearchOpen]);
 
@@ -125,8 +162,8 @@ const Header = () => {
     // Map slugs to their actual routes (handling discrepancies)
     // Note: Some slugs have spaces or don't match the route exactly
     const slugToRoute: Record<string, string> = {
-      'b': '/brishti',  // "b  " trimmed becomes "b"
-      'b  ': '/brishti',  // Original with spaces
+      'b': '/brishti',
+      'b  ': '/brishti',
       'brishti': '/brishti',
       'amar-rajya': '/amar-rajya',
       'banglar-prati-bangalir-udashinota': '/banglar-prati-bangalir-udashinota',
@@ -237,12 +274,10 @@ const Header = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex items-center gap-2"
             >
-              {/* Search Button */}
+            {/* Search Button */}
               <button
                 onClick={handleSearchToggle}
-                className={`focus:outline-none p-2 transition-colors duration-300 ${
-                  isSearchOpen ? 'text-white' : 'text-black'
-                }`}
+                className="focus:outline-none p-2 transition-colors duration-300 text-black"
                 aria-label={isSearchOpen ? 'Close search' : 'Open search'}
               >
                 {isSearchOpen ? (
@@ -262,14 +297,14 @@ const Header = () => {
                 aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               >
                 <X 
-                  size={56} 
+                  size={36} 
                   strokeWidth={1.5} 
                   className={`absolute transition-all duration-300 hover:rotate-90 ${
                     isMenuOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'
                   }`} 
                 />
                 <Menu 
-                  size={56} 
+                  size={36} 
                   strokeWidth={1.5} 
                   className={`transition-all duration-300 ${
                     isMenuOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'
@@ -431,6 +466,7 @@ const Header = () => {
         <AnimatePresence>
           {isSearchOpen && (
             <motion.div
+              ref={searchOverlayRef}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
