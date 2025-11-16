@@ -18,7 +18,7 @@ export const articles: Article[] = [
     title: "আমরা নাকি আধুনিক মানুষ ?",
     date: "AUGUST 16, 2024",
     author: "প্রীতি",
-    category: "প্রহসন",
+    category: "কবিতা",
     excerpt: "ধর্ম-জাতির মোহে আমরা আধুনিক হলেও মানবতা হারিয়েছি। দেশপ্রেমের মুখোশ পরে চলছে পিশাচের রাজ। নিরাপত্তাহীন সমাজে ভালো মানুষরা হারিয়ে যাচ্ছে, অসুরেরা দাপট দেখাচ্ছে।",
     content: "ধর্ম-জাতির মোহে আমরা আধুনিক হলেও মানবতা হারিয়েছি...",
     fullContent: `
@@ -54,8 +54,8 @@ export const articles: Article[] = [
     date: "MARCH 10, 2025",
     author: "সায়নদীপ",
     category: "গল্প",
-    excerpt: "Best practices for creating intuitive and engaging mobile user experiences that convert and retain users in today's competitive landscape.",
-    content: "Best practices for creating intuitive and engaging mobile user experiences...",
+    excerpt: "লেখাটি রাজ্যের বর্তমান অবস্থা ও অতীত গৌরবের তুলনা করে প্রশ্ন তোলে—এটাই কি সত্যিই সেই গর্বের রাজ্য?",
+    content: "লেখাটি রাজ্যের বর্তমান অবস্থা ও অতীত গৌরবের তুলনা করে প্রশ্ন তোলে—এটাই কি সত্যিই সেই গর্বের রাজ্য?",
     fullContent: `
       <p>লেখাটি রাজ্যের নৈতিক ও সামাজিক অবক্ষয়ের চিত্র তুলে ধরে, যেখানে বেকারত্ব, নারী নির্যাতন ও অবিচার বেড়েছে।</p>
 <p>লেখক অতীতের গৌরব—বিদ্যাসাগর, নোবেলপ্রাপ্তি, প্রথম নারী ডাক্তার—এর উল্লেখ করে বর্তমানের সঙ্গে তুলনা করেছেন।</p>

@@ -491,29 +491,52 @@ const Header = () => {
 
                 {/* Search Results */}
                 {(searchResults.articles.length > 0 || searchResults.categories.length > 0) && searchQuery.trim().length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-4 max-h-96 overflow-y-auto bg-white rounded-md shadow-lg border border-gray-200"
-                  >
-                    {/* Article Suggestions */}
-                    {searchResults.articles.length > 0 && (
-                      <div className="p-2">
-                        <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3 py-2">
-                          নিবন্ধ
-                        </div>
-                        {searchResults.articles.map((article) => (
-                          <button
-                            key={article.id}
-                            onClick={() => handleArticleClick(article.slug)}
-                            className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-md transition-colors"
-                          >
-                            <div className="font-medium text-sm">{article.title}</div>
-                            <div className="text-xs text-muted-foreground mt-1">{article.category}</div>
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                                  <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="mt-4 max-h-[32rem] overflow-y-auto bg-white rounded-md shadow-lg border border-gray-200"
+                                  >
+                                    {/* Results Count Header */}
+                                    <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 z-10">
+                                      <div className="text-sm font-semibold text-gray-900">
+                                      নিবন্ধ ({searchResults.articles.length + searchResults.categories.length})
+                                      </div>
+                                      <div className="text-xs text-muted-foreground mt-1">
+                                        {searchResults.articles.length > 0 && `${searchResults.articles.length}টি নিবন্ধ`}
+                                        {searchResults.articles.length > 0 && searchResults.categories.length > 0 && " • "}
+                                        {searchResults.categories.length > 0 && `${searchResults.categories.length}টি বিভাগ`}
+                                      </div>
+                                    </div>
+
+                                    {/* Article Suggestions */}
+                                    {searchResults.articles.length > 0 && (
+                                      <div className="p-2">
+                                        {/* <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3 py-2">
+                                          নিবন্ধ
+                                        </div> */}
+                                        {searchResults.articles.map((article) => (
+                                          <button
+                                            key={article.id}
+                                            onClick={() => handleArticleClick(article.slug)}
+                                            className="w-full text-left px-3 py-3 hover:bg-gray-50 rounded-md transition-colors border-b border-gray-100 last:border-0"
+                                          >
+                                            <div className="flex items-start justify-between gap-3">
+                                              <div className="flex-1 min-w-0">
+                                                <div className="font-semibold text-sm mb-1 line-clamp-2">{article.title}</div>
+                                                <div className="text-xs text-muted-foreground line-clamp-2 mb-2">{article.excerpt}</div>
+                                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                  <span className="font-medium">{article.category}</span>
+                                                  <span>•</span>
+                                                  <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded-md text-xs">
+                                                    {article.date}
+                                                  </span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </button>
+                                        ))}
+                                      </div>
+                                    )}
 
                     {/* Category Suggestions */}
                     {searchResults.categories.length > 0 && (
