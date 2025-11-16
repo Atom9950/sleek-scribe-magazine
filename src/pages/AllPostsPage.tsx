@@ -189,7 +189,7 @@ const AllPostsPage = () => {
                 <a
                   key={category}
                   href={`#${category}`}
-                  className="px-4 py-2 bg-muted rounded-full text-sm hover:bg-muted-foreground hover:text-background transition-colors"
+                   className="text-black border border-black px-4 py-2 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                   {category} ({posts.length})
                 </a>
