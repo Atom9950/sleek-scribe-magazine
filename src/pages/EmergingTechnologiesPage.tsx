@@ -225,7 +225,7 @@ const EmergingTechnologiesPage = () => {
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 bg-[#f0f0f0] border-b border-black rounded-lg focus:outline-none focus:ring-1 focus:ring-black"
                 placeholder="আপনার মন্তব্য লিখুন..."
                 rows={4}
               />
@@ -245,7 +245,7 @@ const EmergingTechnologiesPage = () => {
                 comments.map((comment) => {
                   const canDelete = comment.userId && isCommentOwner(comment);
                   return (
-                    <div key={comment.id} className="p-4 bg-gray-50 rounded-lg border border-gray-200 relative group">
+                    <div key={comment.id} className="p-4 bg-[#f0f0f0] rounded-lg border border-black relative group">
                       <p className="text-gray-800 whitespace-pre-wrap pr-12">{comment.text}</p>
                       <div className="flex items-center justify-between mt-2">
                         <p className="text-xs text-gray-500">
