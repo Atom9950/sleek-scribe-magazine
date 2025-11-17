@@ -164,12 +164,12 @@ const AllPostsPage = () => {
             className="text-center py-16"
           >
             <p className="text-xl font-medium mb-2">কোনো অনুসন্ধান ফলাফল পাওয়া যায়নি</p>
-            <p className="text-muted-foreground mb-4">
+            <p className="text-muted-foreground mb-4 py-6">
               {searchQuery ? `"${searchQuery}" এর জন্য কোনো নিবন্ধ পাওয়া যায়নি` : `${categoryFilter} বিভাগে কোনো নিবন্ধ নেই`}
             </p>
             <Link 
               to="/posts" 
-              className="text-primary hover:underline"
+              className="text-black border border-black px-6 py-3 text-sm font-medium tracking-wide hover:bg-black hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
             >
               সমস্ত নিবন্ধ দেখুন
             </Link>
