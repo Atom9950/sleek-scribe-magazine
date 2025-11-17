@@ -494,10 +494,10 @@ const Header = () => {
                                   <motion.div
                                     initial={{ opacity: 0, y: -10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="mt-4 max-h-[32rem] overflow-y-auto bg-white rounded-md shadow-lg border border-gray-200"
+                                    className="mt-4 max-h-[32rem] overflow-y-auto bg-[#f0f0f0] rounded-md shadow-lg border border-black"
                                   >
                                     {/* Results Count Header */}
-                                    <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 z-10">
+                                    <div className="sticky top-0 bg-[#f0f0f0] border-b border-black px-4 py-3 z-10">
                                       <div className="text-sm font-semibold text-gray-900">
                                       নিবন্ধ ({searchResults.articles.length + searchResults.categories.length})
                                       </div>
@@ -518,7 +518,7 @@ const Header = () => {
                                           <button
                                             key={article.id}
                                             onClick={() => handleArticleClick(article.slug)}
-                                            className="w-full text-left px-3 py-3 hover:bg-gray-50 rounded-md transition-colors border-b border-gray-100 last:border-0"
+                                            className="w-full text-left px-3 py-3 hover:bg-black hover:text-white rounded-md transition-colors border-b border-gray-100 last:border-0"
                                           >
                                             <div className="flex items-start justify-between gap-3">
                                               <div className="flex-1 min-w-0">
