@@ -137,7 +137,7 @@ const EmergingTechnologiesPage = () => {
           </div>
 
           {/* Article Title */}
-          <h1 className="magazine-title font-serif font-bold whitespace-pre-line" style={{ lineHeight: '1.3' }}>
+          <h1 className="magazine-title font-serif font-bold whitespace-pre-line border-b border-border pb-6" style={{ lineHeight: '1.3' }}>
             {articleData.title}
           </h1>
 
@@ -192,6 +192,9 @@ const EmergingTechnologiesPage = () => {
           )}
 
           {/* Article Content */}
+          <div className="pt-12">
+            <h3 className="text-2xl font-semibold mb-6 border-b border-border pb-6">সারাংশ</h3>
+          </div>
           <div 
             className="prose max-w-none text-lg"
             dangerouslySetInnerHTML={{ __html: articleData.fullContent }}
