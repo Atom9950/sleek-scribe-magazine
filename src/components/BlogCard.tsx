@@ -12,6 +12,15 @@ interface BlogCardProps {
   slug?: string;
 }
 
+const getArticlePath = (slug: string) => {
+  // If this is the hero article, use /article/ prefix
+  if (slug === "amra-naki-adhunik-manush") {
+    return `/article/${slug}`;
+  }
+  // For other articles, use just the slug
+  return `/${slug}`;
+};
+
 const BlogCard = ({ title, excerpt, category, date, image, featured = false, slug }: BlogCardProps) => {
   const imageWrapperVariants = {
     initial: { 
@@ -80,7 +89,7 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false, slu
     return (
       <article className="group cursor-pointer col-span-2">
         <div className="space-y-6">
-          <Link to={slug ? `/${slug}` : '#'}>
+          <Link to={slug ? getArticlePath(slug) : '#'}>
             <motion.div 
               initial="initial"
               whileHover="hover"
@@ -137,7 +146,7 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false, slu
               {excerpt}
             </motion.p>
             
-            <Link to={slug ? `/${slug}` : '#'}>
+            <Link to={slug ? getArticlePath(slug) : '#'}>
               <motion.span 
                 initial="initial"
                 whileInView="animate"
@@ -166,7 +175,7 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false, slu
   return (
     <article className="group cursor-pointer">
       <div className="space-y-4">
-        <Link to={slug ? `/${slug}` : '#'}>
+       <Link to={slug ? getArticlePath(slug) : '#'}>
           <motion.div 
             initial="initial"
             whileHover="hover"
@@ -223,7 +232,7 @@ const BlogCard = ({ title, excerpt, category, date, image, featured = false, slu
             {excerpt}
           </motion.p>
 
-          <Link to={slug ? `/${slug}` : '#'}>
+          <Link to={slug ? getArticlePath(slug) : '#'}>
             <motion.span 
               initial="initial"
               whileInView="animate"
