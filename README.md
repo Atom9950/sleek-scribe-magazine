@@ -1,4 +1,4 @@
-# পাতা - Modern Design Magazine
+# পাতা - My Blog Page
 
 A modern, responsive blog platform built with cutting-edge web technologies. This project showcases a clean and elegant design for a magazine-style blog.
 
